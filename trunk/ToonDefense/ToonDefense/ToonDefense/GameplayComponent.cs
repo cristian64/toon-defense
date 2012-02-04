@@ -14,18 +14,24 @@ namespace ToonDefense
 {
     public class GameplayComponent : DrawableGameComponent
     {
+        List<DrawableGameComponent> components;
+
         public GameplayComponent(Game game)
             : base(game)
         {
+            components = new List<DrawableGameComponent>(1000);
         }
 
         public override void Update(GameTime gameTime)
         {
+            foreach (DrawableGameComponent i in components)
+                i.Update(gameTime);
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(Color.Indigo);
             SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             SpriteFont font = Game.Content.Load<SpriteFont>("fonts\\title");
@@ -33,6 +39,9 @@ namespace ToonDefense
             position -= font.MeasureString("Gameplay") / 2;
             spriteBatch.DrawString(font, "Gameplay", position, Color.White);
             spriteBatch.End();
+
+            foreach (DrawableGameComponent i in components)
+                i.Draw(gameTime);
             base.Draw(gameTime);
         }
     }
