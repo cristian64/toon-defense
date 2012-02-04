@@ -24,8 +24,9 @@ namespace ToonDefense
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.IsFullScreen = true;
             this.Window.Title = "Toon Defense";
         }
 
@@ -37,9 +38,11 @@ namespace ToonDefense
         /// </summary>
         protected override void Initialize()
         {
-            Components.Add(new IntroComponent(this));
+            Components.Add(new GameplayComponent(this));
             Components.Add(new FadeInComponent(this, 1000, 1000));
-            Components.Add(new FadeOutComponent(this, 3000, 1000, new MenuComponent(this), new FadeInComponent(this, 1000, 1000)));
+            /*Components.Add(new IntroComponent(this));
+            Components.Add(new FadeInComponent(this, 1000, 1000));
+            Components.Add(new FadeOutComponent(this, 3000, 1000, new MenuComponent(this), new FadeInComponent(this, 1000, 1000)));*/
             base.Initialize();
         }
 
@@ -63,6 +66,8 @@ namespace ToonDefense
             base.UnloadContent();
         }
 
+        bool pressed = false;
+
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -71,26 +76,13 @@ namespace ToonDefense
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                this.Exit();
-
-            if (Keyboard.GetState().IsKeyDown(Keys.NumPad1))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !pressed)
             {
-                Components.Clear();
-                Components.Add(new IntroComponent(this));
+                pressed = true;
+                Components.Add(new FadeOutComponent(this, 0, 1000));
             }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.NumPad2))
-            {
-                Components.Clear();
-                Components.Add(new MenuComponent(this));
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.NumPad3))
-            {
-                Components.Clear();
-                Components.Add(new GameplayComponent(this));
-            }
+            if (Keyboard.GetState().IsKeyUp(Keys.Escape))
+                pressed = false;
 
             base.Update(gameTime);
         }

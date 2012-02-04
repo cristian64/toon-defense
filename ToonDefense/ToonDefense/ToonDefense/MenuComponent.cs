@@ -19,16 +19,8 @@ namespace ToonDefense
         {
         }
 
-        bool pressed = false;
         public override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter) && !pressed)
-            {
-                pressed = true;
-                Game.Components.Add(new FadeOutComponent(Game, 0, 1000));
-            }
-            if (Keyboard.GetState().IsKeyUp(Keys.Enter))
-                pressed = false;
             base.Update(gameTime);
         }
 
