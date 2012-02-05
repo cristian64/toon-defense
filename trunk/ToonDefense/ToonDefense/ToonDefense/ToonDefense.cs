@@ -24,9 +24,10 @@ namespace ToonDefense
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            graphics.IsFullScreen = true;
+            //graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            //graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            //graphics.IsFullScreen = true;
+            graphics.PreferMultiSampling = true;
             this.Window.Title = "Toon Defense";
         }
 
@@ -39,7 +40,7 @@ namespace ToonDefense
         protected override void Initialize()
         {
             Components.Add(new GameplayComponent(this));
-            Components.Add(new FadeInComponent(this, 1000, 1000));
+            Components.Add(new FadeInComponent(this, 0, 300));
             /*Components.Add(new IntroComponent(this));
             Components.Add(new FadeInComponent(this, 1000, 1000));
             Components.Add(new FadeOutComponent(this, 3000, 1000, new MenuComponent(this), new FadeInComponent(this, 1000, 1000)));*/
@@ -79,7 +80,7 @@ namespace ToonDefense
             if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !pressed)
             {
                 pressed = true;
-                Components.Add(new FadeOutComponent(this, 0, 1000));
+                Components.Add(new FadeOutComponent(this, 0, 500));
             }
             if (Keyboard.GetState().IsKeyUp(Keys.Escape))
                 pressed = false;

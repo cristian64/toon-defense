@@ -14,33 +14,51 @@ namespace ToonDefense
 {
     public class GameplayComponent : DrawableGameComponent
     {
-        List<DrawableGameComponent> components;
+        List<DrawableGameComponent> drawableComponents;
+        List<GameComponent> components;
+        Camera camera;
 
         public GameplayComponent(Game game)
             : base(game)
         {
-            components = new List<DrawableGameComponent>(1000);
+            drawableComponents = new List<DrawableGameComponent>();
+            components = new List<GameComponent>();
+        }
+
+        public override void Initialize()
+        {
+            camera = new Camera(Game);
+            components.Add(camera);
+            drawableComponents.Add(new Axis(Game, camera));
+            drawableComponents.Add(new Box(Game, camera));
+            Box box = new Box(Game, camera);
+            box.Position.X = 3;
+            drawableComponents.Add(box);
+
+            foreach (DrawableGameComponent i in drawableComponents)
+                i.Initialize();
+            foreach (GameComponent i in components)
+                i.Initialize();
+            base.Initialize();
         }
 
         public override void Update(GameTime gameTime)
         {
-            foreach (DrawableGameComponent i in components)
+            foreach (DrawableGameComponent i in drawableComponents)
+                i.Update(gameTime);
+            foreach (GameComponent i in components)
                 i.Update(gameTime);
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Indigo);
-            SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-            SpriteFont font = Game.Content.Load<SpriteFont>("fonts\\title");
-            Vector2 position = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2, GraphicsDevice.PresentationParameters.BackBufferHeight / 2);
-            position -= font.MeasureString("Gameplay") / 2;
-            spriteBatch.DrawString(font, "Gameplay", position, Color.White);
-            spriteBatch.End();
+            GraphicsDevice.BlendState = BlendState.AlphaBlend;
+            GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            GraphicsDevice.Clear(Color.Linen);
 
-            foreach (DrawableGameComponent i in components)
+            foreach (DrawableGameComponent i in drawableComponents)
                 i.Draw(gameTime);
             base.Draw(gameTime);
         }
