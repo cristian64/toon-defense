@@ -28,6 +28,8 @@ namespace ToonDefense
         public override void Initialize()
         {
             camera = new Camera(Game);
+            camera.Position = new Vector3(5, 3, 10);
+            camera.Target = new Vector3(8, 5.5f, 0);
             components.Add(camera);
             drawableComponents.Add(new Axis(Game, camera));
             drawableComponents.Add(new Box(Game, camera));
@@ -56,7 +58,7 @@ namespace ToonDefense
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
-            GraphicsDevice.Clear(Color.Linen);
+            GraphicsDevice.Clear(Color.White);
 
             foreach (DrawableGameComponent i in drawableComponents)
                 i.Draw(gameTime);

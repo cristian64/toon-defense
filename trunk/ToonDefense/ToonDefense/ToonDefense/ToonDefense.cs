@@ -67,7 +67,8 @@ namespace ToonDefense
             base.UnloadContent();
         }
 
-        bool pressed = false;
+        bool escapePressed = false;
+        bool f12Pressed = false;
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -77,13 +78,33 @@ namespace ToonDefense
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !pressed)
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !escapePressed)
             {
-                pressed = true;
+                escapePressed = true;
                 Components.Add(new FadeOutComponent(this, 0, 500));
             }
             if (Keyboard.GetState().IsKeyUp(Keys.Escape))
-                pressed = false;
+                escapePressed = false;
+
+            // Allows the game to change size of the screen
+            if (Keyboard.GetState().IsKeyDown(Keys.F12) && !f12Pressed)
+            {
+                f12Pressed = true;
+                if (!graphics.IsFullScreen)
+                {
+                    graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                    graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                }
+                else
+                {
+                    graphics.PreferredBackBufferWidth = 800;
+                    graphics.PreferredBackBufferHeight = 480;
+                }
+                graphics.IsFullScreen = !graphics.IsFullScreen;
+                graphics.ApplyChanges();
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.F12))
+                f12Pressed = false;
 
             base.Update(gameTime);
         }

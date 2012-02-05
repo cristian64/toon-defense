@@ -49,7 +49,7 @@ namespace ToonDefense
         /// Gets or sets camera projection matrix.
         /// </summary>
         public Matrix Projection { get { return projection; } set { projection = value; } }
-        /*/// <summary>
+        /// <summary>
         /// Gets camera view matrix multiplied by projection matrix.
         /// </summary>
         public Matrix ViewProjection { get { return view * projection; } }
@@ -99,7 +99,7 @@ namespace ToonDefense
                 angles.X = -(float)Math.Asin(test.M32);
                 angles.Y = -(float)Math.Asin(test.M13);
             }
-        }*/
+        }
 
         /// <summary>
         /// Updates camera with input and updates view matrix.
