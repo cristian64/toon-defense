@@ -32,18 +32,23 @@ namespace ToonDefense
             camera.Position = new Vector3(5, 3, 10);
             camera.Target = new Vector3(8, 5.5f, 0);
             components.Add(camera);
+
+            World world = new World(Game, camera);
+            world.Position.Y = -1f;
+            drawableComponents.Add(world);
+
             Interceptor interceptor = new Interceptor(Game, camera);
             interceptor.Position.Z = -5;
-            interceptor.Position.X = 5;
+            interceptor.Position.X = 10;
             drawableComponents.Add(interceptor);
-
             BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
-            battleCruiser.Position.Z = -5;
-            battleCruiser.Position.X = -10;
+            battleCruiser.Position.Z = 0;
+            battleCruiser.Position.X = -15;
             drawableComponents.Add(battleCruiser);
             Explorer explorer = new Explorer(Game, camera);
             explorer.Position.Z = -5;
             drawableComponents.Add(explorer);
+
             drawableComponents.Add(new Axis(Game, camera));
             drawableComponents.Add(new Box(Game, camera));
             Box box = new Box(Game, camera);
