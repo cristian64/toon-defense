@@ -32,6 +32,10 @@ namespace ToonDefense
             camera.Position = new Vector3(5, 3, 10);
             camera.Target = new Vector3(8, 5.5f, 0);
             components.Add(camera);
+            Interceptor interceptor = new Interceptor(Game, camera);
+            interceptor.Position.Z = -5;
+            interceptor.Position.X = 5;
+            drawableComponents.Add(interceptor);
             Explorer explorer = new Explorer(Game, camera);
             explorer.Position.Z = -5;
             drawableComponents.Add(explorer);
