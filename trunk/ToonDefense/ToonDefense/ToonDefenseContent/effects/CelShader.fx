@@ -111,11 +111,13 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
     // Get our target pixel color
 	float4 Color = tex2D(ColorMapSampler, input.Tex);
 	// Set our source color tinting (this should be an effect parameter)
-	float Ai = 0.8f;
+	float Ai = 3.0f;
+//0.8f
 	float4 Ac = float4(0.075, 0.075, 0.2, 1.0);
 
 	// Shader scaling (should be an effect parameter)
-	float Di = 1.0f;
+	float Di = 2.0f;
+//1.0f
 
 	// Look up the cel shading light color
 	float2 celTexCoord = float2(saturate(dot(input.L, input.N)), 0.0f);
