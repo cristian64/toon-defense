@@ -118,6 +118,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Spaceships\Explorer.cs" />
+    <Compile Include="Spaceships\Interceptor.cs" />
     <Compile Include="ToonDefense.cs" />
     <Compile Include="GameplayComponent.cs" />
   </ItemGroup>
