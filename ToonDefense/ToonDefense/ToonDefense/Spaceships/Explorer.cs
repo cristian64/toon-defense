@@ -75,12 +75,18 @@ namespace ToonDefense.Spaceships
             GraphicsDevice.Clear(Color.Wheat * 0.0f);*/
 
             Matrix world = Matrix.CreateScale(0.10f) * Matrix.CreateRotationX(-MathHelper.PiOver2) * Matrix.CreateRotationY(-MathHelper.PiOver2) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
-            celShader.Parameters["Projection"].SetValue(Camera.Projection);
-            celShader.Parameters["View"].SetValue(Camera.View);
-            celShader.Parameters["World"].SetValue(world);
-            celShader.Parameters["InverseWorld"].SetValue(Matrix.Invert(world));
-            model.Meshes[0].MeshParts[0].Effect = celShader;
-            model.Meshes[0].Draw();
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                foreach (ModelMeshPart part in mesh.MeshParts)
+                {
+                    part.Effect = celShader;
+                    celShader.Parameters["Projection"].SetValue(Camera.Projection);
+                    celShader.Parameters["View"].SetValue(Camera.View);
+                    celShader.Parameters["World"].SetValue(world);
+                    celShader.Parameters["InverseWorld"].SetValue(Matrix.Invert(world));
+                }
+                mesh.Draw();
+            }
 
             /*GraphicsDevice.SetRenderTarget(null);
 
