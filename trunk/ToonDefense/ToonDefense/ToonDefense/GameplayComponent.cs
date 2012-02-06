@@ -36,6 +36,11 @@ namespace ToonDefense
             interceptor.Position.Z = -5;
             interceptor.Position.X = 5;
             drawableComponents.Add(interceptor);
+
+            BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
+            battleCruiser.Position.Z = -5;
+            battleCruiser.Position.X = -10;
+            drawableComponents.Add(battleCruiser);
             Explorer explorer = new Explorer(Game, camera);
             explorer.Position.Z = -5;
             drawableComponents.Add(explorer);

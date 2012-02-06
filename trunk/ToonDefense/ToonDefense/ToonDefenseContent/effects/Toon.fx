@@ -20,7 +20,7 @@ float3 DiffuseLightDirection = float3(1, 0, 0);
 float4 DiffuseColor = float4(1, 1, 1, 1);
  
 // The intensity of the diffuse light
-float DiffuseIntensity = 2.0;
+float DiffuseIntensity = 3.0;
  
 //--------------------------- TOON SHADER PROPERTIES ------------------------------
 // The color to draw the lines in.  Black is a good default.

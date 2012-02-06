@@ -12,24 +12,24 @@ using Microsoft.Xna.Framework.Media;
 
 namespace ToonDefense.Spaceships
 {
-    public class Interceptor : Object
+    public class BattleCruiser : Object
     {
         Model model;
         Texture2D texture;
         Effect effect;
 
-        public Interceptor(Game game, Camera camera)
+        public BattleCruiser(Game game, Camera camera)
             : base(game, camera)
         {
         }
 
         protected override void LoadContent()
         {
-            model = Game.Content.Load<Model>("models\\explorer");
-            texture = Game.Content.Load<Texture2D>("models\\explorertexture");
+            model = Game.Content.Load<Model>("models\\Ship");
+            texture = model.Meshes[0].Effects[0].Parameters["Texture"].GetValueTexture2D();// Game.Content.Load<Texture2D>("models\\ShipDiffuse");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
-            effect.Parameters["LineThickness"].SetValue(0.5f);
+            effect.Parameters["LineThickness"].SetValue(15);
 
             base.LoadContent();
         }
@@ -51,7 +51,7 @@ namespace ToonDefense.Spaceships
 
         public override void Draw(GameTime gameTime)
         {
-            Matrix world = Matrix.CreateScale(0.10f) * Matrix.CreateRotationX(-MathHelper.PiOver2) * Matrix.CreateRotationY(-MathHelper.PiOver2) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
+            Matrix world = Matrix.CreateScale(0.004f) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (ModelMeshPart part in mesh.MeshParts)
