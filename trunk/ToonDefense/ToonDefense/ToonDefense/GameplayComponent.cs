@@ -37,13 +37,13 @@ namespace ToonDefense
             drawableComponents.Add(world);
 
             Interceptor interceptor = new Interceptor(Game, camera);
-            interceptor.Position = new Vector3(3, 2, -4);
+            interceptor.Position = new Vector3(3, 1, -4);
             drawableComponents.Add(interceptor);
             BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
-            battleCruiser.Position = new Vector3(-5, 2, 0);
+            battleCruiser.Position = new Vector3(-5, 1, 0);
             drawableComponents.Add(battleCruiser);
             Explorer explorer = new Explorer(Game, camera);
-            explorer.Position = new Vector3(0, 2, -3);
+            explorer.Position = new Vector3(0, 1, -3);
             drawableComponents.Add(explorer);
 
             drawableComponents.Add(new Axis(Game, camera));

@@ -39,13 +39,13 @@ namespace ToonDefense.Spaceships
             this.Rotation.Y += MathHelper.Pi / 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
-                Position.Y++;
+                Position.Z -= 0.1f;
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                Position.X--;
+                Position.X -= 0.1f;
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                Position.X++;
+                Position.X += 0.1f;
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
-                Position.Y--;
+                Position.Z += 0.1f;
             base.Update(gameTime);
         }
 

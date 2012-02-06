@@ -21,7 +21,7 @@ namespace ToonDefense
 
         public Model shadowModel;
         public Texture2D shadowTexture;
-        public Effect shadowEffect;
+        public BasicEffect shadowEffect;
 
         public Object(Game game, Camera camera)
             : base(game)
@@ -36,10 +36,9 @@ namespace ToonDefense
         {
             shadowModel = Game.Content.Load<Model>("models\\shadow");
             shadowTexture = Game.Content.Load<Texture2D>("models\\shadowtexture");
-            shadowEffect = Game.Content.Load<Effect>("effects\\Toon").Clone();
-
-            shadowEffect.Parameters["Texture"].SetValue(shadowTexture);
-            shadowEffect.Parameters["LineThickness"].SetValue(0.0f);
+            shadowEffect = (BasicEffect)shadowModel.Meshes[0].Effects[0];
+            shadowEffect.Texture = Game.Content.Load<Texture2D>("models\\shadowtexture");
+            shadowEffect.TextureEnabled = true;
 
             base.LoadContent();
         }
@@ -47,18 +46,20 @@ namespace ToonDefense
         public void DrawShadow(Vector3 position, float scale)
         {
             Matrix world = Matrix.CreateScale(scale * 0.5f) * Matrix.CreateTranslation(position);
+            GraphicsDevice.BlendState = BlendState.AlphaBlend;
+            GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
             foreach (ModelMesh mesh in shadowModel.Meshes)
             {
-                foreach (ModelMeshPart part in mesh.MeshParts)
+                foreach (BasicEffect e in mesh.Effects)
                 {
-                    part.Effect = shadowEffect;
-                    shadowEffect.Parameters["World"].SetValue(world);
-                    shadowEffect.Parameters["View"].SetValue(Camera.View);
-                    shadowEffect.Parameters["Projection"].SetValue(Camera.Projection);
-                    shadowEffect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Transpose(Matrix.Invert(world)));
+                    e.Projection = Camera.Projection;
+                    e.View = Camera.View;
+                    e.World = world;
                 }
                 mesh.Draw();
             }
+            GraphicsDevice.BlendState = BlendState.Opaque;
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
         }
     }
 }

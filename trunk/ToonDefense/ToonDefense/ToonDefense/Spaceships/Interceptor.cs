@@ -37,15 +37,6 @@ namespace ToonDefense.Spaceships
         public override void Update(GameTime gameTime)
         {
             this.Rotation.Y += MathHelper.Pi / 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-                Position.Y++;
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                Position.X--;
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                Position.X++;
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-                Position.Y--;
             base.Update(gameTime);
         }
 
