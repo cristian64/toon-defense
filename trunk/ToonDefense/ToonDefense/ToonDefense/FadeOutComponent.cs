@@ -44,7 +44,8 @@ namespace ToonDefense
         {
             if (milliseconds > delay + duration)
             {
-                Game.Components.RemoveAt(Game.Components.IndexOf(this) - 1);
+                if (Game.Components.IndexOf(this) > 0)
+                    Game.Components.RemoveAt(Game.Components.IndexOf(this) - 1);
                 Game.Components.Remove(this);
                 if (nextComponent != null)
                     Game.Components.Add(nextComponent);

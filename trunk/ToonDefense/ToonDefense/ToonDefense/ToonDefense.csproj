@@ -120,6 +120,7 @@
     <Compile Include="Spaceships\BattleCruiser.cs" />
     <Compile Include="Spaceships\Explorer.cs" />
     <Compile Include="Spaceships\Interceptor.cs" />
+    <Compile Include="World.cs" />
     <Compile Include="ToonDefense.cs" />
     <Compile Include="GameplayComponent.cs" />
   </ItemGroup>
