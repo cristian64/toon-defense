@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using ToonDefense.Spaceships;
 
 namespace ToonDefense
 {
@@ -31,6 +32,9 @@ namespace ToonDefense
             camera.Position = new Vector3(5, 3, 10);
             camera.Target = new Vector3(8, 5.5f, 0);
             components.Add(camera);
+            Explorer explorer = new Explorer(Game, camera);
+            explorer.Position.Z = -5;
+            drawableComponents.Add(explorer);
             drawableComponents.Add(new Axis(Game, camera));
             drawableComponents.Add(new Box(Game, camera));
             Box box = new Box(Game, camera);
