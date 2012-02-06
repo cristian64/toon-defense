@@ -29,7 +29,7 @@ namespace ToonDefense.Spaceships
             texture = Game.Content.Load<Texture2D>("models\\ShipDiffuse");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
-            effect.Parameters["LineThickness"].SetValue(0.5f);
+            effect.Parameters["LineThickness"].SetValue(10f);
 
             base.LoadContent();
         }
@@ -51,7 +51,10 @@ namespace ToonDefense.Spaceships
 
         public override void Draw(GameTime gameTime)
         {
-            Matrix world = Matrix.CreateScale(0.004f) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
+            Vector3 shadowPosition = Position;
+            shadowPosition.Y = 0;
+            DrawShadow(shadowPosition, 1);
+            Matrix world = Matrix.CreateScale(0.001f) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (ModelMeshPart part in mesh.MeshParts)
