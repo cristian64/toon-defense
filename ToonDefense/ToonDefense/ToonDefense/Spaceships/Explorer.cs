@@ -14,14 +14,9 @@ namespace ToonDefense.Spaceships
 {
     public class Explorer : Object
     {
-        SpriteBatch spriteBatch;
         Model model;
         Texture2D texture;
-        Effect celShader;
-        Effect outlineShader;
-        Texture2D celMap;
-
-        RenderTarget2D renderTarget;
+        Effect effect;
 
         public Explorer(Game game, Camera camera)
             : base(game, camera)
@@ -30,22 +25,11 @@ namespace ToonDefense.Spaceships
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
             model = Game.Content.Load<Model>("models\\explorer");
             texture = Game.Content.Load<Texture2D>("models\\explorertexture");
-            celShader = Game.Content.Load<Effect>("effects\\CelShader").Clone();
-            outlineShader = Game.Content.Load<Effect>("effects\\OutlineShader").Clone();
-            celMap = Game.Content.Load<Texture2D>("effects\\celMap");
-
-            celShader.Parameters["LightDirection"].SetValue(new Vector4(0, 0, 1.0f, 1.0f));
-            celShader.Parameters["ColorMap"].SetValue(texture);
-            celShader.Parameters["CelMap"].SetValue(celMap);
-
-            outlineShader.Parameters["Thickness"].SetValue(1.5f);
-            outlineShader.Parameters["Threshold"].SetValue(0.5f);
-            outlineShader.Parameters["ScreenSize"].SetValue(new Vector2(GraphicsDevice.Viewport.Bounds.Width, GraphicsDevice.Viewport.Bounds.Height));
-
-            renderTarget = new RenderTarget2D(GraphicsDevice, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
+            effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
+            effect.Parameters["Texture"].SetValue(texture);
+            effect.Parameters["LineThickness"].SetValue(1);
 
             base.LoadContent();
         }
@@ -67,32 +51,22 @@ namespace ToonDefense.Spaceships
 
         public override void Draw(GameTime gameTime)
         {
-            /*GraphicsDevice.SetRenderTarget(renderTarget);
-            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
-            GraphicsDevice.BlendState = BlendState.Opaque;
-            GraphicsDevice.RasterizerState = RasterizerState.CullNone;
-            GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
-            GraphicsDevice.Clear(Color.Wheat * 0.0f);*/
-
-            Matrix world = Matrix.CreateScale(0.10f) * Matrix.CreateRotationX(-MathHelper.PiOver2) * Matrix.CreateRotationY(-MathHelper.PiOver2) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
+            Vector3 shadowPosition = Position;
+            shadowPosition.Y = 0;
+            DrawShadow(shadowPosition, 1);
+            Matrix world = Matrix.CreateScale(0.02f) * Matrix.CreateRotationX(-MathHelper.PiOver2) * Matrix.CreateRotationY(-MathHelper.PiOver2) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (ModelMeshPart part in mesh.MeshParts)
                 {
-                    part.Effect = celShader;
-                    celShader.Parameters["Projection"].SetValue(Camera.Projection);
-                    celShader.Parameters["View"].SetValue(Camera.View);
-                    celShader.Parameters["World"].SetValue(world);
-                    celShader.Parameters["InverseWorld"].SetValue(Matrix.Invert(world));
+                    part.Effect = effect;
+                    effect.Parameters["World"].SetValue(world);
+                    effect.Parameters["View"].SetValue(Camera.View);
+                    effect.Parameters["Projection"].SetValue(Camera.Projection);
+                    effect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Transpose(Matrix.Invert(world)));
                 }
                 mesh.Draw();
             }
-
-            /*GraphicsDevice.SetRenderTarget(null);
-
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, outlineShader);
-            spriteBatch.Draw(renderTarget, Vector2.Zero, Color.White);
-            spriteBatch.End();*/
 
             base.Draw(gameTime);
         }

@@ -34,25 +34,22 @@ namespace ToonDefense
             components.Add(camera);
 
             World world = new World(Game, camera);
-            world.Position.Y = -1f;
             drawableComponents.Add(world);
 
             Interceptor interceptor = new Interceptor(Game, camera);
-            interceptor.Position.Z = -5;
-            interceptor.Position.X = 10;
+            interceptor.Position = new Vector3(3, 2, -4);
             drawableComponents.Add(interceptor);
             BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
-            battleCruiser.Position.Z = 0;
-            battleCruiser.Position.X = -15;
+            battleCruiser.Position = new Vector3(-5, 2, 0);
             drawableComponents.Add(battleCruiser);
             Explorer explorer = new Explorer(Game, camera);
-            explorer.Position.Z = -5;
+            explorer.Position = new Vector3(0, 2, -3);
             drawableComponents.Add(explorer);
 
             drawableComponents.Add(new Axis(Game, camera));
-            drawableComponents.Add(new Box(Game, camera));
             Box box = new Box(Game, camera);
             box.Position.X = 3;
+            box.Position.Y = 1;
             drawableComponents.Add(box);
 
             foreach (DrawableGameComponent i in drawableComponents)
@@ -76,7 +73,7 @@ namespace ToonDefense
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.RosyBrown);
 
             foreach (DrawableGameComponent i in drawableComponents)
                 i.Draw(gameTime);
