@@ -1,6 +1,6 @@
 #region File Description
 //-----------------------------------------------------------------------------
-// ExplosionSmokeParticleSystem.cs
+// ExplosionParticleSystem.cs
 //
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
@@ -17,44 +17,49 @@ using Microsoft.Xna.Framework.Graphics;
 namespace ToonDefense.ParticleSystem
 {
     /// <summary>
-    /// Custom particle system for creating the smokey part of the explosions.
+    /// Custom particle system for creating the fiery part of the explosions.
     /// </summary>
-    class ExplosionSmokeParticleSystem : ParticleSystem
+    class VortexParticleSystem : ParticleSystem
     {
-        public ExplosionSmokeParticleSystem(Game game, ContentManager content, Camera camera)
+        public VortexParticleSystem(Game game, ContentManager content, Camera camera)
             : base(game, content, camera)
         { }
 
 
         protected override void InitializeSettings(ParticleSettings settings)
         {
-            settings.TextureName = "smoke";
+            settings.TextureName = "vortex";
 
-            settings.MaxParticles = 200;
+            settings.MaxParticles = 100;
 
-            settings.Duration = TimeSpan.FromSeconds(1);
+            settings.Duration = TimeSpan.FromSeconds(2);
+            settings.DurationRandomness = 1;
 
-            settings.MinHorizontalVelocity = 0;
-            settings.MaxHorizontalVelocity = 0.7f;
+            settings.MinHorizontalVelocity = 0.01f;
+            settings.MaxHorizontalVelocity = 0.05f;
 
-            settings.MinVerticalVelocity = -0.5f;
-            settings.MaxVerticalVelocity = 1;
-
-            settings.Gravity = new Vector3(0, -0.5f, 0);
+            settings.MinVerticalVelocity = -0.1f;
+            settings.MaxVerticalVelocity = 0.1f;
 
             settings.EndVelocity = 0;
 
-            settings.MinColor = Color.LightGray;
+            settings.MinColor = Color.DarkGray;
+            settings.MaxColor = Color.Gray;
+
+            settings.MinColor = Color.White;
             settings.MaxColor = Color.White;
 
             settings.MinRotateSpeed = -1;
             settings.MaxRotateSpeed = 1;
 
             settings.MinStartSize = 0.5f;
-            settings.MaxStartSize = 1;
+            settings.MaxStartSize = 0.5f;
 
             settings.MinEndSize = 1.5f;
-            settings.MaxEndSize = 2;
+            settings.MaxEndSize = 2.0f;
+
+            // Use additive blending.
+            settings.BlendState = BlendState.Additive;
         }
     }
 }
