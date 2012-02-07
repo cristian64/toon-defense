@@ -115,6 +115,10 @@
     <Compile Include="IntroComponent.cs" />
     <Compile Include="MenuComponent.cs" />
     <Compile Include="Object.cs" />
+    <Compile Include="ParticleSystem\ForceFieldParticleSystem.cs" />
+    <Compile Include="ParticleSystem\LaserParticleSystem.cs" />
+    <Compile Include="ParticleSystem\PlasmaExplosionParticleSystem.cs" />
+    <Compile Include="ParticleSystem\VortexParticleSystem.cs" />
     <Compile Include="ParticleSystem\ExplosionParticleSystem.cs" />
     <Compile Include="ParticleSystem\ExplosionSmokeParticleSystem.cs" />
     <Compile Include="ParticleSystem\FireParticleSystem.cs" />
@@ -129,6 +133,7 @@
     <Compile Include="Spaceships\BattleCruiser.cs" />
     <Compile Include="Spaceships\Explorer.cs" />
     <Compile Include="Spaceships\Interceptor.cs" />
+    <Compile Include="Spaceships\Spaceship.cs" />
     <Compile Include="World.cs" />
     <Compile Include="ToonDefense.cs" />
     <Compile Include="GameplayComponent.cs" />

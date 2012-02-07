@@ -35,24 +35,24 @@ namespace ToonDefense.ParticleSystem
             settings.Duration = TimeSpan.FromSeconds(10);
 
             settings.MinHorizontalVelocity = 0;
-            settings.MaxHorizontalVelocity = 15;
+            settings.MaxHorizontalVelocity = 0.3f;
 
-            settings.MinVerticalVelocity = 10;
-            settings.MaxVerticalVelocity = 20;
+            settings.MinVerticalVelocity = 0.6f;
+            settings.MaxVerticalVelocity = 1;
 
             // Create a wind effect by tilting the gravity vector sideways.
-            settings.Gravity = new Vector3(-20, -5, 0);
+            settings.Gravity = new Vector3(-1, -0.4f, 0);
 
             settings.EndVelocity = 0.75f;
 
             settings.MinRotateSpeed = -1;
             settings.MaxRotateSpeed = 1;
 
-            settings.MinStartSize = 4;
-            settings.MaxStartSize = 7;
+            settings.MinStartSize = 0.1f;
+            settings.MaxStartSize = 0.5f;
 
-            settings.MinEndSize = 35;
-            settings.MaxEndSize = 140;
+            settings.MinEndSize = 1;
+            settings.MaxEndSize = 2;
         }
     }
 }

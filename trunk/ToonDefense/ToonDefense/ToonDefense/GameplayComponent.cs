@@ -26,6 +26,10 @@ namespace ToonDefense
         ExplosionSmokeParticleSystem explosionSmokeParticleSystem;
         ProjectileTrailParticleSystem projectileTrailParticleSystem;
         SmokePlumeParticleSystem smokePlumeParticleSystem;
+        VortexParticleSystem vortexParticleSystem;
+        PlasmaExplosionParticleSystem plasmaExplosionParticleSystem;
+        LaserParticleSystem laserParticleSystem;
+        ForceFieldParticleSystem forceFieldParticleSystem;
 
         public GameplayComponent(Game game)
             : base(game)
@@ -50,12 +54,20 @@ namespace ToonDefense
             explosionSmokeParticleSystem = new ExplosionSmokeParticleSystem(Game, Game.Content, camera);
             projectileTrailParticleSystem = new ProjectileTrailParticleSystem(Game, Game.Content, camera);
             smokePlumeParticleSystem = new SmokePlumeParticleSystem(Game, Game.Content, camera);
+            vortexParticleSystem = new VortexParticleSystem(Game, Game.Content, camera);
+            plasmaExplosionParticleSystem = new PlasmaExplosionParticleSystem(Game, Game.Content, camera);
+            laserParticleSystem = new LaserParticleSystem(Game, Game.Content, camera);
+            forceFieldParticleSystem = new ForceFieldParticleSystem(Game, Game.Content, camera);
 
-            particleSystems.Add(fireParticleSystem);
-            particleSystems.Add(explosionParticleSystem);
             particleSystems.Add(explosionSmokeParticleSystem);
             particleSystems.Add(projectileTrailParticleSystem);
             particleSystems.Add(smokePlumeParticleSystem);
+            particleSystems.Add(explosionParticleSystem);
+            particleSystems.Add(fireParticleSystem);
+            particleSystems.Add(vortexParticleSystem);
+            particleSystems.Add(plasmaExplosionParticleSystem);
+            particleSystems.Add(laserParticleSystem);
+            particleSystems.Add(forceFieldParticleSystem);
 
             Interceptor interceptor = new Interceptor(Game, camera);
             interceptor.Position = new Vector3(3, 1, -4);
@@ -85,15 +97,23 @@ namespace ToonDefense
         public override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
-                explosionParticleSystem.AddParticle(new Vector3(0, 1, 0), new Vector3(0, 0, 0));
+                smokePlumeParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
             if (Keyboard.GetState().IsKeyDown(Keys.D2))
-                projectileTrailParticleSystem.AddParticle(new Vector3(1, 1, 0), new Vector3(0, 0, 0));
-            if (Keyboard.GetState().IsKeyDown(Keys.D3))
-                fireParticleSystem.AddParticle(new Vector3(1, 2, 0), new Vector3(0, 0, 0));
-            if (Keyboard.GetState().IsKeyDown(Keys.D4))
-                smokePlumeParticleSystem.AddParticle(new Vector3(-1, 2, 0), new Vector3(0, 0, 0));
-            if (Keyboard.GetState().IsKeyDown(Keys.D5))
                 explosionSmokeParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
+            if (Keyboard.GetState().IsKeyDown(Keys.D3))
+                projectileTrailParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
+            if (Keyboard.GetState().IsKeyDown(Keys.D4))
+                explosionParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
+            if (Keyboard.GetState().IsKeyDown(Keys.D5))
+                fireParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
+            if (Keyboard.GetState().IsKeyDown(Keys.D6))
+                vortexParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
+            if (Keyboard.GetState().IsKeyDown(Keys.D7))
+                plasmaExplosionParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
+            if (Keyboard.GetState().IsKeyDown(Keys.D8))
+                laserParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(-10, 5, 0));
+            if (Keyboard.GetState().IsKeyDown(Keys.D9))
+                forceFieldParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(-10, 5, 0));
 
             foreach (DrawableGameComponent i in drawableComponents)
                 i.Update(gameTime);
@@ -109,7 +129,7 @@ namespace ToonDefense
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
-            GraphicsDevice.Clear(Color.RosyBrown);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             foreach (DrawableGameComponent i in drawableComponents)
                 i.Draw(gameTime);
