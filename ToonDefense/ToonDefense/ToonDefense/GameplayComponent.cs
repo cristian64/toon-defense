@@ -77,22 +77,16 @@ namespace ToonDefense
             battleCruiser.Position = new Vector3(-5, 1, 0);
             drawableComponents.Add(battleCruiser);
             Explorer explorer = new Explorer(Game, camera);
-            explorer.Destinations.Add(new Vector2(3, 7));
-            explorer.Destinations.Add(new Vector2(2, -7));
-            explorer.Destinations.Add(new Vector2(-6, 2));
-            explorer.Destinations.Add(new Vector2(3, 8));
-            Random random = new Random();
-            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-            explorer.Rotation.Y -= MathHelper.PiOver2;
             explorer.Position = new Vector3(0, 1, -3);
             drawableComponents.Add(explorer);
+
+            Random random = new Random();
+            for (int i = 0; i < 1000; i++)
+            {
+                explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                interceptor.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                battleCruiser.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+            }
 
             drawableComponents.Add(new Axis(Game, camera));
 

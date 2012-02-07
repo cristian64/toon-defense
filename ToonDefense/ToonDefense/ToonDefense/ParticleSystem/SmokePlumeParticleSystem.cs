@@ -21,10 +21,13 @@ namespace ToonDefense.ParticleSystem
     /// </summary>
     class SmokePlumeParticleSystem : ParticleSystem
     {
+        public static SmokePlumeParticleSystem LastInstance = null;
+
         public SmokePlumeParticleSystem(Game game, ContentManager content, Camera camera)
             : base(game, content, camera)
-        { }
-
+        {
+            LastInstance = this;
+        }
 
         protected override void InitializeSettings(ParticleSettings settings)
         {
