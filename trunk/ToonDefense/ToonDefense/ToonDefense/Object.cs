@@ -27,9 +27,9 @@ namespace ToonDefense
             : base(game)
         {
             Camera = camera;
-            Position = new Vector3();
-            Scale = new Vector3();
-            Rotation = new Vector3();
+            Position = Vector3.Zero;
+            Scale = Vector3.One;
+            Rotation = Vector3.Zero;
         }
 
         protected override void LoadContent()
