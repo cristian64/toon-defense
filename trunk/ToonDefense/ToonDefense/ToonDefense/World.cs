@@ -16,21 +16,23 @@ namespace ToonDefense
     {
         Model model;
         Texture2D texture;
-        Effect effect;
+        BasicEffect effect;
+        String mapName;
 
-        public World(Game game, Camera camera)
+        public World(Game game, Camera camera, String mapName = "map1")
             : base(game, camera)
         {
+            this.mapName = mapName;
         }
 
         protected override void LoadContent()
         {
             model = Game.Content.Load<Model>("models\\map");
-            texture = Game.Content.Load<Texture2D>("models\\map1");
-            effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
-            effect.Parameters["Texture"].SetValue(texture);
-            effect.Parameters["LineThickness"].SetValue(0.0f);
-            effect.Parameters["DiffuseIntensity"].SetValue(10.0f);
+            texture = Game.Content.Load<Texture2D>("maps\\" + mapName);
+            effect = (BasicEffect)model.Meshes[0].Effects[0];
+            effect.Texture = texture;
+            effect.TextureEnabled = true;
+            effect.DiffuseColor = new Vector3(1);
 
             base.LoadContent();
         }
@@ -48,14 +50,9 @@ namespace ToonDefense
             GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
             foreach (ModelMesh mesh in model.Meshes)
             {
-                foreach (ModelMeshPart part in mesh.MeshParts)
-                {
-                    part.Effect = effect;
-                    effect.Parameters["World"].SetValue(world);
-                    effect.Parameters["View"].SetValue(Camera.View);
-                    effect.Parameters["Projection"].SetValue(Camera.Projection);
-                    effect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Transpose(Matrix.Invert(world)));
-                }
+                effect.Projection = Camera.Projection;
+                effect.View = Camera.View;
+                effect.World = world;
                 mesh.Draw();
             }
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;

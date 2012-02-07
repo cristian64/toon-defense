@@ -21,10 +21,13 @@ namespace ToonDefense.ParticleSystem
     /// </summary>
     class ForceFieldParticleSystem : ParticleSystem
     {
+        public static ForceFieldParticleSystem LastInstance = null;
+
         public ForceFieldParticleSystem(Game game, ContentManager content, Camera camera)
             : base(game, content, camera)
-        { }
-
+        {
+            LastInstance = this;
+        }
 
         protected override void InitializeSettings(ParticleSettings settings)
         {

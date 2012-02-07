@@ -21,10 +21,13 @@ namespace ToonDefense.ParticleSystem
     /// </summary>
     class ProjectileTrailParticleSystem : ParticleSystem
     {
+        public static ProjectileTrailParticleSystem LastInstance = null;
+
         public ProjectileTrailParticleSystem(Game game, ContentManager content, Camera camera)
             : base(game, content, camera)
-        { }
-
+        {
+            LastInstance = this;
+        }
 
         protected override void InitializeSettings(ParticleSettings settings)
         {
