@@ -104,13 +104,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="models\map1.png">
-      <Name>map1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="models\map.fbx">
       <Name>map</Name>
       <Importer>FbxImporter</Importer>
