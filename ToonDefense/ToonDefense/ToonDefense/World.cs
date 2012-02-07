@@ -17,7 +17,9 @@ namespace ToonDefense
         Model model;
         Texture2D texture;
         BasicEffect effect;
-        String mapName;
+        private String mapName;
+        private List<Vector2> path;
+        private int[,] terrain;
 
         public World(Game game, Camera camera, String mapName = "map1")
             : base(game, camera)
@@ -33,19 +35,19 @@ namespace ToonDefense
             effect.Texture = texture;
             effect.TextureEnabled = true;
             effect.DiffuseColor = new Vector3(1);
+            LoadMap();
 
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            this.Rotation.Y += MathHelper.Pi / 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            Matrix world = Matrix.CreateScale(10f) * Matrix.CreateTranslation(Position);
+            Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
             GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
             GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
             foreach (ModelMesh mesh in model.Meshes)
@@ -58,6 +60,35 @@ namespace ToonDefense
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
             base.Draw(gameTime);
+        }
+
+        public void LoadMap()
+        {
+            Scale.X = 16;
+            Scale.Z = 16;
+            path = new List<Vector2>();
+            terrain = new int[texture.Width, texture.Height];
+            //Scale, Path and Buildable must be filled.
+            //TODO: load level info, map size and
+        }
+
+        public Vector2 WorldToTexture(Vector3 position)
+        {
+            Vector3 absPosition = position + Scale;
+            Vector2 result;
+            result.X = (float)Math.Floor(texture.Width * absPosition.X / Scale.X);
+            result.Y = (float)Math.Floor(texture.Height * absPosition.Z / Scale.Z);
+            return result;
+        }
+
+        public Vector3 IntersectionWithFloor(Vector3 lineStart, Vector3 lineEnd)
+        {
+            
+        }
+
+        public bool IsBuildable(Vector3 position)
+        {
+            return false;
         }
     }
 }
