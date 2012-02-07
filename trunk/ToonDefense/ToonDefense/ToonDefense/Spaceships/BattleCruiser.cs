@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace ToonDefense.Spaceships
 {
-    public class BattleCruiser : Object
+    public class BattleCruiser : Spaceship
     {
         Model model;
         Texture2D texture;
@@ -36,7 +36,6 @@ namespace ToonDefense.Spaceships
 
         public override void Update(GameTime gameTime)
         {
-            this.Rotation.Y += MathHelper.Pi / 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             base.Update(gameTime);
         }
 
@@ -45,7 +44,7 @@ namespace ToonDefense.Spaceships
             Vector3 shadowPosition = Position;
             shadowPosition.Y = 0;
             DrawShadow(shadowPosition, 1);
-            Matrix world = Matrix.CreateScale(1) * Matrix.CreateRotationX(-MathHelper.PiOver2) * Matrix.CreateRotationY(-MathHelper.PiOver2) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
+            Matrix world = Matrix.CreateScale(1) * Matrix.CreateRotationX(-MathHelper.PiOver2) * Matrix.CreateRotationY(MathHelper.PiOver2) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (ModelMeshPart part in mesh.MeshParts)

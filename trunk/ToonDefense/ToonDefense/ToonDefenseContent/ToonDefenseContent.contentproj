@@ -179,8 +179,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="particlesystem\force.png">
-      <Name>force</Name>
+    <Compile Include="particlesystem\forcefield.png">
+      <Name>forcefield</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

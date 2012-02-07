@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace ToonDefense.Spaceships
 {
-    public class Explorer : Object
+    public class Explorer : Spaceship
     {
         Model model;
         Texture2D texture;
@@ -36,8 +36,6 @@ namespace ToonDefense.Spaceships
 
         public override void Update(GameTime gameTime)
         {
-            this.Rotation.Y += MathHelper.Pi / 10 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
                 Position.Z -= 0.1f;
             if (Keyboard.GetState().IsKeyDown(Keys.Left))

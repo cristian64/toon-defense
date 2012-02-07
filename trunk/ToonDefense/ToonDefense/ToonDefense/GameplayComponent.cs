@@ -71,19 +71,30 @@ namespace ToonDefense
 
             Interceptor interceptor = new Interceptor(Game, camera);
             interceptor.Position = new Vector3(3, 1, -4);
+            interceptor.Destinations.Add(new Vector2(0, 7));
             drawableComponents.Add(interceptor);
             BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
             battleCruiser.Position = new Vector3(-5, 1, 0);
             drawableComponents.Add(battleCruiser);
             Explorer explorer = new Explorer(Game, camera);
+            explorer.Destinations.Add(new Vector2(3, 7));
+            explorer.Destinations.Add(new Vector2(2, -7));
+            explorer.Destinations.Add(new Vector2(-6, 2));
+            explorer.Destinations.Add(new Vector2(3, 8));
+            Random random = new Random();
+            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+            explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+            explorer.Rotation.Y -= MathHelper.PiOver2;
             explorer.Position = new Vector3(0, 1, -3);
             drawableComponents.Add(explorer);
 
             drawableComponents.Add(new Axis(Game, camera));
-            Box box = new Box(Game, camera);
-            box.Position.X = 3;
-            box.Position.Y = 1;
-            drawableComponents.Add(box);
 
             foreach (DrawableGameComponent i in drawableComponents)
                 i.Initialize();
