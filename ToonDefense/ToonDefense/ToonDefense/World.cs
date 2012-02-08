@@ -64,8 +64,8 @@ namespace ToonDefense
 
         public void LoadMap()
         {
-            Scale.X = 16;
-            Scale.Z = 16;
+            Scale.X = 20;
+            Scale.Z = 20;
             path = new List<Vector2>();
             terrain = new int[texture.Width, texture.Height];
             //Scale, Path and Buildable must be filled.

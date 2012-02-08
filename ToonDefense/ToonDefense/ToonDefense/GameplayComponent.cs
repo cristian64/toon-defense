@@ -78,6 +78,15 @@ namespace ToonDefense
             Explorer explorer = new Explorer(Game, camera);
             explorer.Position = new Vector3(0, 1, -3);
             drawableComponents.Add(explorer);
+            ScienceVessel scienceVessel = new ScienceVessel(Game, camera);
+            scienceVessel.Position = new Vector3(3, 1.2f, 6);
+            drawableComponents.Add(scienceVessel);
+            Unidentified unidentified = new Unidentified(Game, camera);
+            unidentified.Position = new Vector3(2, 1, 3);
+            drawableComponents.Add(unidentified);
+            Zeppelin zeppelin = new Zeppelin(Game, camera);
+            zeppelin.Position = new Vector3(3, 1, 4);
+            drawableComponents.Add(zeppelin);
 
             Random random = new Random();
             for (int i = 0; i < 1000; i++)
@@ -85,6 +94,9 @@ namespace ToonDefense
                 explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
                 interceptor.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
                 battleCruiser.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                scienceVessel.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                unidentified.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                zeppelin.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
             }
 
             drawableComponents.Add(new Axis(Game, camera));
