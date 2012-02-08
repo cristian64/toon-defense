@@ -25,11 +25,11 @@ namespace ToonDefense.Spaceships
 
         protected override void LoadContent()
         {
-            model = Game.Content.Load<Model>("models\\Ship");
-            texture = Game.Content.Load<Texture2D>("models\\ShipDiffuse");
+            model = Game.Content.Load<Model>("models\\interceptor");
+            texture = Game.Content.Load<Texture2D>("models\\interceptortexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
-            effect.Parameters["LineThickness"].SetValue(10f);
+            effect.Parameters["LineThickness"].SetValue(0.01F);
 
             base.LoadContent();
         }
@@ -44,7 +44,7 @@ namespace ToonDefense.Spaceships
             Vector3 shadowPosition = Position;
             shadowPosition.Y = 0;
             DrawShadow(shadowPosition, 1);
-            Matrix world = Matrix.CreateScale(0.001f) * Matrix.CreateRotationY(-MathHelper.PiOver2) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
+            Matrix world = Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (ModelMeshPart part in mesh.MeshParts)

@@ -29,7 +29,7 @@ namespace ToonDefense.Spaceships
             texture = Game.Content.Load<Texture2D>("models\\battlecruisertexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
-            effect.Parameters["LineThickness"].SetValue(0.0f);
+            effect.Parameters["LineThickness"].SetValue(0.01f);
 
             base.LoadContent();
         }

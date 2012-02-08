@@ -71,7 +71,6 @@ namespace ToonDefense
 
             Interceptor interceptor = new Interceptor(Game, camera);
             interceptor.Position = new Vector3(3, 1, -4);
-            interceptor.Destinations.Add(new Vector2(0, 7));
             drawableComponents.Add(interceptor);
             BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
             battleCruiser.Position = new Vector3(-5, 1, 0);

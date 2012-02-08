@@ -83,7 +83,7 @@ namespace ToonDefense
 
         public Vector3 IntersectionWithFloor(Vector3 lineStart, Vector3 lineEnd)
         {
-            
+            return Vector3.Zero;
         }
 
         public bool IsBuildable(Vector3 position)
