@@ -47,7 +47,7 @@ namespace ToonDefense
             camera.Target = new Vector3(8, 5.5f, 0);
             components.Add(camera);
 
-            world = new World(Game, camera);
+            world = new World(Game, camera, "map1");
             drawableComponents.Add(world);
 
             fireParticleSystem = new FireParticleSystem(Game, Game.Content, camera);
@@ -70,7 +70,6 @@ namespace ToonDefense
             particleSystems.Add(laserParticleSystem);
             particleSystems.Add(forceFieldParticleSystem);
 
-            Random random = new Random();
             for (int j = 0; j < 1; j++)
             {
                 Interceptor interceptor = new Interceptor(Game, camera);
@@ -94,19 +93,7 @@ namespace ToonDefense
                 DeltaDart deltaDart = new DeltaDart(Game, camera);
                 deltaDart.Position = new Vector3(-7, 2, 0);
                 drawableComponents.Add(deltaDart);
-
-                for (int i = 0; i < 1000; i++)
-                {
-                    explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                    interceptor.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                    battleCruiser.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                    scienceVessel.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                    unidentified.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                    zeppelin.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                    deltaDart.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                }
             }
-
             drawableComponents.Add(new Axis(Game, camera));
 
             foreach (DrawableGameComponent i in drawableComponents)
@@ -116,6 +103,19 @@ namespace ToonDefense
             foreach (GameComponent i in components)
                 i.Initialize();
             base.Initialize();
+
+            Random random = new Random();
+            foreach (DrawableGameComponent i in drawableComponents)
+            {
+                Spaceship spaceship = i as Spaceship;
+                if (spaceship != null)
+                {
+                    foreach (Vector3 j in world.Waypoints)
+                        spaceship.Destinations.Add(j);
+                    for (int j = 0; j < 1000; j++)
+                        spaceship.Destinations.Add(new Vector3(random.Next() % (int)world.Scale.X - (int)world.Scale.X / 2, 0, random.Next() % (int)world.Scale.Z - (int)world.Scale.Z / 2));
+                }
+            }
         }
 
         Vector3 lastPosition;
@@ -144,8 +144,12 @@ namespace ToonDefense
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 lastPosition = camera.Position;
-                lastFloor = camera.RayFromScreenToFloor(Mouse.GetState().X, Mouse.GetState().Y);
-                Console.WriteLine(lastFloor);
+                Vector3 floor = camera.RayFromScreenToFloor(Mouse.GetState().X, Mouse.GetState().Y);
+                if (lastFloor == null || !floor.Equals(lastFloor))
+                {
+                    lastFloor = floor;
+                    Console.WriteLine(world.WorldUnitsToTextureUnits(lastFloor).X + " " + world.WorldUnitsToTextureUnits(lastFloor).Y);
+                }
             }
 
             foreach (DrawableGameComponent i in drawableComponents)
