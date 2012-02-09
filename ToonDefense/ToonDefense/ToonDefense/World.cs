@@ -17,30 +17,41 @@ namespace ToonDefense
         Model model;
         Texture2D texture;
         BasicEffect effect;
-        private String mapName;
-        private List<Vector3> waypoints;
-        private int[,] terrain;
+        public String MapName;
+        public List<Vector3> Waypoints;
+        bool[,] buildableAreas;
 
         public World(Game game, Camera camera, String mapName = "map1")
             : base(game, camera)
         {
-            this.mapName = mapName;
+            this.MapName = mapName;
         }
 
         protected override void LoadContent()
         {
             model = Game.Content.Load<Model>("models\\map");
-            texture = Game.Content.Load<Texture2D>("maps\\" + mapName + "texture");
+            texture = Game.Content.Load<Texture2D>("maps\\" + MapName + "texture");
             effect = (BasicEffect)model.Meshes[0].Effects[0];
             effect.Texture = texture;
             effect.TextureEnabled = true;
             effect.DiffuseColor = new Vector3(1);
-            Scale.X = 20;
-            Scale.Z = 20;
-            waypoints = new List<Vector3>();
-            foreach (Vector2 i in Game.Content.Load<List<Vector2>>("maps\\" + mapName))
-                waypoints.Add(TextureUnitsToWorldUnits(i));
-            terrain = new int[texture.Width, texture.Height];
+
+            // Process XML file with waypoints and real size of the map.
+            Scale.X = Game.Content.Load<List<Vector2>>("maps\\" + MapName).First().X;
+            Scale.Z = Game.Content.Load<List<Vector2>>("maps\\" + MapName).First().Y;
+            Game.Content.Load<List<Vector2>>("maps\\" + MapName).RemoveAt(0);
+            Waypoints = new List<Vector3>();
+            foreach (Vector2 i in Game.Content.Load<List<Vector2>>("maps\\" + MapName))
+                Waypoints.Add(TextureUnitsToWorldUnits(i));
+
+            // Process buildable areas from the binary image.
+            Texture2D buildableTexture = Game.Content.Load<Texture2D>("maps\\" + MapName + "buildable");
+            Color[] colorData = new Color[buildableTexture.Width * buildableTexture.Height];
+            buildableTexture.GetData<Color>(colorData);
+            buildableAreas = new bool[texture.Width, texture.Height];
+            for (int i = 0; i < colorData.Count(); i++)
+                if (colorData[i].Equals(Color.Black))
+                    buildableAreas[i % texture.Height, i / texture.Height] = true;
 
             base.LoadContent();
         }
@@ -62,8 +73,8 @@ namespace ToonDefense
                 effect.World = world;
                 mesh.Draw();
             }
-            for (int i = 0; i < waypoints.Count - 1; i++)
-                PrimitiveDrawings.DrawLine(GraphicsDevice, Camera, waypoints[i], waypoints[i + 1], Color.White);
+            for (int i = 0; i < Waypoints.Count - 1; i++)
+                PrimitiveDrawings.DrawLine(GraphicsDevice, Camera, Waypoints[i], Waypoints[i + 1], Color.White);
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
             base.Draw(gameTime);
@@ -86,7 +97,8 @@ namespace ToonDefense
 
         public bool IsBuildable(Vector3 position)
         {
-            return false;
+            Vector2 discrete = WorldUnitsToTextureUnits(position);
+            return buildableAreas[(int)discrete.X, (int)discrete.Y];
         }
     }
 }
