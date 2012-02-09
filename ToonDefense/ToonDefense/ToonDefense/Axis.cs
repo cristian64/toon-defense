@@ -37,27 +37,18 @@ namespace ToonDefense
             basicEffect.Projection = Camera.Projection;
             basicEffect.View = Camera.View;
             basicEffect.CurrentTechnique.Passes[0].Apply();
-            drawLine(new Vector3(0, 0, 0), new Vector3(length, 0, 0), Color.Red);
-            drawLine(new Vector3(length - 0.5f, 0.5f * 0.4f, 0), new Vector3(length, 0, 0), Color.Red);
-            drawLine(new Vector3(length - 0.5f, -0.5f * 0.4f, 0), new Vector3(length, 0, 0), Color.Red);
+            PrimitiveDrawings.DrawLine(Game.GraphicsDevice, Camera, new Vector3(0, 0, 0), new Vector3(length, 0, 0), Color.Red);
+            PrimitiveDrawings.DrawLine(Game.GraphicsDevice, Camera, new Vector3(length - 0.5f, 0.5f * 0.4f, 0), new Vector3(length, 0, 0), Color.Red);
+            PrimitiveDrawings.DrawLine(Game.GraphicsDevice, Camera, new Vector3(length - 0.5f, -0.5f * 0.4f, 0), new Vector3(length, 0, 0), Color.Red);
 
-            drawLine(new Vector3(0, 0, 0), new Vector3(0, length, 0), Color.Green);
-            drawLine(new Vector3(0.5f * 0.4f, length - 0.5f, 0), new Vector3(0, length, 0), Color.Green);
-            drawLine(new Vector3(-0.5f * 0.4f, length - 0.5f, 0), new Vector3(0, length, 0), Color.Green);
+            PrimitiveDrawings.DrawLine(Game.GraphicsDevice, Camera, new Vector3(0, 0, 0), new Vector3(0, length, 0), Color.Green);
+            PrimitiveDrawings.DrawLine(Game.GraphicsDevice, Camera, new Vector3(0.5f * 0.4f, length - 0.5f, 0), new Vector3(0, length, 0), Color.Green);
+            PrimitiveDrawings.DrawLine(Game.GraphicsDevice, Camera, new Vector3(-0.5f * 0.4f, length - 0.5f, 0), new Vector3(0, length, 0), Color.Green);
 
-            drawLine(new Vector3(0, 0, 0), new Vector3(0, 0, length), Color.Blue);
-            drawLine(new Vector3(0, 0.5f * 0.4f, length - 0.5f), new Vector3(0, 0, length), Color.Blue);
-            drawLine(new Vector3(0, -0.5f * 0.4f, length - 0.5f), new Vector3(0, 0, length), Color.Blue);
+            PrimitiveDrawings.DrawLine(Game.GraphicsDevice, Camera, new Vector3(0, 0, 0), new Vector3(0, 0, length), Color.Blue);
+            PrimitiveDrawings.DrawLine(Game.GraphicsDevice, Camera, new Vector3(0, 0.5f * 0.4f, length - 0.5f), new Vector3(0, 0, length), Color.Blue);
+            PrimitiveDrawings.DrawLine(Game.GraphicsDevice, Camera, new Vector3(0, -0.5f * 0.4f, length - 0.5f), new Vector3(0, 0, length), Color.Blue);
             base.Draw(gameTime);
-        }
-
-        private void drawLine(Vector3 source, Vector3 destination, Color color)
-        {
-            vertices[0].Position = source;
-            vertices[0].Color = color;
-            vertices[1].Position = destination;
-            vertices[1].Color = color;
-            Game.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineList, vertices, 0, 1);
         }
     }
 }

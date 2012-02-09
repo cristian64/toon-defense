@@ -172,5 +172,43 @@ namespace ToonDefense
 
             view = Matrix.CreateLookAt(position, targetPos, upVector);
         }
+
+        /// <summary>
+        /// Gets a direction from the screen/camera to the world, according to the position (x, y) of the screen.
+        /// </summary>
+        /// <param name="x">Position X on the screen</param>
+        /// <param name="y">Position Y on the screen</param>
+        /// <returns>Direction from the screen to the world.</returns>
+        public Vector3 RayFromScreenToWorld(int x, int y)
+        {
+            Vector3 nearSource = new Vector3(x, y, 0);
+            Vector3 farSource = new Vector3(x, y, 1);
+
+            Matrix world = Matrix.CreateTranslation(0, 0, 0);
+
+            Vector3 nearPoint = Game.GraphicsDevice.Viewport.Unproject(nearSource, Projection, View, world);
+            Vector3 farPoint = Game.GraphicsDevice.Viewport.Unproject(farSource, Projection, View, world);
+
+            Vector3 direction = farPoint - nearPoint;
+            direction.Normalize();
+            return direction;
+        }
+
+        public Vector3 RayFromScreenToFloor(int x, int y)
+        {
+            Vector3 direction = RayFromScreenToWorld(x, y);
+            Vector3 lineStart = direction + position;
+            Vector3 lineEnd = position;
+            Vector3 result = new Vector3();
+            result.X = lineStart.X + (lineStart.X - lineEnd.X) * lineStart.Y / (lineEnd.Y - lineStart.Y);
+            result.Z = lineStart.Z + (lineStart.Z - lineEnd.Z) * lineStart.Y / (lineEnd.Y - lineStart.Y);
+            return result;
+        }
+
+        public Vector2 RayFromWorldToScreen(Vector3 position)
+        {
+            Vector3 screenPosition = Game.GraphicsDevice.Viewport.Project(position, Projection, View, Matrix.Identity);
+            return new Vector2(screenPosition.X, screenPosition.Z);
+        }
     }
 }

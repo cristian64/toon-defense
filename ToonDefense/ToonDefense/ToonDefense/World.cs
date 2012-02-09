@@ -18,7 +18,7 @@ namespace ToonDefense
         Texture2D texture;
         BasicEffect effect;
         private String mapName;
-        private List<Vector2> path;
+        private List<Vector3> waypoints;
         private int[,] terrain;
 
         public World(Game game, Camera camera, String mapName = "map1")
@@ -30,12 +30,17 @@ namespace ToonDefense
         protected override void LoadContent()
         {
             model = Game.Content.Load<Model>("models\\map");
-            texture = Game.Content.Load<Texture2D>("maps\\" + mapName);
+            texture = Game.Content.Load<Texture2D>("maps\\" + mapName + "texture");
             effect = (BasicEffect)model.Meshes[0].Effects[0];
             effect.Texture = texture;
             effect.TextureEnabled = true;
             effect.DiffuseColor = new Vector3(1);
-            LoadMap();
+            Scale.X = 20;
+            Scale.Z = 20;
+            waypoints = new List<Vector3>();
+            foreach (Vector2 i in Game.Content.Load<List<Vector2>>("maps\\" + mapName))
+                waypoints.Add(TextureUnitsToWorldUnits(i));
+            terrain = new int[texture.Width, texture.Height];
 
             base.LoadContent();
         }
@@ -57,33 +62,26 @@ namespace ToonDefense
                 effect.World = world;
                 mesh.Draw();
             }
+            for (int i = 0; i < waypoints.Count - 1; i++)
+                PrimitiveDrawings.DrawLine(GraphicsDevice, Camera, waypoints[i], waypoints[i + 1], Color.White);
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
             base.Draw(gameTime);
         }
 
-        public void LoadMap()
+        public Vector2 WorldUnitsToTextureUnits(Vector3 position)
         {
-            Scale.X = 20;
-            Scale.Z = 20;
-            path = new List<Vector2>();
-            terrain = new int[texture.Width, texture.Height];
-            //Scale, Path and Buildable must be filled.
-            //TODO: load level info, map size and
+            return new Vector2(
+                (float)Math.Round(texture.Width * (position.X + Scale.X / 2) / Scale.X),
+                (float)Math.Round(texture.Height * (position.Z + Scale.Z / 2) / Scale.Z));
         }
 
-        public Vector2 WorldToTexture(Vector3 position)
+        public Vector3 TextureUnitsToWorldUnits(Vector2 position)
         {
-            Vector3 absPosition = position + Scale;
-            Vector2 result;
-            result.X = (float)Math.Floor(texture.Width * absPosition.X / Scale.X);
-            result.Y = (float)Math.Floor(texture.Height * absPosition.Z / Scale.Z);
-            return result;
-        }
-
-        public Vector3 IntersectionWithFloor(Vector3 lineStart, Vector3 lineEnd)
-        {
-            return Vector3.Zero;
+            return new Vector3(
+                Scale.X * position.X / (texture.Width - 1) - Scale.X / 2,
+                0,
+                Scale.Z * position.Y / (texture.Height - 1) - Scale.Z / 2);
         }
 
         public bool IsBuildable(Vector3 position)
