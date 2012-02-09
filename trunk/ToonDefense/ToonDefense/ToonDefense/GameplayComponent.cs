@@ -20,6 +20,7 @@ namespace ToonDefense
         List<DrawableGameComponent> particleSystems;
         List<GameComponent> components;
         Camera camera;
+        World world;
 
         FireParticleSystem fireParticleSystem;
         ExplosionParticleSystem explosionParticleSystem;
@@ -46,7 +47,7 @@ namespace ToonDefense
             camera.Target = new Vector3(8, 5.5f, 0);
             components.Add(camera);
 
-            World world = new World(Game, camera);
+            world = new World(Game, camera);
             drawableComponents.Add(world);
 
             fireParticleSystem = new FireParticleSystem(Game, Game.Content, camera);
@@ -117,6 +118,8 @@ namespace ToonDefense
             base.Initialize();
         }
 
+        Vector3 lastPosition;
+        Vector3 lastFloor;
         public override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
@@ -138,6 +141,13 @@ namespace ToonDefense
             if (Keyboard.GetState().IsKeyDown(Keys.D9))
                 forceFieldParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(-10, 5, 0));
 
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                lastPosition = camera.Position;
+                lastFloor = camera.RayFromScreenToFloor(Mouse.GetState().X, Mouse.GetState().Y);
+                Console.WriteLine(lastFloor);
+            }
+
             foreach (DrawableGameComponent i in drawableComponents)
                 i.Update(gameTime);
             foreach (DrawableGameComponent i in particleSystems)
@@ -153,6 +163,9 @@ namespace ToonDefense
             GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            if (lastFloor != null)
+                PrimitiveDrawings.DrawLine(GraphicsDevice, camera, lastPosition, lastFloor, Color.Pink);
 
             foreach (DrawableGameComponent i in drawableComponents)
                 i.Draw(gameTime);
