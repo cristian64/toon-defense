@@ -69,38 +69,41 @@ namespace ToonDefense
             particleSystems.Add(laserParticleSystem);
             particleSystems.Add(forceFieldParticleSystem);
 
-            Interceptor interceptor = new Interceptor(Game, camera);
-            interceptor.Position = new Vector3(3, 2, -4);
-            drawableComponents.Add(interceptor);
-            BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
-            battleCruiser.Position = new Vector3(-5, 2, 0);
-            drawableComponents.Add(battleCruiser);
-            Explorer explorer = new Explorer(Game, camera);
-            explorer.Position = new Vector3(0, 2, -3);
-            drawableComponents.Add(explorer);
-            ScienceVessel scienceVessel = new ScienceVessel(Game, camera);
-            scienceVessel.Position = new Vector3(3, 2, 6);
-            drawableComponents.Add(scienceVessel);
-            Unidentified unidentified = new Unidentified(Game, camera);
-            unidentified.Position = new Vector3(2, 2, 3);
-            drawableComponents.Add(unidentified);
-            Zeppelin zeppelin = new Zeppelin(Game, camera);
-            zeppelin.Position = new Vector3(3, 2, 4);
-            drawableComponents.Add(zeppelin);
-            DeltaDart deltaDart = new DeltaDart(Game, camera);
-            deltaDart.Position = new Vector3(-7, 2, 0);
-            drawableComponents.Add(deltaDart);
-
             Random random = new Random();
-            for (int i = 0; i < 1000; i++)
+            for (int j = 0; j < 1; j++)
             {
-                explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                interceptor.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                battleCruiser.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                scienceVessel.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                unidentified.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                zeppelin.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
-                deltaDart.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                Interceptor interceptor = new Interceptor(Game, camera);
+                interceptor.Position = new Vector3(3, 2, -4);
+                drawableComponents.Add(interceptor);
+                BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
+                battleCruiser.Position = new Vector3(-5, 2, 0);
+                drawableComponents.Add(battleCruiser);
+                Explorer explorer = new Explorer(Game, camera);
+                explorer.Position = new Vector3(0, 2, -3);
+                drawableComponents.Add(explorer);
+                ScienceVessel scienceVessel = new ScienceVessel(Game, camera);
+                scienceVessel.Position = new Vector3(3, 2, 6);
+                drawableComponents.Add(scienceVessel);
+                Unidentified unidentified = new Unidentified(Game, camera);
+                unidentified.Position = new Vector3(2, 2, 3);
+                drawableComponents.Add(unidentified);
+                Zeppelin zeppelin = new Zeppelin(Game, camera);
+                zeppelin.Position = new Vector3(3, 2, 4);
+                drawableComponents.Add(zeppelin);
+                DeltaDart deltaDart = new DeltaDart(Game, camera);
+                deltaDart.Position = new Vector3(-7, 2, 0);
+                drawableComponents.Add(deltaDart);
+
+                for (int i = 0; i < 1000; i++)
+                {
+                    explorer.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                    interceptor.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                    battleCruiser.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                    scienceVessel.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                    unidentified.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                    zeppelin.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                    deltaDart.Destinations.Add(new Vector2(random.Next() % 20 - 10, random.Next() % 20 - 10));
+                }
             }
 
             drawableComponents.Add(new Axis(Game, camera));
