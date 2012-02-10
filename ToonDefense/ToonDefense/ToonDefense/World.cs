@@ -14,9 +14,7 @@ namespace ToonDefense
 {
     public class World : Object
     {
-        Model model;
-        Texture2D texture;
-        BasicEffect effect;
+        BasicEffect basicEffect;
         public String MapName;
         public List<Vector3> Waypoints;
         Color[] buildableAreas;
@@ -31,10 +29,10 @@ namespace ToonDefense
         {
             model = Game.Content.Load<Model>("models\\map");
             texture = Game.Content.Load<Texture2D>("maps\\" + MapName + "texture");
-            effect = (BasicEffect)model.Meshes[0].Effects[0];
-            effect.Texture = texture;
-            effect.TextureEnabled = true;
-            effect.DiffuseColor = new Vector3(1);
+            basicEffect = (BasicEffect)model.Meshes[0].Effects[0];
+            basicEffect.Texture = texture;
+            basicEffect.TextureEnabled = true;
+            basicEffect.DiffuseColor = new Vector3(1);
 
             // Process XML file with waypoints and real size of the map.
             Scale.X = Game.Content.Load<List<Vector2>>("maps\\" + MapName).First().X;
@@ -64,9 +62,9 @@ namespace ToonDefense
             GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
             foreach (ModelMesh mesh in model.Meshes)
             {
-                effect.Projection = Camera.Projection;
-                effect.View = Camera.View;
-                effect.World = world;
+                basicEffect.Projection = Camera.Projection;
+                basicEffect.View = Camera.View;
+                basicEffect.World = world;
                 mesh.Draw();
             }
             for (int i = 0; i < Waypoints.Count - 1; i++)

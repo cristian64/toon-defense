@@ -39,7 +39,7 @@ namespace ToonDefense.ParticleSystem
 
             settings.DurationRandomness = 1.5f;
 
-            settings.EmitterVelocitySensitivity = 0.1f;
+            settings.EmitterVelocitySensitivity = 0;
 
             settings.MinHorizontalVelocity = 0;
             settings.MaxHorizontalVelocity = 0;

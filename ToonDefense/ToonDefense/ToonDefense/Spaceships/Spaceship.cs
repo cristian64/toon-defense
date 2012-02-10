@@ -14,11 +14,6 @@ namespace ToonDefense.Spaceships
 {
     public class Spaceship : Object
     {
-        protected Model model;
-        protected Texture2D texture;
-        protected Effect effect;
-        private BoundingBox boundingBox;
-        private bool boundingBoxCalculated;
         public List<Vector3> Destinations;
         public float Speed;
         public int Health;
@@ -56,56 +51,6 @@ namespace ToonDefense.Spaceships
                 }
             }
             base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
-            PrimitiveDrawings.DrawBoundingBox(Game.GraphicsDevice, Camera, world, BoundingBox, Color.White);
-            base.Draw(gameTime);
-        }
-
-        public BoundingBox BoundingBox
-        {
-            get
-            {
-                if (boundingBoxCalculated == false)
-                {
-                    // Initialize minimum and maximum corners of the bounding box to max and min values
-                    Vector3 min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
-                    Vector3 max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
-
-                    // For each mesh of the model
-                    foreach (ModelMesh mesh in model.Meshes)
-                    {
-                        foreach (ModelMeshPart meshPart in mesh.MeshParts)
-                        {
-                            // Vertex buffer parameters
-                            int vertexStride = meshPart.VertexBuffer.VertexDeclaration.VertexStride;
-                            int vertexBufferSize = meshPart.NumVertices * vertexStride;
-
-                            // Get vertex data as float
-                            float[] vertexData = new float[vertexBufferSize / sizeof(float)];
-                            meshPart.VertexBuffer.GetData<float>(vertexData);
-
-                            // Iterate through vertices (possibly) growing bounding box, all calculations are done in world space
-                            for (int i = 0; i < vertexBufferSize / sizeof(float); i += vertexStride / sizeof(float))
-                            {
-                                Vector3 transformedPosition = Vector3.Transform(new Vector3(vertexData[i], vertexData[i + 1], vertexData[i + 2]), Matrix.Identity);
-
-                                min = Vector3.Min(min, transformedPosition);
-                                max = Vector3.Max(max, transformedPosition);
-                            }
-                        }
-                    }
-
-                    // Create and return bounding box
-                    boundingBox = new BoundingBox(min, max);
-                    boundingBoxCalculated = true;
-                }
-
-                return boundingBox;
-            }
         }
     }
 }

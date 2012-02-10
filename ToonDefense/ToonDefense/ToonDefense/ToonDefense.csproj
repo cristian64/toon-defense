@@ -140,6 +140,8 @@
     <Compile Include="Spaceships\Explorer.cs" />
     <Compile Include="Spaceships\Interceptor.cs" />
     <Compile Include="Spaceships\Spaceship.cs" />
+    <Compile Include="Towers\TeslaCoil.cs" />
+    <Compile Include="Towers\Tower.cs" />
     <Compile Include="World.cs" />
     <Compile Include="ToonDefense.cs" />
     <Compile Include="GameplayComponent.cs" />
