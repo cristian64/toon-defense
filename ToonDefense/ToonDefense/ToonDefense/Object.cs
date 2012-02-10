@@ -47,6 +47,7 @@ namespace ToonDefense
         {
             Matrix world = Matrix.CreateScale(scale * 0.5f) * Matrix.CreateTranslation(position);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
+            GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
             foreach (ModelMesh mesh in shadowModel.Meshes)
             {
                 foreach (BasicEffect e in mesh.Effects)
@@ -58,6 +59,7 @@ namespace ToonDefense
                 mesh.Draw();
             }
             GraphicsDevice.BlendState = BlendState.Opaque;
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
         }
     }
 }

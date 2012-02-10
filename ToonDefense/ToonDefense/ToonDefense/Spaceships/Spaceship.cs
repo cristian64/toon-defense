@@ -28,7 +28,7 @@ namespace ToonDefense.Spaceships
             :base(game, camera)
         {
             Destinations = new List<Vector3>();
-            Speed = 0.2f;
+            Speed = 1;
             Health = 100;
             Reward = 100;
         }

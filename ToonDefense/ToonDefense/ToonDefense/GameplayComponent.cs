@@ -104,7 +104,7 @@ namespace ToonDefense
                 i.Initialize();
             base.Initialize();
 
-            /*Random random = new Random();
+            Random random = new Random();
             foreach (DrawableGameComponent i in drawableComponents)
             {
                 Spaceship spaceship = i as Spaceship;
@@ -115,7 +115,7 @@ namespace ToonDefense
                     for (int j = 0; j < 1000; j++)
                         spaceship.Destinations.Add(new Vector3(random.Next() % (int)world.Scale.X - (int)world.Scale.X / 2, 0, random.Next() % (int)world.Scale.Z - (int)world.Scale.Z / 2));
                 }
-            }*/
+            }
         }
 
         Vector3 lastPosition;
