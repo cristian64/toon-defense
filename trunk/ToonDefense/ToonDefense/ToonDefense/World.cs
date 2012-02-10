@@ -19,7 +19,7 @@ namespace ToonDefense
         BasicEffect effect;
         public String MapName;
         public List<Vector3> Waypoints;
-        bool[,] buildableAreas;
+        Color[] buildableAreas;
 
         public World(Game game, Camera camera, String mapName = "map1")
             : base(game, camera)
@@ -46,12 +46,8 @@ namespace ToonDefense
 
             // Process buildable areas from the binary image.
             Texture2D buildableTexture = Game.Content.Load<Texture2D>("maps\\" + MapName + "buildable");
-            Color[] colorData = new Color[buildableTexture.Width * buildableTexture.Height];
-            buildableTexture.GetData<Color>(colorData);
-            buildableAreas = new bool[texture.Width, texture.Height];
-            for (int i = 0; i < colorData.Count(); i++)
-                if (colorData[i].Equals(Color.Black))
-                    buildableAreas[i % texture.Height, i / texture.Height] = true;
+            buildableAreas = new Color[buildableTexture.Width * buildableTexture.Height];
+            buildableTexture.GetData<Color>(buildableAreas);
 
             base.LoadContent();
         }
@@ -83,8 +79,8 @@ namespace ToonDefense
         public Vector2 WorldUnitsToTextureUnits(Vector3 position)
         {
             return new Vector2(
-                (float)Math.Round(texture.Width * (position.X + Scale.X / 2) / Scale.X),
-                (float)Math.Round(texture.Height * (position.Z + Scale.Z / 2) / Scale.Z));
+                (float)Math.Round((texture.Width - 1) * (position.X + Scale.X / 2) / Scale.X),
+                (float)Math.Round((texture.Height -1) * (position.Z + Scale.Z / 2) / Scale.Z));
         }
 
         public Vector3 TextureUnitsToWorldUnits(Vector2 position)
