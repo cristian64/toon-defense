@@ -26,6 +26,8 @@ namespace ToonDefense.Spaceships
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
 
+            Position.Y = Height / 2.0f;
+
             base.LoadContent();
         }
 

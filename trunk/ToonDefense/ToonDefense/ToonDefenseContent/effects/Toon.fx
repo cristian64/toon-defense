@@ -14,7 +14,7 @@ float4x4 WorldInverseTranspose;
  
 //--------------------------- DIFFUSE LIGHT PROPERTIES ------------------------------
 // The direction of the diffuse light
-float3 DiffuseLightDirection = float3(1, 0, 0);
+float3 DiffuseLightDirection = float3(4, 3, -3);
  
 // The color of the diffuse light
 float4 DiffuseColor = float4(1, 1, 1, 1);

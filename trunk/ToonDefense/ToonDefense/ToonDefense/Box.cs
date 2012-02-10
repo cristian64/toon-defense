@@ -16,8 +16,6 @@ namespace ToonDefense
     /// </summary>
     public class Box : Object
     {
-        private Model model;
-
         public Box(Game game, Camera camera)
             : base(game, camera)
         {

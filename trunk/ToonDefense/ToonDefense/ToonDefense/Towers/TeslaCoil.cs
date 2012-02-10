@@ -11,34 +11,33 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using ToonDefense.ParticleSystem;
 
-namespace ToonDefense.Spaceships
+namespace ToonDefense.Towers
 {
-    public class DeltaDart : Spaceship
+    public class TeslaCoil : Tower
     {
-        public DeltaDart(Game game, Camera camera)
+        ParticleEmitter forceFieldEmitter;
+
+        public TeslaCoil(Game game, Camera camera)
             : base(game, camera)
         {
+            forceFieldEmitter = new ParticleEmitter(ForceFieldParticleSystem.LastInstance, 1, Position);
         }
 
         protected override void LoadContent()
         {
-            model = Game.Content.Load<Model>("models\\deltadart");
-            texture = Game.Content.Load<Texture2D>("models\\deltadarttexture");
+            model = Game.Content.Load<Model>("models\\teslacoil");
+            texture = Game.Content.Load<Texture2D>("models\\teslacoiltexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
+
+            Position.Y = Height / 2.0f;
 
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            Vector3 direction = Destinations[0] - Position;
-            direction.Y = 0;
-            direction.Normalize();
-            Vector3 normal = new Vector3(-direction.Z, 0, direction.X);
-            
-            WhiteTrailParticleSystem.LastInstance.AddParticle(Position + normal * 0.12f - direction * (Width / 2), Vector3.Zero);
-            WhiteTrailParticleSystem.LastInstance.AddParticle(Position - normal * 0.12f - direction * (Width / 2), Vector3.Zero);
+            forceFieldEmitter.Update(gameTime, Position + new Vector3(0, Height / 2 + 0.15f, 0));
             base.Update(gameTime);
         }
 
@@ -46,8 +45,8 @@ namespace ToonDefense.Spaceships
         {
             Vector3 shadowPosition = Position;
             shadowPosition.Y = 0;
-            DrawShadow(shadowPosition, 1);
-            Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
+            DrawShadow(shadowPosition, 1.8f);
+            Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (ModelMeshPart part in mesh.MeshParts)

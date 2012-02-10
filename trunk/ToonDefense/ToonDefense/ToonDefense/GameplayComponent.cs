@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using ToonDefense.Spaceships;
+using ToonDefense.Towers;
 using ToonDefense.ParticleSystem;
 
 namespace ToonDefense
@@ -96,6 +97,9 @@ namespace ToonDefense
                 DeltaDart deltaDart = new DeltaDart(Game, camera);
                 deltaDart.Position = new Vector3(18, 2, 0);
                 drawableComponents.Add(deltaDart);
+                TeslaCoil teslaCoil = new TeslaCoil(Game, camera);
+                teslaCoil.Position = new Vector3(3, 2, 2);
+                drawableComponents.Add(teslaCoil);
             }
             drawableComponents.Add(new Axis(Game, camera));
 
