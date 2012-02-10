@@ -26,6 +26,7 @@ namespace ToonDefense
         ExplosionParticleSystem explosionParticleSystem;
         ExplosionSmokeParticleSystem explosionSmokeParticleSystem;
         ProjectileTrailParticleSystem projectileTrailParticleSystem;
+        WhiteTrailParticleSystem whiteTrailParticleSystem;
         SmokePlumeParticleSystem smokePlumeParticleSystem;
         VortexParticleSystem vortexParticleSystem;
         PlasmaExplosionParticleSystem plasmaExplosionParticleSystem;
@@ -54,6 +55,7 @@ namespace ToonDefense
             explosionParticleSystem = new ExplosionParticleSystem(Game, Game.Content, camera);
             explosionSmokeParticleSystem = new ExplosionSmokeParticleSystem(Game, Game.Content, camera);
             projectileTrailParticleSystem = new ProjectileTrailParticleSystem(Game, Game.Content, camera);
+            whiteTrailParticleSystem = new WhiteTrailParticleSystem(Game, Game.Content, camera);
             smokePlumeParticleSystem = new SmokePlumeParticleSystem(Game, Game.Content, camera);
             vortexParticleSystem = new VortexParticleSystem(Game, Game.Content, camera);
             plasmaExplosionParticleSystem = new PlasmaExplosionParticleSystem(Game, Game.Content, camera);
@@ -61,6 +63,7 @@ namespace ToonDefense
             forceFieldParticleSystem = new ForceFieldParticleSystem(Game, Game.Content, camera);
 
             particleSystems.Add(explosionSmokeParticleSystem);
+            particleSystems.Add(whiteTrailParticleSystem);
             particleSystems.Add(projectileTrailParticleSystem);
             particleSystems.Add(smokePlumeParticleSystem);
             particleSystems.Add(explosionParticleSystem);
@@ -129,16 +132,18 @@ namespace ToonDefense
             if (Keyboard.GetState().IsKeyDown(Keys.D3))
                 projectileTrailParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
             if (Keyboard.GetState().IsKeyDown(Keys.D4))
-                explosionParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
+                whiteTrailParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
             if (Keyboard.GetState().IsKeyDown(Keys.D5))
-                fireParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
+                explosionParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
             if (Keyboard.GetState().IsKeyDown(Keys.D6))
-                vortexParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
+                fireParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
             if (Keyboard.GetState().IsKeyDown(Keys.D7))
-                plasmaExplosionParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
+                vortexParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
             if (Keyboard.GetState().IsKeyDown(Keys.D8))
-                laserParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(-10, 5, 0));
+                plasmaExplosionParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
             if (Keyboard.GetState().IsKeyDown(Keys.D9))
+                laserParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(-10, 5, 0));
+            if (Keyboard.GetState().IsKeyDown(Keys.D0))
                 forceFieldParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(-10, 5, 0));
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)

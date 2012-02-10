@@ -32,7 +32,7 @@ namespace ToonDefense.Spaceships
 
         public override void Update(GameTime gameTime)
         {
-            ProjectileTrailParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
+            WhiteTrailParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
                 Position.Z -= 0.1f;
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
