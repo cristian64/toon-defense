@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <XnaContent>
   <Asset Type="System.Collections.Generic.List[Microsoft.Xna.Framework.Vector2]">
-    <!--first vector2 indicates the size of the world using directx units-->
-    50 30
+    <!--first vector2 indicates the size of the world in directx units-->
+    24 16
     <!--and now the waypoints-->
     157 146
     174 176

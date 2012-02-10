@@ -28,7 +28,7 @@ float4 LineColor = float4(0, 0, 0, 1);
  
 // The thickness of the lines.  This may need to change, depending on the scale of
 // the objects you are drawing.
-float LineThickness = 0.2;
+float LineThickness = 0.02;
  
 //--------------------------- TEXTURE PROPERTIES ------------------------------
 // The texture being used for the object
