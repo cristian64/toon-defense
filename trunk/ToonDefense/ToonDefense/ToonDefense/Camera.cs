@@ -107,7 +107,7 @@ namespace ToonDefense
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            if (Enabled)
+            if (Game.IsActive && Enabled)
             {
                 double elapsedTime = (double)gameTime.ElapsedGameTime.Ticks / (double)TimeSpan.TicksPerSecond;
                 ProcessInput((float)elapsedTime * 10.0f);

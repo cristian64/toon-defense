@@ -14,10 +14,6 @@ namespace ToonDefense.Spaceships
 {
     public class BattleCruiser : Spaceship
     {
-        Model model;
-        Texture2D texture;
-        Effect effect;
-
         public BattleCruiser(Game game, Camera camera)
             : base(game, camera)
         {
@@ -29,7 +25,6 @@ namespace ToonDefense.Spaceships
             texture = Game.Content.Load<Texture2D>("models\\battlecruisertexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
-            effect.Parameters["LineThickness"].SetValue(0.01f);
 
             base.LoadContent();
         }
@@ -44,7 +39,7 @@ namespace ToonDefense.Spaceships
             Vector3 shadowPosition = Position;
             shadowPosition.Y = 0;
             DrawShadow(shadowPosition, 1);
-            Matrix world = Matrix.CreateScale(1) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
+            Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (ModelMeshPart part in mesh.MeshParts)

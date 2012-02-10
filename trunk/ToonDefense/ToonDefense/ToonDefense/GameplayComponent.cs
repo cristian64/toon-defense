@@ -73,25 +73,25 @@ namespace ToonDefense
             for (int j = 0; j < 1; j++)
             {
                 Interceptor interceptor = new Interceptor(Game, camera);
-                interceptor.Position = new Vector3(3, 2, -4);
+                interceptor.Position = new Vector3(0, 2, 0);
                 drawableComponents.Add(interceptor);
                 BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
-                battleCruiser.Position = new Vector3(-5, 2, 0);
+                battleCruiser.Position = new Vector3(3, 2, 0);
                 drawableComponents.Add(battleCruiser);
                 Explorer explorer = new Explorer(Game, camera);
-                explorer.Position = new Vector3(0, 2, -3);
+                explorer.Position = new Vector3(6, 2, 0);
                 drawableComponents.Add(explorer);
                 ScienceVessel scienceVessel = new ScienceVessel(Game, camera);
-                scienceVessel.Position = new Vector3(3, 2, 6);
+                scienceVessel.Position = new Vector3(9, 2, 0);
                 drawableComponents.Add(scienceVessel);
                 Unidentified unidentified = new Unidentified(Game, camera);
-                unidentified.Position = new Vector3(2, 2, 3);
+                unidentified.Position = new Vector3(12, 2, 0);
                 drawableComponents.Add(unidentified);
                 Zeppelin zeppelin = new Zeppelin(Game, camera);
-                zeppelin.Position = new Vector3(3, 2, 4);
+                zeppelin.Position = new Vector3(15, 2, 0);
                 drawableComponents.Add(zeppelin);
                 DeltaDart deltaDart = new DeltaDart(Game, camera);
-                deltaDart.Position = new Vector3(-7, 2, 0);
+                deltaDart.Position = new Vector3(18, 2, 0);
                 drawableComponents.Add(deltaDart);
             }
             drawableComponents.Add(new Axis(Game, camera));
@@ -104,7 +104,7 @@ namespace ToonDefense
                 i.Initialize();
             base.Initialize();
 
-            Random random = new Random();
+            /*Random random = new Random();
             foreach (DrawableGameComponent i in drawableComponents)
             {
                 Spaceship spaceship = i as Spaceship;
@@ -115,7 +115,7 @@ namespace ToonDefense
                     for (int j = 0; j < 1000; j++)
                         spaceship.Destinations.Add(new Vector3(random.Next() % (int)world.Scale.X - (int)world.Scale.X / 2, 0, random.Next() % (int)world.Scale.Z - (int)world.Scale.Z / 2));
                 }
-            }
+            }*/
         }
 
         Vector3 lastPosition;

@@ -14,15 +14,9 @@ namespace ToonDefense.Spaceships
 {
     public class Zeppelin : Spaceship
     {
-        Model model;
-        Texture2D texture;
-        Effect effect;
-        float extraRotationX;
-
         public Zeppelin(Game game, Camera camera)
             : base(game, camera)
         {
-            extraRotationX = 0;
         }
 
         protected override void LoadContent()
@@ -31,14 +25,13 @@ namespace ToonDefense.Spaceships
             texture = Game.Content.Load<Texture2D>("models\\zeppelintexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
-            effect.Parameters["LineThickness"].SetValue(0.01f);
 
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            extraRotationX += MathHelper.Pi / 1.5f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Rotation.X += MathHelper.Pi / 1.5f * (float)gameTime.ElapsedGameTime.TotalSeconds;
             base.Update(gameTime);
         }
 
@@ -47,7 +40,7 @@ namespace ToonDefense.Spaceships
             Vector3 shadowPosition = Position;
             shadowPosition.Y = 0;
             DrawShadow(shadowPosition, 1);
-            Matrix world = Matrix.CreateScale(2) * Matrix.CreateRotationX(extraRotationX) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
+            Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateRotationX(Rotation.X) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (ModelMeshPart part in mesh.MeshParts)
