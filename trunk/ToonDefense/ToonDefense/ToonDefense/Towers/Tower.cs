@@ -34,9 +34,9 @@ namespace ToonDefense.Towers
 
         public override void Draw(GameTime gameTime)
         {
-            if (Target != null)
+            /*if (Target != null)
                 PrimitiveDrawings.DrawLine(GraphicsDevice, Camera, Position, Target.Position, Color.Violet);
-            PrimitiveDrawings.DrawSphere(Game, GraphicsDevice, Camera, Position, Sight);
+            PrimitiveDrawings.DrawSphere(Game, GraphicsDevice, Camera, Position, Sight);*/
             base.Draw(gameTime);
         }
 
