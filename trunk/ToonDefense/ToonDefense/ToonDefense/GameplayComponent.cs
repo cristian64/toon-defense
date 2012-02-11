@@ -17,7 +17,7 @@ namespace ToonDefense
 {
     public class GameplayComponent : DrawableGameComponent
     {
-        List<DrawableGameComponent> drawableComponents;
+        public List<DrawableGameComponent> DrawableComponents;
         List<DrawableGameComponent> particleSystems;
         List<GameComponent> components;
         Camera camera;
@@ -34,12 +34,16 @@ namespace ToonDefense
         LaserParticleSystem laserParticleSystem;
         ForceFieldParticleSystem forceFieldParticleSystem;
 
+        public static GameplayComponent LastInstance = null;
+
         public GameplayComponent(Game game)
             : base(game)
         {
-            drawableComponents = new List<DrawableGameComponent>();
+            DrawableComponents = new List<DrawableGameComponent>();
             particleSystems = new List<DrawableGameComponent>();
             components = new List<GameComponent>();
+
+            LastInstance = this;
         }
 
         public override void Initialize()
@@ -50,7 +54,7 @@ namespace ToonDefense
             components.Add(camera);
 
             world = new World(Game, camera, "map1");
-            drawableComponents.Add(world);
+            DrawableComponents.Add(world);
 
             fireParticleSystem = new FireParticleSystem(Game, Game.Content, camera);
             explosionParticleSystem = new ExplosionParticleSystem(Game, Game.Content, camera);
@@ -78,32 +82,35 @@ namespace ToonDefense
             {
                 Interceptor interceptor = new Interceptor(Game, camera);
                 interceptor.Position = new Vector3(0, 2, 0);
-                drawableComponents.Add(interceptor);
+                DrawableComponents.Add(interceptor);
                 BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
                 battleCruiser.Position = new Vector3(3, 2, 0);
-                drawableComponents.Add(battleCruiser);
+                DrawableComponents.Add(battleCruiser);
                 Explorer explorer = new Explorer(Game, camera);
                 explorer.Position = new Vector3(6, 2, 0);
-                drawableComponents.Add(explorer);
+                DrawableComponents.Add(explorer);
                 ScienceVessel scienceVessel = new ScienceVessel(Game, camera);
                 scienceVessel.Position = new Vector3(9, 2, 0);
-                drawableComponents.Add(scienceVessel);
+                DrawableComponents.Add(scienceVessel);
                 Unidentified unidentified = new Unidentified(Game, camera);
                 unidentified.Position = new Vector3(12, 2, 0);
-                drawableComponents.Add(unidentified);
+                DrawableComponents.Add(unidentified);
                 Zeppelin zeppelin = new Zeppelin(Game, camera);
                 zeppelin.Position = new Vector3(15, 2, 0);
-                drawableComponents.Add(zeppelin);
+                DrawableComponents.Add(zeppelin);
                 DeltaDart deltaDart = new DeltaDart(Game, camera);
                 deltaDart.Position = new Vector3(18, 2, 0);
-                drawableComponents.Add(deltaDart);
+                DrawableComponents.Add(deltaDart);
                 TeslaCoil teslaCoil = new TeslaCoil(Game, camera);
-                teslaCoil.Position = new Vector3(3, 2, 2);
-                drawableComponents.Add(teslaCoil);
+                teslaCoil.Position = new Vector3(3, 2, -3f);
+                DrawableComponents.Add(teslaCoil);
+                TeslaCoil teslaCoil2 = new TeslaCoil(Game, camera);
+                teslaCoil2.Position = new Vector3(3, 2, 2f);
+                DrawableComponents.Add(teslaCoil2);
             }
-            drawableComponents.Add(new Axis(Game, camera));
+            DrawableComponents.Add(new Axis(Game, camera));
 
-            foreach (DrawableGameComponent i in drawableComponents)
+            foreach (DrawableGameComponent i in DrawableComponents)
                 i.Initialize();
             foreach (DrawableGameComponent i in particleSystems)
                 i.Initialize();
@@ -112,7 +119,7 @@ namespace ToonDefense
             base.Initialize();
 
             Random random = new Random();
-            foreach (DrawableGameComponent i in drawableComponents)
+            foreach (DrawableGameComponent i in DrawableComponents)
             {
                 Spaceship spaceship = i as Spaceship;
                 if (spaceship != null)
@@ -161,7 +168,7 @@ namespace ToonDefense
                 }
             }
 
-            foreach (DrawableGameComponent i in drawableComponents)
+            foreach (DrawableGameComponent i in DrawableComponents)
                 i.Update(gameTime);
             foreach (DrawableGameComponent i in particleSystems)
                 i.Update(gameTime);
@@ -180,7 +187,7 @@ namespace ToonDefense
             if (lastFloor != null)
                 PrimitiveDrawings.DrawLine(GraphicsDevice, camera, lastPosition, lastFloor, Color.Pink);
 
-            foreach (DrawableGameComponent i in drawableComponents)
+            foreach (DrawableGameComponent i in DrawableComponents)
                 i.Draw(gameTime);
             foreach (DrawableGameComponent i in particleSystems)
                 i.Draw(gameTime);

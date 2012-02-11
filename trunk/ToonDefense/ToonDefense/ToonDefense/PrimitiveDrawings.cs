@@ -29,7 +29,10 @@ namespace ToonDefense
             vertices[0].Color = color;
             vertices[1].Position = destination;
             vertices[1].Color = color;
+            basicEffect.GraphicsDevice.BlendState = BlendState.Additive;
+            basicEffect.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             basicEffect.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineList, vertices, 0, 1);
+            basicEffect.GraphicsDevice.BlendState = BlendState.AlphaBlend;
         }
 
         public static void DrawLine(GraphicsDevice device, Camera camera, Vector3 source, Vector3 destination, Color color)
@@ -69,6 +72,27 @@ namespace ToonDefense
             DrawLine(device, camera, world, vertex2, vertex8, color);
             DrawLine(device, camera, world, vertex3, vertex5, color);
             DrawLine(device, camera, world, vertex4, vertex6, color);
+        }
+
+        public static void DrawSphere(Game game, GraphicsDevice device, Camera camera, Vector3 position, float scale)
+        {
+            device.DepthStencilState = DepthStencilState.DepthRead;
+            device.BlendState = BlendState.Additive;
+            Matrix world = Matrix.CreateScale(scale) * Matrix.CreateScale(2) * Matrix.CreateTranslation(position);
+
+            foreach (ModelMesh mm in game.Content.Load<Model>("models\\sphere").Meshes)
+            {
+                foreach (BasicEffect e in mm.Effects)
+                {
+                    e.Projection = camera.Projection;
+                    e.View = camera.View;
+                    e.World = world;
+                    e.Alpha = 0.25f;
+                }
+                mm.Draw();
+            }
+            device.BlendState = BlendState.AlphaBlend;
+            device.DepthStencilState = DepthStencilState.Default;
         }
     }
 }

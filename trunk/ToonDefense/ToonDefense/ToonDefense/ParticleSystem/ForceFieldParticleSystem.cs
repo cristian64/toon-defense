@@ -33,16 +33,16 @@ namespace ToonDefense.ParticleSystem
         {
             settings.TextureName = "forcefield";
 
-            settings.MaxParticles = 100;
+            settings.MaxParticles = 10000;
 
-            settings.Duration = TimeSpan.FromSeconds(0.5f);
+            settings.Duration = TimeSpan.FromSeconds(2);
             settings.DurationRandomness = 0;
 
-            settings.MinHorizontalVelocity = 0.01f;
-            settings.MaxHorizontalVelocity = 0.05f;
+            settings.MinHorizontalVelocity = 0;
+            settings.MaxHorizontalVelocity = 0;
 
-            settings.MinVerticalVelocity = -0.1f;
-            settings.MaxVerticalVelocity = 0.1f;
+            settings.MinVerticalVelocity = 0;
+            settings.MaxVerticalVelocity = 0;
 
             settings.EndVelocity = 0;
 
@@ -52,11 +52,11 @@ namespace ToonDefense.ParticleSystem
             settings.MinRotateSpeed = -0.5f;
             settings.MaxRotateSpeed = 0.5f;
 
-            settings.MinStartSize = 0.1f;
-            settings.MaxStartSize = 0.1f;
+            settings.MinStartSize = 0.5f;
+            settings.MaxStartSize = 0.5f;
 
-            settings.MinEndSize = 0.5f;
-            settings.MaxEndSize = 0.5f;
+            settings.MinEndSize = 0.1f;
+            settings.MaxEndSize = 0.1f;
 
             // Use additive blending.
             settings.BlendState = BlendState.Additive;
