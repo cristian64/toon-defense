@@ -24,6 +24,8 @@ namespace ToonDefense
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            graphics.PreferredBackBufferWidth = 1300;
+            graphics.PreferredBackBufferHeight = 730;
             //graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             //graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             //graphics.IsFullScreen = true;
