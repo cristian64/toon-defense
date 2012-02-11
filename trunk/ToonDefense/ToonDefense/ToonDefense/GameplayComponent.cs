@@ -18,8 +18,10 @@ namespace ToonDefense
     public class GameplayComponent : DrawableGameComponent
     {
         public List<DrawableGameComponent> DrawableComponents;
+        public List<DrawableGameComponent> GuiComponents;
         List<DrawableGameComponent> particleSystems;
         List<GameComponent> components;
+        Player player;
         Camera camera;
         World world;
 
@@ -40,6 +42,7 @@ namespace ToonDefense
             : base(game)
         {
             DrawableComponents = new List<DrawableGameComponent>();
+            GuiComponents = new List<DrawableGameComponent>();
             particleSystems = new List<DrawableGameComponent>();
             components = new List<GameComponent>();
 
@@ -48,6 +51,9 @@ namespace ToonDefense
 
         public override void Initialize()
         {
+            player = new Player(Game);
+            GuiComponents.Add(player);
+
             camera = new Camera(Game);
             camera.Position = new Vector3(5, 3, 10);
             camera.Target = new Vector3(8, 5.5f, 0);
@@ -116,6 +122,8 @@ namespace ToonDefense
                 i.Initialize();
             foreach (GameComponent i in components)
                 i.Initialize();
+            foreach (DrawableGameComponent i in GuiComponents)
+                i.Initialize();
             base.Initialize();
 
             Random random = new Random();
@@ -175,7 +183,8 @@ namespace ToonDefense
                 {
                     if (spaceship.Health <= 0)
                     {
-                        //Player.Money += i.Price;
+                        player.Money += spaceship.Reward;
+                        player.Kills++;
                         for (int j = 0; j < 30; j++)
                             explosionSmokeParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
                         for (int j = 0; j< 30; j++)
@@ -184,7 +193,7 @@ namespace ToonDefense
                     }
                     else if (spaceship.Destinations.Count == 0)
                     {
-                        //Player.Lives--;
+                        player.Lives--;
                         for (int j = 0; j < 10; j++)
                             vortexParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
                         for (int j = 0; j < 10; j++)
@@ -216,6 +225,8 @@ namespace ToonDefense
             foreach (DrawableGameComponent i in DrawableComponents)
                 i.Draw(gameTime);
             foreach (DrawableGameComponent i in particleSystems)
+                i.Draw(gameTime);
+            foreach (DrawableGameComponent i in GuiComponents)
                 i.Draw(gameTime);
             base.Draw(gameTime);
         }
