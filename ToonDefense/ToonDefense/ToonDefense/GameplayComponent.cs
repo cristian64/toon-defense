@@ -126,7 +126,7 @@ namespace ToonDefense
                 {
                     foreach (Vector3 j in world.Waypoints)
                         spaceship.Destinations.Add(j);
-                    for (int j = 0; j < 1000; j++)
+                    for (int j = 0; j < 0; j++)
                         spaceship.Destinations.Add(new Vector3(random.Next() % (int)world.Scale.X - (int)world.Scale.X / 2, 0, random.Next() % (int)world.Scale.Z - (int)world.Scale.Z / 2));
                 }
             }
@@ -165,6 +165,32 @@ namespace ToonDefense
                 {
                     lastFloor = floor;
                     Console.WriteLine(world.WorldUnitsToTextureUnits(lastFloor).X + " " + world.WorldUnitsToTextureUnits(lastFloor).Y);
+                }
+            }
+
+            for (int i = DrawableComponents.Count - 1; i >= 0; i--)
+            {
+                Spaceship spaceship = DrawableComponents[i] as Spaceship;
+                if (spaceship != null)
+                {
+                    if (spaceship.Health <= 0)
+                    {
+                        //Player.Money += i.Price;
+                        for (int j = 0; j < 30; j++)
+                            explosionSmokeParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
+                        for (int j = 0; j< 30; j++)
+                            explosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
+                        DrawableComponents.RemoveAt(i);
+                    }
+                    else if (spaceship.Destinations.Count == 0)
+                    {
+                        //Player.Lives--;
+                        for (int j = 0; j < 10; j++)
+                            vortexParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
+                        for (int j = 0; j < 10; j++)
+                            plasmaExplosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
+                        DrawableComponents.RemoveAt(i);
+                    }
                 }
             }
 

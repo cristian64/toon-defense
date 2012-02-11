@@ -58,8 +58,8 @@ namespace ToonDefense.ParticleSystem
             settings.MinStartSize = 0.5f;
             settings.MaxStartSize = 0.5f;
 
-            settings.MinEndSize = 1.5f;
-            settings.MaxEndSize = 2.0f;
+            settings.MinEndSize = 2;
+            settings.MaxEndSize = 2.5f;
 
             // Use additive blending.
             settings.BlendState = BlendState.Additive;
