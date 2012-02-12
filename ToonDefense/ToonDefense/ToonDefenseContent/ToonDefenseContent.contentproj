@@ -360,7 +360,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="models\spectrumtexture.jpg">
+    <Compile Include="models\spectrumtexture.png">
       <Name>spectrumtexture</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
