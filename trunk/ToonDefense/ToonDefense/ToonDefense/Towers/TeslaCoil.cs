@@ -24,7 +24,7 @@ namespace ToonDefense.Towers
             forceFieldEmitter = new ParticleEmitter(ForceFieldParticleSystem.LastInstance, 1, Position);
             Sight = 5;
             Damage = 10;
-            Delay = 500;
+            Delay = 400;
             Price = 100;
         }
 

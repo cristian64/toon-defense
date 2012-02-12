@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using ToonDefense.ParticleSystem;
+using ToonDefense.Projectiles;
 
 namespace ToonDefense.Towers
 {
@@ -38,7 +39,11 @@ namespace ToonDefense.Towers
 
         public override void Shoot()
         {
-            LaserParticleSystem.LastInstance.AddParticle(Position, Target.Position - Position);
+            Projectile missile = new Projectile(Game, Camera);
+            missile.Initialize();
+            missile.Target = Target;
+            missile.Position = Position + new Vector3(0, Height, 0);
+            GameplayComponent.LastInstance.SpawnComponents.Add(missile);
             base.Shoot();
         }
 
