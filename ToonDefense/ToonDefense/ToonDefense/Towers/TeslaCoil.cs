@@ -44,6 +44,7 @@ namespace ToonDefense.Towers
         public override void Shoot()
         {
             ForceFieldParticleSystem.LastInstance.AddParticle(Target.Position, Position - Target.Position);
+            Target.Health -= Damage;
             base.Shoot();
         }
 
