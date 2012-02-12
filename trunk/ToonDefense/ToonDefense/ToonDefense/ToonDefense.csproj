@@ -147,6 +147,7 @@
     <Compile Include="Spaceships\Interceptor.cs" />
     <Compile Include="Spaceships\Spaceship.cs" />
     <Compile Include="Sphere.cs" />
+    <Compile Include="Towers\MissileLauncher.cs" />
     <Compile Include="Towers\TeslaCoil.cs" />
     <Compile Include="Towers\Tower.cs" />
     <Compile Include="World.cs" />

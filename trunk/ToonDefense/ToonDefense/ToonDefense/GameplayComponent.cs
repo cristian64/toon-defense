@@ -129,6 +129,9 @@ namespace ToonDefense
                 TeslaCoil teslaCoil2 = new TeslaCoil(Game, camera);
                 teslaCoil2.Position = new Vector3(3, 2, 2f);
                 DrawableComponents.Add(teslaCoil2);
+                MissileLauncher missileLauncher = new MissileLauncher(Game, camera);
+                missileLauncher.Position = new Vector3(5, 2, 2f);
+                DrawableComponents.Add(missileLauncher);
             }
             DrawableComponents.Add(new Axis(Game, camera));
 
