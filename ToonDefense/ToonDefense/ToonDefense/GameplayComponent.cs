@@ -119,6 +119,9 @@ namespace ToonDefense
                 Spectrum spectrum = new Spectrum(Game, camera);
                 spectrum.Position = new Vector3(27, 2, 0);
                 DrawableComponents.Add(spectrum);
+                Helicopter helicopter = new Helicopter(Game, camera);
+                helicopter.Position = new Vector3(-16, 2, 0);
+                DrawableComponents.Add(helicopter);
 
                 TeslaCoil teslaCoil = new TeslaCoil(Game, camera);
                 teslaCoil.Position = new Vector3(3, 2, -3f);
