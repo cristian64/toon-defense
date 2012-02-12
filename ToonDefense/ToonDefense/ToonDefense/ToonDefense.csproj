@@ -134,6 +134,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Spaceships\BattleCruiser.cs" />
+    <Compile Include="Spaceships\Spectrum.cs" />
+    <Compile Include="Spaceships\HoverBoard.cs" />
+    <Compile Include="Spaceships\PaperAirplane.cs" />
+    <Compile Include="Spaceships\Gunner.cs" />
     <Compile Include="Spaceships\DeltaDart.cs" />
     <Compile Include="Spaceships\Zeppelin.cs" />
     <Compile Include="Spaceships\Unidentified.cs" />

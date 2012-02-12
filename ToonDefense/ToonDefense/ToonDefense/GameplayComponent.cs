@@ -107,6 +107,19 @@ namespace ToonDefense
                 DeltaDart deltaDart = new DeltaDart(Game, camera);
                 deltaDart.Position = new Vector3(18, 2, 0);
                 DrawableComponents.Add(deltaDart);
+                Gunner gunner = new Gunner(Game, camera);
+                gunner.Position = new Vector3(19, 2, 0);
+                DrawableComponents.Add(gunner);
+                HoverBoard hoverBoard = new HoverBoard(Game, camera);
+                hoverBoard.Position = new Vector3(22, 2, 0);
+                DrawableComponents.Add(hoverBoard);
+                PaperAirplane paperAirplane = new PaperAirplane(Game, camera);
+                paperAirplane.Position = new Vector3(24, 2, 0);
+                DrawableComponents.Add(paperAirplane);
+                Spectrum spectrum = new Spectrum(Game, camera);
+                spectrum.Position = new Vector3(27, 2, 0);
+                DrawableComponents.Add(spectrum);
+
                 TeslaCoil teslaCoil = new TeslaCoil(Game, camera);
                 teslaCoil.Position = new Vector3(3, 2, -3f);
                 DrawableComponents.Add(teslaCoil);
