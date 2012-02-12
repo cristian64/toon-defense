@@ -131,6 +131,7 @@
     <Compile Include="ParticleSystem\SmokePlumeParticleSystem.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PrimitiveDrawings.cs" />
+    <Compile Include="Projectiles\Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Spaceships\BattleCruiser.cs" />

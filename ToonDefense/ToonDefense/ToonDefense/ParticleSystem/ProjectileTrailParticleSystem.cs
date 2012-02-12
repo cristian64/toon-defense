@@ -35,7 +35,7 @@ namespace ToonDefense.ParticleSystem
 
             settings.MaxParticles = 1000;
 
-            settings.Duration = TimeSpan.FromSeconds(3);
+            settings.Duration = TimeSpan.FromSeconds(1);
 
             settings.DurationRandomness = 1.5f;
 
@@ -53,11 +53,11 @@ namespace ToonDefense.ParticleSystem
             settings.MinRotateSpeed = -4;
             settings.MaxRotateSpeed = 4;
 
-            settings.MinStartSize = 0.2f;
-            settings.MaxStartSize = 0.4f;
+            settings.MinStartSize = 0.1f;
+            settings.MaxStartSize = 0.3f;
 
-            settings.MinEndSize = 0.3f;
-            settings.MaxEndSize = 0.5f;
+            settings.MinEndSize = 0.2f;
+            settings.MaxEndSize = 0.4f;
         }
     }
 }

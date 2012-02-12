@@ -12,11 +12,13 @@ using Microsoft.Xna.Framework.Media;
 using ToonDefense.Spaceships;
 using ToonDefense.Towers;
 using ToonDefense.ParticleSystem;
+using ToonDefense.Projectiles;
 
 namespace ToonDefense
 {
     public class GameplayComponent : DrawableGameComponent
     {
+        public List<DrawableGameComponent> SpawnComponents;
         public List<DrawableGameComponent> DrawableComponents;
         public List<DrawableGameComponent> GuiComponents;
         List<DrawableGameComponent> particleSystems;
@@ -41,6 +43,7 @@ namespace ToonDefense
         public GameplayComponent(Game game)
             : base(game)
         {
+            SpawnComponents = new List<DrawableGameComponent>();
             DrawableComponents = new List<DrawableGameComponent>();
             GuiComponents = new List<DrawableGameComponent>();
             particleSystems = new List<DrawableGameComponent>();
@@ -206,7 +209,7 @@ namespace ToonDefense
                         player.Kills++;
                         for (int j = 0; j < 30; j++)
                             explosionSmokeParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
-                        for (int j = 0; j< 30; j++)
+                        for (int j = 0; j < 30; j++)
                             explosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
                         DrawableComponents.RemoveAt(i);
                     }
@@ -217,13 +220,26 @@ namespace ToonDefense
                             vortexParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
                         for (int j = 0; j < 10; j++)
                             plasmaExplosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
+                        spaceship.Health = 0;
                         DrawableComponents.RemoveAt(i);
                     }
+                }
+                else
+                {
+                    Projectile projectile = DrawableComponents[i] as Projectile;
+                    if (projectile != null && projectile.NoTarget)
+                        DrawableComponents.RemoveAt(i);
                 }
             }
 
             foreach (DrawableGameComponent i in DrawableComponents)
                 i.Update(gameTime);
+            foreach (DrawableGameComponent i in SpawnComponents)
+            {
+                i.Initialize();
+                DrawableComponents.Add(i);
+            }
+            SpawnComponents.Clear();
             foreach (DrawableGameComponent i in particleSystems)
                 i.Update(gameTime);
             foreach (GameComponent i in components)
