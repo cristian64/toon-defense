@@ -23,7 +23,7 @@ namespace ToonDefense.Spaceships
             :base(game, camera)
         {
             Destinations = new List<Vector3>();
-            Speed = 1;
+            Speed = 3;
             Health = 100;
             Reward = 100;
         }
@@ -36,11 +36,11 @@ namespace ToonDefense.Spaceships
                 Vector2 destination = new Vector2(Destinations[0].X, Destinations[0].Z);
                 Vector2 direction = destination - position;
 
-                if (direction.LengthSquared() > Speed * Speed / gameTime.ElapsedGameTime.TotalMilliseconds / gameTime.ElapsedGameTime.TotalMilliseconds)
+                if (direction.LengthSquared() > Speed * Speed * gameTime.ElapsedGameTime.TotalSeconds * gameTime.ElapsedGameTime.TotalSeconds)
                 {
                     direction.Normalize();
-                    Position.X += direction.X * Speed / (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                    Position.Z += direction.Y * Speed / (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    Position.X += direction.X * Speed * (float)(gameTime.ElapsedGameTime.TotalSeconds);
+                    Position.Z += direction.Y * Speed * (float)(gameTime.ElapsedGameTime.TotalSeconds);
                     Rotation.Y = (float)Math.Atan2(-direction.Y, direction.X);
                 }
                 else

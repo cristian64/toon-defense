@@ -18,8 +18,8 @@ namespace ToonDefense.Towers
         public Spaceship Target;
         public float Sight;
         public int Damage;
-        public int Delay;
-        public int DelayCounter;
+        public float Delay;
+        public float DelayCounter;
         public int Price;
 
         public Tower(Game game, Camera camera)
@@ -47,7 +47,7 @@ namespace ToonDefense.Towers
                 FindTarget();
             }
 
-            DelayCounter += gameTime.ElapsedGameTime.Milliseconds;
+            DelayCounter += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (DelayCounter > Delay)
             {
                 DelayCounter -= Delay;

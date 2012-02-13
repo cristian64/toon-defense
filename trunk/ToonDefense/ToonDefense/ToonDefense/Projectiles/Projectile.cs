@@ -20,14 +20,15 @@ namespace ToonDefense.Projectiles
         public Spaceship Target;
         public Vector3 Speed;
         public float Acceleration;
+        public float Friction;
         public bool NoTarget;
 
         public Projectile(Game game, Camera camera)
             :base(game, camera)
         {
-            Speed = Vector3.Up * 7;
-            Acceleration = 0.25f;
-            Damage = 25;
+            Speed = Vector3.Up * 15;
+            Acceleration = 110;
+            Friction = 100;
         }
 
         protected override void LoadContent()
@@ -48,26 +49,31 @@ namespace ToonDefense.Projectiles
             {
                 if (gameTime.ElapsedGameTime.TotalMilliseconds > 0)
                 {
-                    Vector3 direction = Target.Position - Position;
-                    float distanceSquared = direction.LengthSquared();
-                    direction.Normalize();
-                    Speed *= 0.9f;
-                    Speed += direction * Acceleration;
-                    if (distanceSquared > Speed.LengthSquared() / (2 * (float)gameTime.ElapsedGameTime.TotalMilliseconds))
-                    {
-                        Position += Speed / (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    Vector3 direction = Vector3.Normalize(Target.Position - Position);
+                    Speed += (direction * Acceleration) * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                        Vector3 speedDirection = Speed;
-                        speedDirection.Normalize();
+                    Vector3 speedDirection = Vector3.Normalize(Speed);
+                    Speed -= (speedDirection * Friction) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    float distanceSquared = (Target.Position - Position).LengthSquared();
+                    if (distanceSquared > 0.2f && distanceSquared > Speed.LengthSquared() * gameTime.ElapsedGameTime.TotalSeconds * gameTime.ElapsedGameTime.TotalSeconds)
+                    {
+                        Position += Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                        speedDirection = Vector3.Normalize(Speed);
                         Rotation.Y = (float)Math.Atan2(-speedDirection.Z, speedDirection.X);
                         Rotation.Z = (float)Math.Atan2(speedDirection.Y, Math.Abs(speedDirection.X));
                     }
                     else
                     {
-                        ExplosionParticleSystem.LastInstance.AddParticle(Position, Speed);
-                        ExplosionParticleSystem.LastInstance.AddParticle(Position, Speed);
-                        ExplosionParticleSystem.LastInstance.AddParticle(Position, Speed);
-                        ExplosionParticleSystem.LastInstance.AddParticle(Position, Speed);
+                        ExplosionParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
+                        ExplosionParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
+                        ExplosionParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
+                        ExplosionParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
+                        ExplosionParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
+                        ExplosionParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
+                        ExplosionParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
+                        ExplosionParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
                         Target.Health -= Damage;
                         NoTarget = true;
                     }
