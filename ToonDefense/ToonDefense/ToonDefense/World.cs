@@ -67,8 +67,11 @@ namespace ToonDefense
                 basicEffect.World = world;
                 mesh.Draw();
             }
+            #if DEBUG
             for (int i = 0; i < Waypoints.Count - 1; i++)
                 PrimitiveDrawings.DrawLine(GraphicsDevice, Camera, Waypoints[i], Waypoints[i + 1], Color.White);
+            #endif
+
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
             base.Draw(gameTime);
