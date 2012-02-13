@@ -151,6 +151,7 @@
     <Compile Include="Spaceships\Interceptor.cs" />
     <Compile Include="Spaceships\Spaceship.cs" />
     <Compile Include="Sphere.cs" />
+    <Compile Include="Towers\LaserCannon.cs" />
     <Compile Include="Towers\PlasmaGenerator.cs" />
     <Compile Include="Towers\MissileLauncher.cs" />
     <Compile Include="Towers\TeslaCoil.cs" />
