@@ -144,6 +144,9 @@ namespace ToonDefense
                 LaserCannon laserCannon = new LaserCannon(Game, camera);
                 laserCannon.Position = new Vector3(-7, 2, 2f);
                 DrawableComponents.Add(laserCannon);
+                Flamethower flamethower = new Flamethower(Game, camera);
+                flamethower.Position = new Vector3(-3, 2, -2.4f);
+                DrawableComponents.Add(flamethower);
             }
             DrawableComponents.Add(new Axis(Game, camera));
 

@@ -23,15 +23,15 @@ namespace ToonDefense.Towers
         {
             laserEmitter = new ParticleEmitter(LaserParticleSystem.LastInstance, 4, Position);
             Sight = 5;
-            Damage = 1;
+            Damage = 10;
             Delay = 100;
             Price = 100;
         }
 
         protected override void LoadContent()
         {
-            model = Game.Content.Load<Model>("models\\teslacoil");
-            texture = Game.Content.Load<Texture2D>("models\\teslacoiltexture");
+            model = Game.Content.Load<Model>("models\\lasercannon");
+            texture = Game.Content.Load<Texture2D>("models\\lasercannontexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
 
@@ -43,10 +43,12 @@ namespace ToonDefense.Towers
 
         public override void Shoot()
         {
-            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
-            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.One * 0.3f);
-            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.One * -0.3f);
-            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
+            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Up * 0.2f);
+            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Down * 0.2f);
+            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Right * 0.2f);
+            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Left * 0.2f);
+            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Forward * 0.2f);
+            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Backward * 0.2f);
             Target.Health -= Damage;
             base.Shoot();
         }
@@ -76,7 +78,7 @@ namespace ToonDefense.Towers
                     effect.Parameters["Projection"].SetValue(Camera.Projection);
                     effect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Transpose(Matrix.Invert(world)));
                 }
-                //mesh.Draw();
+                mesh.Draw();
             }
 
             base.Draw(gameTime);
