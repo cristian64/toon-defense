@@ -41,6 +41,10 @@ namespace ToonDefense.Spaceships
                 Position.X += 0.1f;
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
                 Position.Z += 0.1f;
+            if (Keyboard.GetState().IsKeyDown(Keys.Add))
+                Position.Y += 0.1f;
+            if (Keyboard.GetState().IsKeyDown(Keys.Subtract))
+                Position.Y -= 0.1f;
             base.Update(gameTime);
         }
 
