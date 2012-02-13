@@ -37,6 +37,7 @@ namespace ToonDefense
         PlasmaExplosionParticleSystem plasmaExplosionParticleSystem;
         LaserParticleSystem laserParticleSystem;
         ForceFieldParticleSystem forceFieldParticleSystem;
+        PlasmaParticleSystem plasmaParticleSystem;
 
         public static GameplayComponent LastInstance = null;
 
@@ -75,6 +76,7 @@ namespace ToonDefense
             plasmaExplosionParticleSystem = new PlasmaExplosionParticleSystem(Game, Game.Content, camera);
             laserParticleSystem = new LaserParticleSystem(Game, Game.Content, camera);
             forceFieldParticleSystem = new ForceFieldParticleSystem(Game, Game.Content, camera);
+            plasmaParticleSystem = new PlasmaParticleSystem(Game, Game.Content, camera);
 
             particleSystems.Add(explosionSmokeParticleSystem);
             particleSystems.Add(whiteTrailParticleSystem);
@@ -86,6 +88,7 @@ namespace ToonDefense
             particleSystems.Add(plasmaExplosionParticleSystem);
             particleSystems.Add(laserParticleSystem);
             particleSystems.Add(forceFieldParticleSystem);
+            particleSystems.Add(plasmaParticleSystem);
 
             for (int j = 0; j < 1; j++)
             {
@@ -135,6 +138,9 @@ namespace ToonDefense
                 MissileLauncher missileLauncher = new MissileLauncher(Game, camera);
                 missileLauncher.Position = new Vector3(5, 2, 2f);
                 DrawableComponents.Add(missileLauncher);
+                PlasmaGenerator plasmaGenerator = new PlasmaGenerator(Game, camera);
+                plasmaGenerator.Position = new Vector3(7, 2, 2f);
+                DrawableComponents.Add(plasmaGenerator);
             }
             DrawableComponents.Add(new Axis(Game, camera));
 
