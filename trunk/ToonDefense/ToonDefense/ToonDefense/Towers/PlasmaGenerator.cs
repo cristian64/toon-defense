@@ -14,21 +14,21 @@ using ToonDefense.Projectiles;
 
 namespace ToonDefense.Towers
 {
-    public class MissileLauncher : Tower
+    public class PlasmaGenerator : Tower
     {
-        public MissileLauncher(Game game, Camera camera)
+        public PlasmaGenerator(Game game, Camera camera)
             : base(game, camera)
         {
             Sight = 5;
             Damage = 10;
-            Delay = 500;
+            Delay = 1000;
             Price = 100;
         }
 
         protected override void LoadContent()
         {
-            model = Game.Content.Load<Model>("models\\missilelauncher");
-            texture = Game.Content.Load<Texture2D>("models\\missilelaunchertexture");
+            model = Game.Content.Load<Model>("models\\plasmagenerator");
+            texture = Game.Content.Load<Texture2D>("models\\plasmageneratortexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
 
@@ -39,21 +39,16 @@ namespace ToonDefense.Towers
 
         public override void Shoot()
         {
-            Missile missile = new Missile(Game, Camera);
-            missile.Target = Target;
-            missile.Damage = Damage;
-            missile.Position = Position + new Vector3(0, Height, 0);
-            GameplayComponent.LastInstance.SpawnComponents.Add(missile);
+            Plasma plasma = new Plasma(Game, Camera);
+            plasma.Target = Target;
+            plasma.Damage = Damage;
+            plasma.Position = Position + new Vector3(-0.55f, Height - 0.4f, 0);
+            GameplayComponent.LastInstance.SpawnComponents.Add(plasma);
             base.Shoot();
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (Target != null)
-            {
-                Vector3 direction = Target.Position - Position;
-                Rotation.Y = (float)Math.Atan2(-direction.Z, direction.X);
-            }
             base.Update(gameTime);
         }
 
@@ -61,7 +56,7 @@ namespace ToonDefense.Towers
         {
             Vector3 shadowPosition = Position;
             shadowPosition.Y = 0;
-            DrawShadow(shadowPosition, 2.1f);
+            DrawShadow(shadowPosition, 3f);
 
             Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
             foreach (ModelMeshPart part in model.Meshes[0].MeshParts)
@@ -73,17 +68,6 @@ namespace ToonDefense.Towers
                 effect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Transpose(Matrix.Invert(world)));
             }
             model.Meshes[0].Draw();
-
-            world = Matrix.CreateScale(Scale) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
-            foreach (ModelMeshPart part in model.Meshes[1].MeshParts)
-            {
-                part.Effect = effect;
-                effect.Parameters["World"].SetValue(world);
-                effect.Parameters["View"].SetValue(Camera.View);
-                effect.Parameters["Projection"].SetValue(Camera.Projection);
-                effect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Transpose(Matrix.Invert(world)));
-            }
-            model.Meshes[1].Draw();
 
             base.Draw(gameTime);
         }

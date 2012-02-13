@@ -115,6 +115,7 @@
     <Compile Include="IntroComponent.cs" />
     <Compile Include="MenuComponent.cs" />
     <Compile Include="Object.cs" />
+    <Compile Include="ParticleSystem\PlasmaParticleSystem.cs" />
     <Compile Include="ParticleSystem\WhiteTrailParticleSystem.cs" />
     <Compile Include="ParticleSystem\ForceFieldParticleSystem.cs" />
     <Compile Include="ParticleSystem\LaserParticleSystem.cs" />
@@ -131,6 +132,8 @@
     <Compile Include="ParticleSystem\SmokePlumeParticleSystem.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PrimitiveDrawings.cs" />
+    <Compile Include="Projectiles\Missile.cs" />
+    <Compile Include="Projectiles\Plasma.cs" />
     <Compile Include="Projectiles\Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
@@ -148,6 +151,7 @@
     <Compile Include="Spaceships\Interceptor.cs" />
     <Compile Include="Spaceships\Spaceship.cs" />
     <Compile Include="Sphere.cs" />
+    <Compile Include="Towers\PlasmaGenerator.cs" />
     <Compile Include="Towers\MissileLauncher.cs" />
     <Compile Include="Towers\TeslaCoil.cs" />
     <Compile Include="Towers\Tower.cs" />
