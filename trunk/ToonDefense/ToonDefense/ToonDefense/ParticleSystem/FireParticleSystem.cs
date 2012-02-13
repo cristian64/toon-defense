@@ -35,7 +35,7 @@ namespace ToonDefense.ParticleSystem
 
             settings.MaxParticles = 2400;
 
-            settings.Duration = TimeSpan.FromSeconds(1);
+            settings.Duration = TimeSpan.FromSeconds(0.8f);
 
             settings.DurationRandomness = 1;
 
