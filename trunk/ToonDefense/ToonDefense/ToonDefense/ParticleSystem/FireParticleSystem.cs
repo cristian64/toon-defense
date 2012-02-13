@@ -35,7 +35,7 @@ namespace ToonDefense.ParticleSystem
 
             settings.MaxParticles = 2400;
 
-            settings.Duration = TimeSpan.FromSeconds(2);
+            settings.Duration = TimeSpan.FromSeconds(1);
 
             settings.DurationRandomness = 1;
 
@@ -48,20 +48,20 @@ namespace ToonDefense.ParticleSystem
             // Set gravity upside down, so the flames will 'fall' upward.
             settings.Gravity = new Vector3(0, 0.8f, 0);
 
-            settings.MinColor = new Color(255, 255, 255, 100);
-            settings.MaxColor = new Color(255, 255, 255, 200);
+            settings.MinColor = new Color(255, 255, 255, 70);
+            settings.MaxColor = new Color(255, 255, 255, 150);
 
             settings.MinRotateSpeed = -0.1f;
             settings.MaxRotateSpeed = 0.1f;
 
-            settings.MinStartSize = 0.5f;
-            settings.MaxStartSize = 1f;
+            settings.MinStartSize = 0.1f;
+            settings.MaxStartSize = 0.5f;
 
-            settings.MinEndSize = 1;
-            settings.MaxEndSize = 2;
+            settings.MinEndSize = 0.6f;
+            settings.MaxEndSize = 1f;
 
             // Use additive blending.
-            settings.BlendState = BlendState.Additive;
+            settings.BlendState = BlendState.AlphaBlend;
         }
     }
 }
