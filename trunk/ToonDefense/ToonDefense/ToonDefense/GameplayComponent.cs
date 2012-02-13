@@ -148,7 +148,9 @@ namespace ToonDefense
                 flamethower.Position = new Vector3(-3, 2, -2.4f);
                 DrawableComponents.Add(flamethower);
             }
+            #if DEBUG
             DrawableComponents.Add(new Axis(Game, camera));
+            #endif
 
             foreach (DrawableGameComponent i in DrawableComponents)
                 i.Initialize();
