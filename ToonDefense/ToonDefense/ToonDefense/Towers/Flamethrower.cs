@@ -21,7 +21,7 @@ namespace ToonDefense.Towers
         {
             Sight = 5;
             Damage = 1;
-            Delay = 1;
+            Delay = 25;
             Price = 100;
         }
 
@@ -41,8 +41,9 @@ namespace ToonDefense.Towers
         {
             Vector3 targetDirection =  Vector3.Normalize(Target.Destinations[0] - Target.Position);
             targetDirection.Y = 0;
-            Vector3 direction = Vector3.Normalize(Target.Position + 2 * targetDirection - Position);
+            Vector3 direction = Vector3.Normalize(Target.Position + Target.Speed * targetDirection - Position);
             FireParticleSystem.LastInstance.AddParticle(Position + direction, 3 * direction);
+            Target.Health -= Damage;
             base.Shoot();
         }
 
@@ -52,7 +53,7 @@ namespace ToonDefense.Towers
             {
                 Vector3 targetDirection = Vector3.Normalize(Target.Destinations[0] - Target.Position);
                 targetDirection.Y = 0;
-                Vector3 direction = Vector3.Normalize(Target.Position + 2 * targetDirection - Position);
+                Vector3 direction = Vector3.Normalize(Target.Position + Target.Speed * targetDirection - Position);
                 Rotation.Y = (float)Math.Atan2(-direction.Z, direction.X);
             }
             base.Update(gameTime);
