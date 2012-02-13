@@ -141,6 +141,9 @@ namespace ToonDefense
                 PlasmaGenerator plasmaGenerator = new PlasmaGenerator(Game, camera);
                 plasmaGenerator.Position = new Vector3(7, 2, 2f);
                 DrawableComponents.Add(plasmaGenerator);
+                LaserCannon laserCannon = new LaserCannon(Game, camera);
+                laserCannon.Position = new Vector3(-7, 2, 2f);
+                DrawableComponents.Add(laserCannon);
             }
             DrawableComponents.Add(new Axis(Game, camera));
 

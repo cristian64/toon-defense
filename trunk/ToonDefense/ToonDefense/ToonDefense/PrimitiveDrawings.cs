@@ -11,6 +11,7 @@ namespace ToonDefense
     {
         private static BasicEffect basicEffect;
         private static VertexPositionColor[] vertices = new VertexPositionColor[2];
+        private static VertexPositionColor[] verticesTriangle = new VertexPositionColor[9];
 
         public static void DrawLine(GraphicsDevice device, Camera camera, Matrix world, Vector3 source, Vector3 destination, Color color)
         {
@@ -38,6 +39,48 @@ namespace ToonDefense
         public static void DrawLine(GraphicsDevice device, Camera camera, Vector3 source, Vector3 destination, Color color)
         {
             DrawLine(device, camera, Matrix.Identity, source, destination, color);
+        }
+
+        public static void DrawPyramid(GraphicsDevice device, Camera camera, Vector3 source, Vector3 destination, Color color)
+        {
+            if (basicEffect == null)
+            {
+                basicEffect = new BasicEffect(device);
+                basicEffect.LightingEnabled = false;
+                basicEffect.VertexColorEnabled = true;
+            }
+
+            basicEffect.Projection = camera.Projection;
+            basicEffect.View = camera.View;
+            basicEffect.CurrentTechnique.Passes[0].Apply();
+            basicEffect.Alpha = 0.8f;
+
+            Vector3 direction = Vector3.Normalize(destination - source);
+            Vector3 normal1 = new Vector3(direction.Z, direction.Y, -direction.X);
+            Vector3 normal2 = new Vector3(direction.X, direction.Z, -direction.Y);
+
+            verticesTriangle[0].Position = source;
+            verticesTriangle[0].Color = color;
+            verticesTriangle[1].Position = destination + 0.1f * normal1;
+            verticesTriangle[1].Color = color;
+            verticesTriangle[2].Position = destination - 0.1f * normal2;
+            verticesTriangle[2].Color = color;
+            verticesTriangle[3].Position = source;
+            verticesTriangle[3].Color = color;
+            verticesTriangle[4].Position = destination - 0.1f * normal2;
+            verticesTriangle[4].Color = color;
+            verticesTriangle[5].Position = destination - 0.1f * normal1;
+            verticesTriangle[5].Color = color;
+            verticesTriangle[6].Position = destination + 0.1f * normal1;
+            verticesTriangle[6].Color = color;
+            verticesTriangle[7].Position = source;
+            verticesTriangle[7].Color = color;
+            verticesTriangle[8].Position = destination - 0.1f * normal1;
+            verticesTriangle[8].Color = color;
+
+            basicEffect.GraphicsDevice.BlendState = BlendState.Additive;
+            basicEffect.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            device.DrawUserPrimitives(PrimitiveType.TriangleList, verticesTriangle, 0, 3, VertexPositionColor.VertexDeclaration);
         }
 
         public static void DrawBoundingBox(GraphicsDevice device, Camera camera, Matrix world, BoundingBox boundingBox, Color color)
