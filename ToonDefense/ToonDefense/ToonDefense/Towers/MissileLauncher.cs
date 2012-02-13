@@ -42,6 +42,7 @@ namespace ToonDefense.Towers
             Projectile missile = new Projectile(Game, Camera);
             missile.Initialize();
             missile.Target = Target;
+            missile.Damage = Damage;
             missile.Position = Position + new Vector3(0, Height, 0);
             GameplayComponent.LastInstance.SpawnComponents.Add(missile);
             base.Shoot();
