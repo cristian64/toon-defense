@@ -14,9 +14,13 @@ namespace ToonDefense.Spaceships
 {
     public class Spaceship : Object
     {
+        SpriteBatch spriteBatch;
+        Texture2D blackTexture;
+        Texture2D greenTexture;
         public List<Vector3> Destinations;
         public float Speed;
         public int Health;
+        public int InitialHealth;
         public int Reward;
 
         public Spaceship(Game game, Camera camera)
@@ -24,8 +28,21 @@ namespace ToonDefense.Spaceships
         {
             Destinations = new List<Vector3>();
             Speed = 3;
-            Health = 100;
+            InitialHealth = Health = 100;
             Reward = 100;
+        }
+
+        protected override void LoadContent()
+        {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            blackTexture = new Texture2D(GraphicsDevice, 1, 1, true, SurfaceFormat.Color);
+            Color[] colors = new Color[1];
+            colors[0] = Color.Black;
+            blackTexture.SetData(colors);
+            greenTexture = new Texture2D(GraphicsDevice, 1, 1, true, SurfaceFormat.Color);
+            colors[0] = Color.Lime;
+            greenTexture.SetData(colors);
+            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
@@ -51,6 +68,17 @@ namespace ToonDefense.Spaceships
                 }
             }
             base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            Vector2 position = Camera.RayFromWorldToScreen(Position);
+            position.Y -= 20;
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            spriteBatch.Draw(blackTexture, new Rectangle((int)position.X, (int)position.Y, 32, 4), Color.White);
+            spriteBatch.Draw(greenTexture, new Rectangle((int)position.X + 1, (int)position.Y + 1, (int)(30 * (Health / (float)InitialHealth)), 2), Color.White);
+            spriteBatch.End();
+            base.Draw(gameTime);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace ToonDefense.Spaceships
             : base(game, camera)
         {
             Speed = 0.0f;
-            Health = int.MaxValue;
+            InitialHealth = Health = int.MaxValue;
         }
 
         protected override void LoadContent()
