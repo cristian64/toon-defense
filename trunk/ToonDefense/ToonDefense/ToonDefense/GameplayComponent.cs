@@ -65,6 +65,7 @@ namespace ToonDefense
 
             world = new World(Game, camera, "map1");
             DrawableComponents.Add(world);
+            GuiComponents.Add(new RoundManager(Game, camera, world));
 
             fireParticleSystem = new FireParticleSystem(Game, Game.Content, camera);
             explosionParticleSystem = new ExplosionParticleSystem(Game, Game.Content, camera);
@@ -92,43 +93,6 @@ namespace ToonDefense
 
             for (int j = 0; j < 1; j++)
             {
-                Interceptor interceptor = new Interceptor(Game, camera);
-                interceptor.Position = new Vector3(0, 2, 0);
-                DrawableComponents.Add(interceptor);
-                BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
-                battleCruiser.Position = new Vector3(3, 2, 0);
-                DrawableComponents.Add(battleCruiser);
-                Explorer explorer = new Explorer(Game, camera);
-                explorer.Position = new Vector3(6, 2, 0);
-                DrawableComponents.Add(explorer);
-                ScienceVessel scienceVessel = new ScienceVessel(Game, camera);
-                scienceVessel.Position = new Vector3(9, 2, 0);
-                DrawableComponents.Add(scienceVessel);
-                Unidentified unidentified = new Unidentified(Game, camera);
-                unidentified.Position = new Vector3(12, 2, 0);
-                DrawableComponents.Add(unidentified);
-                Zeppelin zeppelin = new Zeppelin(Game, camera);
-                zeppelin.Position = new Vector3(15, 2, 0);
-                DrawableComponents.Add(zeppelin);
-                DeltaDart deltaDart = new DeltaDart(Game, camera);
-                deltaDart.Position = new Vector3(18, 2, 0);
-                DrawableComponents.Add(deltaDart);
-                Gunner gunner = new Gunner(Game, camera);
-                gunner.Position = new Vector3(19, 2, 0);
-                DrawableComponents.Add(gunner);
-                HoverBoard hoverBoard = new HoverBoard(Game, camera);
-                hoverBoard.Position = new Vector3(22, 2, 0);
-                DrawableComponents.Add(hoverBoard);
-                PaperAirplane paperAirplane = new PaperAirplane(Game, camera);
-                paperAirplane.Position = new Vector3(24, 2, 0);
-                DrawableComponents.Add(paperAirplane);
-                Spectrum spectrum = new Spectrum(Game, camera);
-                spectrum.Position = new Vector3(27, 2, 0);
-                DrawableComponents.Add(spectrum);
-                Helicopter helicopter = new Helicopter(Game, camera);
-                helicopter.Position = new Vector3(-16, 2, 0);
-                DrawableComponents.Add(helicopter);
-
                 TeslaCoil teslaCoil = new TeslaCoil(Game, camera);
                 teslaCoil.Position = new Vector3(3, 2, -3f);
                 DrawableComponents.Add(teslaCoil);
@@ -161,19 +125,6 @@ namespace ToonDefense
             foreach (DrawableGameComponent i in GuiComponents)
                 i.Initialize();
             base.Initialize();
-
-            Random random = new Random();
-            foreach (DrawableGameComponent i in DrawableComponents)
-            {
-                Spaceship spaceship = i as Spaceship;
-                if (spaceship != null)
-                {
-                    foreach (Vector3 j in world.Waypoints)
-                        spaceship.Destinations.Add(j);
-                    for (int j = 0; j < 0; j++)
-                        spaceship.Destinations.Add(new Vector3(random.Next() % (int)world.Scale.X - (int)world.Scale.X / 2, 0, random.Next() % (int)world.Scale.Z - (int)world.Scale.Z / 2));
-                }
-            }
         }
 
         Vector3 lastPosition;
@@ -259,6 +210,8 @@ namespace ToonDefense
             foreach (DrawableGameComponent i in particleSystems)
                 i.Update(gameTime);
             foreach (GameComponent i in components)
+                i.Update(gameTime);
+            foreach (DrawableGameComponent i in GuiComponents)
                 i.Update(gameTime);
             base.Update(gameTime);
         }
