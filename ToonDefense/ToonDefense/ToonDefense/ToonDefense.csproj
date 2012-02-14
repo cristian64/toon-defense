@@ -137,6 +137,7 @@
     <Compile Include="Projectiles\Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="RoundManager.cs" />
     <Compile Include="Spaceships\BattleCruiser.cs" />
     <Compile Include="Spaceships\Helicopter.cs" />
     <Compile Include="Spaceships\Spectrum.cs" />

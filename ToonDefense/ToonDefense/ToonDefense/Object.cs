@@ -29,6 +29,34 @@ namespace ToonDefense
         public Texture2D shadowTexture;
         public BasicEffect shadowEffect;
 
+        private bool selected;
+        public bool Selected
+        {
+            get { return selected; }
+            set
+            {
+                selected = value;
+                if (selected)
+                {
+                    float[] lineColor = new float[4];
+                    lineColor[0] = 173 / 255.0f;
+                    lineColor[1] = 1.0f;
+                    lineColor[2] = 47 / 255.0f;
+                    lineColor[3] = 1.0f;
+                    effect.Parameters["LineColor"].SetValue(lineColor);
+                }
+                else
+                {
+                    float[] lineColor = new float[4];
+                    lineColor[0] = 0.0f;
+                    lineColor[1] = 0.0f;
+                    lineColor[2] = 0.0f;
+                    lineColor[3] = 1.0f;
+                    effect.Parameters["LineColor"].SetValue(lineColor);
+                }
+            }
+        }
+
         public Object(Game game, Camera camera)
             : base(game)
         {
