@@ -129,7 +129,7 @@ namespace ToonDefense
                     if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down) || Mouse.GetState().Y == Game.GraphicsDevice.PresentationParameters.BackBufferHeight - 1)
                         position.Z += 1 / (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-                    float increment = (Mouse.GetState().ScrollWheelValue - prevMouseState.ScrollWheelValue) / 1000.0f;
+                    float increment = (prevMouseState.ScrollWheelValue - Mouse.GetState().ScrollWheelValue) / 1000.0f;
                     if (position.Y > 3 || increment > 0)
                     {
                         position.Y += increment;
