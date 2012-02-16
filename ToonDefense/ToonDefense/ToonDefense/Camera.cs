@@ -39,6 +39,7 @@ namespace ToonDefense
             aspectRatio = Game.GraphicsDevice.PresentationParameters.BackBufferWidth / (float)Game.GraphicsDevice.PresentationParameters.BackBufferHeight;
             UpdateProjection();
             Mouse.SetPosition(widthOver2, heightOver2);
+            FreeCamera = false;
         }
 
         /// <summary>
@@ -109,11 +110,57 @@ namespace ToonDefense
         {
             if (Game.IsActive && Enabled)
             {
-                double elapsedTime = (double)gameTime.ElapsedGameTime.Ticks / (double)TimeSpan.TicksPerSecond;
-                ProcessInput((float)elapsedTime * 10.0f);
-                UpdateView();
+                aspectRatio = Game.GraphicsDevice.PresentationParameters.BackBufferWidth / (float)Game.GraphicsDevice.PresentationParameters.BackBufferHeight;
+                if (freeCamera)
+                {
+                    double elapsedTime = (double)gameTime.ElapsedGameTime.Ticks / (double)TimeSpan.TicksPerSecond;
+                    ProcessInput((float)elapsedTime * 10.0f);
+                    UpdateProjection();
+                    UpdateView();
+                }
+                else
+                {
+                    if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left) || Mouse.GetState().X == 0)
+                        position.X -= 1 / (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right) || Mouse.GetState().X == Game.GraphicsDevice.PresentationParameters.BackBufferWidth - 1)
+                        position.X += 1 / (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.Up) || Mouse.GetState().Y == 0)
+                        position.Z -= 1 / (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down) || Mouse.GetState().Y == Game.GraphicsDevice.PresentationParameters.BackBufferHeight - 1)
+                        position.Z += 1 / (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                    float increment = (Mouse.GetState().ScrollWheelValue - prevMouseState.ScrollWheelValue) / 1000.0f;
+                    if (position.Y > 3 || increment > 0)
+                    {
+                        position.Y += increment;
+                        position.Z += increment;
+                    }
+                    projection = Matrix.CreatePerspectiveFieldOfView(0.4f, aspectRatio, nearPlaneDistance, farPlaneDistance);
+                    view = Matrix.CreateLookAt(position, new Vector3(position.X, position.Y - 15, position.Z - 20), Vector3.Up);
+
+                    prevMouseState = Mouse.GetState();
+                }
 
                 base.Update(gameTime);
+            }
+        }
+
+        private bool freeCamera;
+        public bool FreeCamera
+        {
+            get { return freeCamera; }
+            set
+            {
+                freeCamera = value;
+                if (freeCamera)
+                {
+                    position = new Vector3(5, 3, 10);
+                    Target = new Vector3(8, 5.5f, 0);
+                }
+                else
+                {
+                    position = new Vector3(0, 15, 20);
+                }
             }
         }
 

@@ -59,8 +59,6 @@ namespace ToonDefense
             GuiComponents.Add(player);
 
             camera = new Camera(Game);
-            camera.Position = new Vector3(5, 3, 10);
-            camera.Target = new Vector3(8, 5.5f, 0);
             components.Add(camera);
 
             world = new World(Game, camera, "map1");

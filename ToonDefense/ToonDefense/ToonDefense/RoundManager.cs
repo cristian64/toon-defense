@@ -60,6 +60,7 @@ namespace ToonDefense
 
                         foreach (Spaceship i in pendentShips)
                         {
+                            i.Initialize();
                             Vector3 noise = new Vector3((float)random.NextDouble() - 0.5f, 0, (float)random.NextDouble() - 0.5f);
                             foreach (Vector3 j in world.Waypoints)
                                 i.Destinations.Add(j + noise);
@@ -76,7 +77,6 @@ namespace ToonDefense
                 if (generationDelayCounter > generationDelay)
                 {
                     generationDelayCounter -= generationDelay;
-                    pendentShips[0].Initialize();
                     GameplayComponent.LastInstance.SpawnComponents.Add(pendentShips[0]);
                     VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Up * 0.1f);
                     VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Down * 0.1f);
