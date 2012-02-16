@@ -19,6 +19,7 @@ namespace ToonDefense
         double generationDelayCounter;
         List<Spaceship> pendentShips;
         int roundNumber;
+        Random random;
 
         public RoundManager(Game game, Camera camera, World world)
             : base(game)
@@ -31,6 +32,7 @@ namespace ToonDefense
             generationDelayCounter = 0;
             pendentShips = new List<Spaceship>();
             roundNumber = 0;
+            random = new Random();
         }
 
         public override void Update(GameTime gameTime)
@@ -55,8 +57,9 @@ namespace ToonDefense
 
                         foreach (Spaceship i in pendentShips)
                         {
+                            Vector3 noise = new Vector3((float)random.NextDouble() - 0.5f, 0, (float)random.NextDouble() - 0.5f);
                             foreach (Vector3 j in world.Waypoints)
-                                i.Destinations.Add(j);
+                                i.Destinations.Add(j + noise);
                             i.Position.X = i.Destinations[0].X;
                             i.Position.Z = i.Destinations[0].Z;
                             i.Destinations.RemoveAt(0);
