@@ -52,11 +52,11 @@ namespace ToonDefense.ParticleSystem
             settings.MinRotateSpeed = -0.5f;
             settings.MaxRotateSpeed = 0.5f;
 
-            settings.MinStartSize = 0.3f;
-            settings.MaxStartSize = 0.3f;
+            settings.MinStartSize = 0.4f;
+            settings.MaxStartSize = 0.4f;
 
-            settings.MinEndSize = 0.5f;
-            settings.MaxEndSize = 0.5f;
+            settings.MinEndSize = 0.6f;
+            settings.MaxEndSize = 0.6f;
 
             // Use additive blending.
             settings.BlendState = BlendState.Additive;
