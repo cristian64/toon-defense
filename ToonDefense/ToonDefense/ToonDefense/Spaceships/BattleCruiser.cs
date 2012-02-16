@@ -17,6 +17,10 @@ namespace ToonDefense.Spaceships
         public BattleCruiser(Game game, Camera camera)
             : base(game, camera)
         {
+            Speed = 1.9f;
+            InitialHealth = 1000;
+            Reward = 500;
+            Position.Y = 2.6f;
         }
 
         protected override void LoadContent()

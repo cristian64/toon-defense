@@ -18,6 +18,9 @@ namespace ToonDefense.Spaceships
             : base(game, camera)
         {
             Speed = 0.5f;
+            InitialHealth = 100;
+            Reward = 30;
+            Position.Y = 0.3f;
         }
 
         protected override void LoadContent()
@@ -26,8 +29,6 @@ namespace ToonDefense.Spaceships
             texture = Game.Content.Load<Texture2D>("models\\hoverboardtexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
-
-            Position.Y = 0.3f;
 
             base.LoadContent();
         }
