@@ -27,7 +27,7 @@ namespace ToonDefense
         Texture2D forceExtractorThumbnail;
         TeslaCoil forceExtractor;
         Texture2D flameThrowerThumbnail;
-        Flamethower flameThrower;
+        Flamethower flamethrower;
         Texture2D missileLauncherThumbnail;
         MissileLauncher missileLauncher;
         Texture2D plasmaGeneratorThumbnail;
@@ -51,7 +51,7 @@ namespace ToonDefense
             forceExtractorThumbnail = Game.Content.Load<Texture2D>("images\\forceextractorthumbnail");
             forceExtractor = new TeslaCoil(Game, camera);
             flameThrowerThumbnail = Game.Content.Load<Texture2D>("images\\flamethrowerthumbnail");
-            flameThrower = new Flamethower(Game, camera);
+            flamethrower = new Flamethower(Game, camera);
             missileLauncherThumbnail = Game.Content.Load<Texture2D>("images\\missilelauncherthumbnail");
             missileLauncher = new MissileLauncher(Game, camera);
             plasmaGeneratorThumbnail = Game.Content.Load<Texture2D>("images\\plasmageneratorthumbnail");
@@ -70,7 +70,7 @@ namespace ToonDefense
                     tower = new LaserCannon(Game, camera);
                 else if (isOnButton(Mouse.GetState(), 2) && forceExtractor.Price <= player.Money)
                     tower = new TeslaCoil(Game, camera);
-                else if (isOnButton(Mouse.GetState(), 3) && flameThrower.Price <= player.Money)
+                else if (isOnButton(Mouse.GetState(), 3) && flamethrower.Price <= player.Money)
                     tower = new Flamethower(Game, camera);
                 else if (isOnButton(Mouse.GetState(), 4) && missileLauncher.Price <= player.Money)
                     tower = new MissileLauncher(Game, camera);
@@ -138,7 +138,7 @@ namespace ToonDefense
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             drawButton(laserCannonThumbnail, 1, laserCannon.Price);
             drawButton(forceExtractorThumbnail, 2, forceExtractor.Price);
-            drawButton(flameThrowerThumbnail, 3, flameThrower.Price);
+            drawButton(flameThrowerThumbnail, 3, flamethrower.Price);
             drawButton(missileLauncherThumbnail, 4, missileLauncher.Price);
             drawButton(plasmaGeneratorThumbnail, 5, plasmaGenerator.Price);
             spriteBatch.End();
