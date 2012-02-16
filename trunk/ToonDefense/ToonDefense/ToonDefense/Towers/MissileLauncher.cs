@@ -40,6 +40,7 @@ namespace ToonDefense.Towers
         public override void Shoot()
         {
             Missile missile = new Missile(Game, Camera);
+            missile.Initialize();
             missile.Target = Target;
             missile.Damage = Damage;
             Vector3 direction = Vector3.Normalize(Target.Position - Position);

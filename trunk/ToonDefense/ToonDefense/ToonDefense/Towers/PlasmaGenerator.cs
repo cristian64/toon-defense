@@ -40,6 +40,7 @@ namespace ToonDefense.Towers
         public override void Shoot()
         {
             Plasma plasma = new Plasma(Game, Camera);
+            plasma.Initialize();
             plasma.Target = Target;
             plasma.Damage = Damage;
             plasma.Position = Position + new Vector3(-0.55f, Height - 0.4f, 0);

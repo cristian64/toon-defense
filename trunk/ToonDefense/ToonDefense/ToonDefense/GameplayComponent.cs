@@ -202,10 +202,7 @@ namespace ToonDefense
             foreach (DrawableGameComponent i in DrawableComponents)
                 i.Update(gameTime);
             foreach (DrawableGameComponent i in SpawnComponents)
-            {
-                i.Initialize();
                 DrawableComponents.Add(i);
-            }
             SpawnComponents.Clear();
             foreach (DrawableGameComponent i in particleSystems)
                 i.Update(gameTime);
