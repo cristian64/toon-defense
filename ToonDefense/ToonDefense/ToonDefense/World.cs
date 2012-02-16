@@ -95,11 +95,12 @@ namespace ToonDefense
         public bool IsBuildable(Vector3 position)
         {
             Vector2 discrete = WorldUnitsToTextureUnits(position);
-            int shift = (int)discrete.X + (int)discrete.Y * texture.Width;
-            if (0 <= shift && shift < buildableAreas.Count())
-                return buildableAreas[(int)discrete.X + (int)discrete.Y * texture.Width].Equals(Color.Black);
-            else
-                return false;
+            if (0 <= discrete.X && discrete.X < texture.Width && 0 <= discrete.Y && 0 <= discrete.Y && discrete.Y < texture.Height)
+            {
+                int shift = (int)discrete.X + (int)discrete.Y * texture.Width;
+                return buildableAreas[shift].Equals(Color.Black);
+            }
+            return false;
         }
 
         public void SetNotBuildable(Vector3 position1, Vector3 position2)
