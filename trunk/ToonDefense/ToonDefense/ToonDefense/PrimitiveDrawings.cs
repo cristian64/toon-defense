@@ -53,7 +53,6 @@ namespace ToonDefense
             basicEffect.Projection = camera.Projection;
             basicEffect.View = camera.View;
             basicEffect.CurrentTechnique.Passes[0].Apply();
-            basicEffect.Alpha = 0.8f;
 
             Vector3 direction = Vector3.Normalize(destination - source);
             Vector3 normal1 = new Vector3(direction.Z, direction.Y, -direction.X);
@@ -78,7 +77,7 @@ namespace ToonDefense
             verticesTriangle[8].Position = destination - 0.1f * normal1;
             verticesTriangle[8].Color = color;
 
-            basicEffect.GraphicsDevice.BlendState = BlendState.Additive;
+            basicEffect.GraphicsDevice.BlendState = BlendState.AlphaBlend;
             basicEffect.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             device.DrawUserPrimitives(PrimitiveType.TriangleList, verticesTriangle, 0, 3, VertexPositionColor.VertexDeclaration);
         }

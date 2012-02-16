@@ -21,7 +21,7 @@ namespace ToonDefense.Towers
         public LaserCannon(Game game, Camera camera)
             : base(game, camera)
         {
-            laserEmitter = new ParticleEmitter(LaserParticleSystem.LastInstance, 4, Position);
+            laserEmitter = new ParticleEmitter(LaserParticleSystem.LastInstance, 3, Position + Vector3.Up * 0.2f);
             Sight = 5;
             Damage = 10;
             Delay = 100;
@@ -43,26 +43,26 @@ namespace ToonDefense.Towers
 
         public override void Shoot()
         {
-            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Up * 0.2f);
-            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Down * 0.2f);
-            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Right * 0.2f);
-            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Left * 0.2f);
-            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Forward * 0.2f);
-            LaserParticleSystem.LastInstance.AddParticle(Position, Vector3.Backward * 0.2f);
+            LaserParticleSystem.LastInstance.AddParticle(Position + Vector3.Up * 0.2f, Vector3.Up * 0.2f);
+            LaserParticleSystem.LastInstance.AddParticle(Position + Vector3.Up * 0.2f, Vector3.Down * 0.2f);
+            LaserParticleSystem.LastInstance.AddParticle(Position + Vector3.Up * 0.2f, Vector3.Right * 0.2f);
+            LaserParticleSystem.LastInstance.AddParticle(Position + Vector3.Up * 0.2f, Vector3.Left * 0.2f);
+            LaserParticleSystem.LastInstance.AddParticle(Position + Vector3.Up * 0.2f, Vector3.Forward * 0.2f);
+            LaserParticleSystem.LastInstance.AddParticle(Position + Vector3.Up * 0.2f, Vector3.Backward * 0.2f);
             Target.Health -= Damage;
             base.Shoot();
         }
 
         public override void Update(GameTime gameTime)
         {
-            laserEmitter.Update(gameTime, Position);
+            laserEmitter.Update(gameTime, Position + Vector3.Up * 0.2f);
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
             if (Target != null)
-                PrimitiveDrawings.DrawPyramid(GraphicsDevice, Camera, Position, Target.Position, Color.Magenta);
+                PrimitiveDrawings.DrawPyramid(GraphicsDevice, Camera, Position + Vector3.Up * 0.2f, Target.Position, Color.Magenta);
 
             Vector3 shadowPosition = Position;
             shadowPosition.Y = 0;
