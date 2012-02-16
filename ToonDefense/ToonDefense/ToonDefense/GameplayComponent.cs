@@ -125,43 +125,9 @@ namespace ToonDefense
             base.Initialize();
         }
 
-        Vector3 lastPosition;
-        Vector3 lastFloor;
         public override void Update(GameTime gameTime)
         {
             //gameTime = new GameTime(gameTime.TotalGameTime + gameTime.TotalGameTime + gameTime.TotalGameTime + gameTime.TotalGameTime, gameTime.ElapsedGameTime + gameTime.ElapsedGameTime + gameTime.ElapsedGameTime + gameTime.ElapsedGameTime, gameTime.IsRunningSlowly);
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D1))
-                smokePlumeParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
-            if (Keyboard.GetState().IsKeyDown(Keys.D2))
-                explosionSmokeParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
-            if (Keyboard.GetState().IsKeyDown(Keys.D3))
-                projectileTrailParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
-            if (Keyboard.GetState().IsKeyDown(Keys.D4))
-                whiteTrailParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
-            if (Keyboard.GetState().IsKeyDown(Keys.D5))
-                explosionParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
-            if (Keyboard.GetState().IsKeyDown(Keys.D6))
-                fireParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
-            if (Keyboard.GetState().IsKeyDown(Keys.D7))
-                vortexParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
-            if (Keyboard.GetState().IsKeyDown(Keys.D8))
-                plasmaExplosionParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(0, 0, 0));
-            if (Keyboard.GetState().IsKeyDown(Keys.D9))
-                laserParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(-10, 5, 0));
-            if (Keyboard.GetState().IsKeyDown(Keys.D0))
-                forceFieldParticleSystem.AddParticle(new Vector3(-1, 1, 0), new Vector3(-10, 5, 0));
-
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                lastPosition = camera.Position;
-                Vector3 floor = camera.RayFromScreenToFloor(Mouse.GetState().X, Mouse.GetState().Y);
-                if (lastFloor == null || !floor.Equals(lastFloor))
-                {
-                    lastFloor = floor;
-                    Console.WriteLine(world.WorldUnitsToTextureUnits(lastFloor).X + " " + world.WorldUnitsToTextureUnits(lastFloor).Y);
-                }
-            }
 
             for (int i = DrawableComponents.Count - 1; i >= 0; i--)
             {
@@ -219,9 +185,6 @@ namespace ToonDefense
             GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            if (lastFloor != null)
-                PrimitiveDrawings.DrawLine(GraphicsDevice, camera, lastPosition, lastFloor, Color.Pink);
 
             foreach (DrawableGameComponent i in DrawableComponents)
                 i.Draw(gameTime);
