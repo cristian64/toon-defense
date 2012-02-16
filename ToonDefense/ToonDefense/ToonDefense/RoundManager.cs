@@ -70,6 +70,7 @@ namespace ToonDefense
                 if (generationDelayCounter > generationDelay)
                 {
                     generationDelayCounter -= generationDelay;
+                    pendentShips[0].Initialize();
                     GameplayComponent.LastInstance.SpawnComponents.Add(pendentShips[0]);
                     VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Up * 0.1f);
                     VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Down * 0.1f);
@@ -88,40 +89,28 @@ namespace ToonDefense
         {
             Console.WriteLine("round 1");
             Interceptor interceptor = new Interceptor(Game, camera);
-            interceptor.Position = new Vector3(0, 2, 0);
             pendentShips.Add(interceptor);
             BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
-            battleCruiser.Position = new Vector3(3, 2, 0);
             pendentShips.Add(battleCruiser);
             Explorer explorer = new Explorer(Game, camera);
-            explorer.Position = new Vector3(6, 2, 0);
             pendentShips.Add(explorer);
             ScienceVessel scienceVessel = new ScienceVessel(Game, camera);
-            scienceVessel.Position = new Vector3(9, 2, 0);
             pendentShips.Add(scienceVessel);
             Unidentified unidentified = new Unidentified(Game, camera);
-            unidentified.Position = new Vector3(12, 2, 0);
             pendentShips.Add(unidentified);
             Zeppelin zeppelin = new Zeppelin(Game, camera);
-            zeppelin.Position = new Vector3(15, 2, 0);
             pendentShips.Add(zeppelin);
             DeltaDart deltaDart = new DeltaDart(Game, camera);
-            deltaDart.Position = new Vector3(18, 2, 0);
             pendentShips.Add(deltaDart);
             Gunner gunner = new Gunner(Game, camera);
-            gunner.Position = new Vector3(19, 2, 0);
             pendentShips.Add(gunner);
             HoverBoard hoverBoard = new HoverBoard(Game, camera);
-            hoverBoard.Position = new Vector3(22, 2, 0);
             pendentShips.Add(hoverBoard);
             PaperAirplane paperAirplane = new PaperAirplane(Game, camera);
-            paperAirplane.Position = new Vector3(24, 2, 0);
             pendentShips.Add(paperAirplane);
             Spectrum spectrum = new Spectrum(Game, camera);
-            spectrum.Position = new Vector3(27, 2, 0);
             pendentShips.Add(spectrum);
             Helicopter helicopter = new Helicopter(Game, camera);
-            helicopter.Position = new Vector3(-16, 2, 0);
             pendentShips.Add(helicopter);
         }
     }
