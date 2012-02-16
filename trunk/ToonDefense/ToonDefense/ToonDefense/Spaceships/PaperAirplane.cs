@@ -17,7 +17,10 @@ namespace ToonDefense.Spaceships
         public PaperAirplane(Game game, Camera camera)
             : base(game, camera)
         {
-            Speed = 0.3f;
+            Speed = 2;
+            InitialHealth = 30;
+            Reward = 30;
+            Position.Y = 2.5f;
         }
 
         protected override void LoadContent()

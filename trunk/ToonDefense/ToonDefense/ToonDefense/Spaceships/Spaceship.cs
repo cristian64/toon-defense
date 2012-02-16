@@ -28,8 +28,15 @@ namespace ToonDefense.Spaceships
         {
             Destinations = new List<Vector3>();
             Speed = 3;
-            InitialHealth = Health = 100;
+            InitialHealth = 100;
             Reward = 100;
+            Position.Y = 2;
+        }
+
+        public override void Initialize()
+        {
+            Health = InitialHealth;
+            base.Initialize();
         }
 
         protected override void LoadContent()

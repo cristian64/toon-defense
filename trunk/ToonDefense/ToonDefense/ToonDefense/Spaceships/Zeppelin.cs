@@ -17,6 +17,10 @@ namespace ToonDefense.Spaceships
         public Zeppelin(Game game, Camera camera)
             : base(game, camera)
         {
+            Speed = 2;
+            InitialHealth = 100;
+            Reward = 200;
+            Position.Y = 3;
         }
 
         protected override void LoadContent()

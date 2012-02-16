@@ -17,7 +17,10 @@ namespace ToonDefense.Spaceships
         public Spectrum(Game game, Camera camera)
             : base(game, camera)
         {
-            Speed = 0.5f;
+            Speed = 1;
+            InitialHealth = 700;
+            Reward = 400;
+            Position.Y = 1;
         }
 
         protected override void LoadContent()

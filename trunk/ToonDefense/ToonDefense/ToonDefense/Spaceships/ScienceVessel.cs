@@ -17,6 +17,9 @@ namespace ToonDefense.Spaceships
         public ScienceVessel(Game game, Camera camera)
             : base(game, camera)
         {
+            Speed = 1;
+            InitialHealth = 2000;
+            Reward = 1000;
         }
 
         protected override void LoadContent()
@@ -33,7 +36,7 @@ namespace ToonDefense.Spaceships
 
         public override void Update(GameTime gameTime)
         {
-            Rotation.Z -= MathHelper.Pi / 0.8f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Rotation.Z -= MathHelper.Pi / 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             base.Update(gameTime);
         }
 

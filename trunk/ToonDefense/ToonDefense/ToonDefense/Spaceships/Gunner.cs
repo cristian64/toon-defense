@@ -17,7 +17,10 @@ namespace ToonDefense.Spaceships
         public Gunner(Game game, Camera camera)
             : base(game, camera)
         {
-            Speed = 0.5f;
+            Speed = 0.8f;
+            InitialHealth = 600;
+            Reward = 200;
+            Position.Y = 2.7f;
         }
 
         protected override void LoadContent()

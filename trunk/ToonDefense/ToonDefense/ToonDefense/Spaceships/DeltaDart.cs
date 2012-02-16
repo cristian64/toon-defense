@@ -18,6 +18,10 @@ namespace ToonDefense.Spaceships
         public DeltaDart(Game game, Camera camera)
             : base(game, camera)
         {
+            Speed = 6;
+            InitialHealth = 600;
+            Reward = 300;
+            Position.Y = 1.5f;
         }
 
         protected override void LoadContent()

@@ -20,6 +20,10 @@ namespace ToonDefense.Spaceships
             : base(game, camera)
         {
             extraRotationY = 0;
+            Speed = 4;
+            InitialHealth = 500;
+            Reward = 250;
+            Position.Y = 1;
         }
 
         protected override void LoadContent()
