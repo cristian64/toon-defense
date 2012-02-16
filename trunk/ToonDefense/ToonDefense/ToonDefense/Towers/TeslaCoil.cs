@@ -21,11 +21,10 @@ namespace ToonDefense.Towers
         public TeslaCoil(Game game, Camera camera)
             : base(game, camera)
         {
-            forceFieldEmitter = new ParticleEmitter(ForceFieldParticleSystem.LastInstance, 1, Position);
             Sight = 5;
             Damage = 10;
             Delay = 400;
-            Price = 100;
+            Price = 300;
         }
 
         protected override void LoadContent()
@@ -36,7 +35,7 @@ namespace ToonDefense.Towers
             effect.Parameters["Texture"].SetValue(texture);
 
             Position.Y = Height / 2.0f;
-            headPosition = Position + new Vector3(0, Height / 2 + 0.15f, 0);
+            forceFieldEmitter = new ParticleEmitter(ForceFieldParticleSystem.LastInstance, 1, Position);
 
             base.LoadContent();
         }
@@ -50,6 +49,7 @@ namespace ToonDefense.Towers
 
         public override void Update(GameTime gameTime)
         {
+            headPosition = Position + new Vector3(0, Height / 2 + 0.15f, 0);
             forceFieldEmitter.Update(gameTime, headPosition);
             base.Update(gameTime);
         }

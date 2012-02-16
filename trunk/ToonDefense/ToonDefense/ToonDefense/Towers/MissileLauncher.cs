@@ -22,7 +22,7 @@ namespace ToonDefense.Towers
             Sight = 5;
             Damage = 10;
             Delay = 500;
-            Price = 100;
+            Price = 200;
         }
 
         protected override void LoadContent()
