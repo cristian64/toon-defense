@@ -99,8 +99,8 @@ namespace ToonDefense
                 }
                 else
                 {
-                    graphics.PreferredBackBufferWidth = 800;
-                    graphics.PreferredBackBufferHeight = 480;
+                    graphics.PreferredBackBufferWidth = (int)(0.8 * GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width);
+                    graphics.PreferredBackBufferHeight = (int)(0.8 * GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
                 }
                 graphics.IsFullScreen = !graphics.IsFullScreen;
                 graphics.ApplyChanges();
