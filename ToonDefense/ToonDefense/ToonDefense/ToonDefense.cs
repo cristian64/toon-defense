@@ -22,6 +22,7 @@ namespace ToonDefense
         public ToonDefense()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreparingDeviceSettings += preparingDeviceSettings;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             graphics.PreferredBackBufferWidth = 1300;
@@ -32,6 +33,11 @@ namespace ToonDefense
             graphics.PreferMultiSampling = true;
             this.Window.Title = "Toon Defense";
         }
+
+        private void preparingDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e)
+        {
+            e.GraphicsDeviceInformation.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PreserveContents;
+        } 
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.

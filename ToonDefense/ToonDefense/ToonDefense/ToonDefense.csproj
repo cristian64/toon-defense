@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Axis.cs" />
     <Compile Include="Box.cs" />
+    <Compile Include="BuildingPanel.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="FadeInComponent.cs" />
     <Compile Include="FadeOutComponent.cs" />
