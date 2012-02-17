@@ -90,27 +90,6 @@ namespace ToonDefense
             particleSystems.Add(forceFieldParticleSystem);
             particleSystems.Add(plasmaParticleSystem);
 
-            for (int j = 0; j < 1; j++)
-            {
-                TeslaCoil teslaCoil = new TeslaCoil(Game, camera);
-                teslaCoil.Position = new Vector3(3, 2, -3f);
-                DrawableComponents.Add(teslaCoil);
-                TeslaCoil teslaCoil2 = new TeslaCoil(Game, camera);
-                teslaCoil2.Position = new Vector3(3, 2, 2f);
-                DrawableComponents.Add(teslaCoil2);
-                MissileLauncher missileLauncher = new MissileLauncher(Game, camera);
-                missileLauncher.Position = new Vector3(5, 2, 2f);
-                DrawableComponents.Add(missileLauncher);
-                PlasmaGenerator plasmaGenerator = new PlasmaGenerator(Game, camera);
-                plasmaGenerator.Position = new Vector3(7, 2, 2f);
-                DrawableComponents.Add(plasmaGenerator);
-                LaserCannon laserCannon = new LaserCannon(Game, camera);
-                laserCannon.Position = new Vector3(-7, 2, 2f);
-                DrawableComponents.Add(laserCannon);
-                Flamethower flamethower = new Flamethower(Game, camera);
-                flamethower.Position = new Vector3(-3, 2, -2.4f);
-                DrawableComponents.Add(flamethower);
-            }
             #if DEBUG
             DrawableComponents.Add(new Axis(Game, camera));
             #endif
