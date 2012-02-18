@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using ToonDefense.Spaceships;
 using ToonDefense.ParticleSystem;
 using System.Reflection;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ToonDefense
 {
@@ -21,18 +22,30 @@ namespace ToonDefense
         int roundNumber;
         Random random;
 
+        double displayTimeCounter;
+        static double displayTime = 5000;
+        SpriteBatch spriteBatch;
+        SpriteFont spriteFont;
+
         public RoundManager(Game game, Camera camera, World world)
             : base(game)
         {
             this.camera = camera;
             this.world = world;
             roundDelay = 5000;
-            roundDelayCounter = 5000;
+            roundDelayCounter = 2000;
             generationDelay = 1000;
             generationDelayCounter = 0;
             pendentShips = new List<Spaceship>();
             roundNumber = 1;
             random = new Random();
+        }
+
+        protected override void LoadContent()
+        {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteFont = Game.Content.Load<SpriteFont>("fonts\\round");
+            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
@@ -51,11 +64,11 @@ namespace ToonDefense
 
                     if (spaceshipCounter == 0)
                     {
-                        MethodInfo methodInfo = GetType().GetMethod("Round1");
+                        MethodInfo methodInfo = GetType().GetMethod("Round1 " + (++roundNumber % 1));
                         if (methodInfo != null)
                         {
                             methodInfo.Invoke(this, null);
-                            Console.WriteLine("Round " + roundNumber++);
+                            displayTimeCounter = displayTime;
                         }
 
                         foreach (Spaceship i in pendentShips)
@@ -89,6 +102,23 @@ namespace ToonDefense
             }
 
             base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            if (displayTimeCounter > 0)
+            {
+                float alpha = (displayTimeCounter <= 300) ? (float)(displayTimeCounter / 300) : 1.0f;
+                displayTimeCounter = Math.Max(0, displayTimeCounter - gameTime.ElapsedGameTime.TotalMilliseconds);
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+                String text = "Round " + roundNumber;
+                Vector2 position = new Vector2(GraphicsDevice.Viewport.Width / 2 - spriteFont.MeasureString(text).X / 2, GraphicsDevice.Viewport.Height / 2 - spriteFont.MeasureString(text).Y / 2);
+                spriteBatch.DrawString(spriteFont, text, position, Color.Black * 0.7f * alpha * alpha);
+                spriteBatch.DrawString(spriteFont, text, position + Vector2.UnitY, Color.Black * 0.2f * alpha * alpha);
+                spriteBatch.DrawString(spriteFont, text, position - Vector2.One, Color.White * 0.9f * alpha);
+                spriteBatch.End();
+            }
+            base.Draw(gameTime);
         }
 
         public void Round1()
