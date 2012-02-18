@@ -20,6 +20,7 @@ namespace ToonDefense
 
     public class GameplayComponent : DrawableGameComponent
     {
+        public SpriteBatch SpriteBatch;
         public List<DrawableGameComponent> SpawnComponents;
         public List<DrawableGameComponent> DrawableComponents;
         public List<DrawableGameComponent> GuiComponents;
@@ -107,6 +108,12 @@ namespace ToonDefense
             foreach (DrawableGameComponent i in GuiComponents)
                 i.Initialize();
             base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
+            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
