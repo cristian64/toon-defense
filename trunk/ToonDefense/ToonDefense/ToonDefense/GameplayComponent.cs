@@ -16,6 +16,8 @@ using ToonDefense.Projectiles;
 
 namespace ToonDefense
 {
+    public enum SpeedLevel { NORMAL, FAST, PAUSED }
+
     public class GameplayComponent : DrawableGameComponent
     {
         public List<DrawableGameComponent> SpawnComponents;
@@ -26,6 +28,7 @@ namespace ToonDefense
         Player player;
         Camera camera;
         World world;
+        public SpeedLevel SpeedLevel;
 
         FireParticleSystem fireParticleSystem;
         ExplosionParticleSystem explosionParticleSystem;
@@ -65,6 +68,7 @@ namespace ToonDefense
             DrawableComponents.Add(world);
             GuiComponents.Add(new RoundManager(Game, camera, world));
             GuiComponents.Add(new BuildingPanel(Game, camera, world, player));
+            GuiComponents.Add(new SpeedPanel(Game));
 
             fireParticleSystem = new FireParticleSystem(Game, Game.Content, camera);
             explosionParticleSystem = new ExplosionParticleSystem(Game, Game.Content, camera);
@@ -107,49 +111,53 @@ namespace ToonDefense
 
         public override void Update(GameTime gameTime)
         {
-            //gameTime = new GameTime(gameTime.TotalGameTime + gameTime.TotalGameTime + gameTime.TotalGameTime + gameTime.TotalGameTime, gameTime.ElapsedGameTime + gameTime.ElapsedGameTime + gameTime.ElapsedGameTime + gameTime.ElapsedGameTime, gameTime.IsRunningSlowly);
+            if (SpeedLevel == SpeedLevel.FAST)
+                gameTime = new GameTime(gameTime.TotalGameTime + gameTime.TotalGameTime + gameTime.TotalGameTime + gameTime.TotalGameTime, gameTime.ElapsedGameTime + gameTime.ElapsedGameTime + gameTime.ElapsedGameTime + gameTime.ElapsedGameTime, gameTime.IsRunningSlowly);
 
-            for (int i = DrawableComponents.Count - 1; i >= 0; i--)
+            if (SpeedLevel != SpeedLevel.PAUSED)
             {
-                Spaceship spaceship = DrawableComponents[i] as Spaceship;
-                if (spaceship != null)
+                for (int i = DrawableComponents.Count - 1; i >= 0; i--)
                 {
-                    if (spaceship.Health <= 0)
+                    Spaceship spaceship = DrawableComponents[i] as Spaceship;
+                    if (spaceship != null)
                     {
-                        player.Money += spaceship.Reward;
-                        player.Kills++;
-                        for (int j = 0; j < 30; j++)
-                            explosionSmokeParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
-                        for (int j = 0; j < 30; j++)
-                            explosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
-                        DrawableComponents.RemoveAt(i);
+                        if (spaceship.Health <= 0)
+                        {
+                            player.Money += spaceship.Reward;
+                            player.Kills++;
+                            for (int j = 0; j < 30; j++)
+                                explosionSmokeParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
+                            for (int j = 0; j < 30; j++)
+                                explosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
+                            DrawableComponents.RemoveAt(i);
+                        }
+                        else if (spaceship.Destinations.Count == 0)
+                        {
+                            player.Lives--;
+                            for (int j = 0; j < 10; j++)
+                                vortexParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
+                            for (int j = 0; j < 10; j++)
+                                plasmaExplosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
+                            spaceship.Health = 0;
+                            DrawableComponents.RemoveAt(i);
+                        }
                     }
-                    else if (spaceship.Destinations.Count == 0)
+                    else
                     {
-                        player.Lives--;
-                        for (int j = 0; j < 10; j++)
-                            vortexParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
-                        for (int j = 0; j < 10; j++)
-                            plasmaExplosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
-                        spaceship.Health = 0;
-                        DrawableComponents.RemoveAt(i);
+                        Projectile projectile = DrawableComponents[i] as Projectile;
+                        if (projectile != null && projectile.NoTarget)
+                            DrawableComponents.RemoveAt(i);
                     }
                 }
-                else
-                {
-                    Projectile projectile = DrawableComponents[i] as Projectile;
-                    if (projectile != null && projectile.NoTarget)
-                        DrawableComponents.RemoveAt(i);
-                }
-            }
 
-            foreach (DrawableGameComponent i in DrawableComponents)
-                i.Update(gameTime);
-            foreach (DrawableGameComponent i in SpawnComponents)
-                DrawableComponents.Add(i);
-            SpawnComponents.Clear();
-            foreach (DrawableGameComponent i in particleSystems)
-                i.Update(gameTime);
+                foreach (DrawableGameComponent i in DrawableComponents)
+                    i.Update(gameTime);
+                foreach (DrawableGameComponent i in SpawnComponents)
+                    DrawableComponents.Add(i);
+                SpawnComponents.Clear();
+                foreach (DrawableGameComponent i in particleSystems)
+                    i.Update(gameTime);
+            }
             foreach (GameComponent i in components)
                 i.Update(gameTime);
             foreach (DrawableGameComponent i in GuiComponents)

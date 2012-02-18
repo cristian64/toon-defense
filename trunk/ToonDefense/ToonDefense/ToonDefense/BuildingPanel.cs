@@ -64,7 +64,7 @@ namespace ToonDefense
             if (renderTarget.Width != GraphicsDevice.Viewport.Width || renderTarget.Height != GraphicsDevice.Viewport.Height)
                 renderTarget = new RenderTarget2D(GraphicsDevice, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed && tower == null)
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && tower == null && GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
             {
                 if (isOnButton(Mouse.GetState(), 1) && laserCannon.Price <= player.Money)
                     tower = new LaserCannon(Game, camera);
