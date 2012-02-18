@@ -64,9 +64,7 @@ namespace ToonDefense.Towers
             if (Target != null)
                 PrimitiveDrawings.DrawPyramid(GraphicsDevice, Camera, Position + Vector3.Up * 0.2f, Target.Position, Color.Magenta);
 
-            Vector3 shadowPosition = Position;
-            shadowPosition.Y = 0;
-            DrawShadow(shadowPosition, 1.8f);
+            DrawShadow();
             Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
             foreach (ModelMesh mesh in model.Meshes)
             {

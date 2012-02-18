@@ -42,9 +42,7 @@ namespace ToonDefense.Spaceships
         float propellerRotation = 0;
         public override void Draw(GameTime gameTime)
         {
-            Vector3 shadowPosition = Position;
-            shadowPosition.Y = 0;
-            DrawShadow(shadowPosition, 1);
+            DrawShadow();
             Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateRotationZ(-0.2f) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
             foreach (ModelMeshPart part in model.Meshes[2].MeshParts)
             {
