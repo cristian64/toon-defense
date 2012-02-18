@@ -261,10 +261,9 @@ namespace ToonDefense
             return result;
         }
 
-        public Vector2 RayFromWorldToScreen(Vector3 position)
+        public Vector3 RayFromWorldToScreen(Vector3 position)
         {
-            Vector3 screenPosition = Game.GraphicsDevice.Viewport.Project(position, Projection, View, Matrix.Identity);
-            return new Vector2(screenPosition.X, screenPosition.Y);
+            return Game.GraphicsDevice.Viewport.Project(position, Projection, View, Matrix.Identity);
         }
     }
 }

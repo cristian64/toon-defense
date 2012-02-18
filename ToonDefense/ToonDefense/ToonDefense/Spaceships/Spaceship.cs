@@ -79,12 +79,15 @@ namespace ToonDefense.Spaceships
 
         public override void Draw(GameTime gameTime)
         {
-            Vector2 position = Camera.RayFromWorldToScreen(Position);
-            position.Y -= 20;
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-            spriteBatch.Draw(blackTexture, new Rectangle((int)position.X, (int)position.Y, 32, 4), Color.White);
-            spriteBatch.Draw(greenTexture, new Rectangle((int)position.X + 1, (int)position.Y + 1, (int)(30 * (Health / (float)InitialHealth)), 2), Color.White);
-            spriteBatch.End();
+            Vector3 position = Camera.RayFromWorldToScreen(Position);
+            if (position.Z < 1)
+            {
+                position.Y -= 20;
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+                spriteBatch.Draw(blackTexture, new Rectangle((int)position.X, (int)position.Y, 32, 4), Color.White);
+                spriteBatch.Draw(greenTexture, new Rectangle((int)position.X + 1, (int)position.Y + 1, (int)(30 * (Health / (float)InitialHealth)), 2), Color.White);
+                spriteBatch.End();
+            }
             base.Draw(gameTime);
         }
     }
