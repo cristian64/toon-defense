@@ -121,13 +121,13 @@ namespace ToonDefense
                 else
                 {
                     if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left) || Mouse.GetState().X == 0)
-                        position.X -= 1 / (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                        position.X -= 5 * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                     if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right) || Mouse.GetState().X == Game.GraphicsDevice.PresentationParameters.BackBufferWidth - 1)
-                        position.X += 1 / (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                        position.X += 5 * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                     if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.Up) || Mouse.GetState().Y == 0)
-                        position.Z -= 1 / (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                        position.Z -= 5 * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                     if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down) || Mouse.GetState().Y == Game.GraphicsDevice.PresentationParameters.BackBufferHeight - 1)
-                        position.Z += 1 / (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                        position.Z += 5 * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
 
                     float increment = (prevMouseState.ScrollWheelValue - Mouse.GetState().ScrollWheelValue) / 1000.0f;
                     if (position.Y > 3 || increment > 0)
