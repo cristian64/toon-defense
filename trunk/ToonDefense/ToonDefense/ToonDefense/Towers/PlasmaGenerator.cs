@@ -55,9 +55,7 @@ namespace ToonDefense.Towers
 
         public override void Draw(GameTime gameTime)
         {
-            Vector3 shadowPosition = Position;
-            shadowPosition.Y = 0;
-            DrawShadow(shadowPosition, 3f);
+            DrawShadow();
 
             Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
             foreach (ModelMeshPart part in model.Meshes[0].MeshParts)

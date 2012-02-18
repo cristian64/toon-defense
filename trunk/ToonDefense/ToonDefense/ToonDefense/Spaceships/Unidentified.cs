@@ -44,9 +44,7 @@ namespace ToonDefense.Spaceships
 
         public override void Draw(GameTime gameTime)
         {
-            Vector3 shadowPosition = Position;
-            shadowPosition.Y = 0;
-            DrawShadow(shadowPosition, 1);
+            DrawShadow();
             Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateRotationY(extraRotationY) * Matrix.CreateTranslation(Position);
             foreach (ModelMesh mesh in model.Meshes)
             {

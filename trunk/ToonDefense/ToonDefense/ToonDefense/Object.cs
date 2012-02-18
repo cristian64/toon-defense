@@ -86,9 +86,13 @@ namespace ToonDefense
             base.Draw(gameTime);
         }
 
-        public void DrawShadow(Vector3 position, float scale)
+        public void DrawShadow()
         {
-            Matrix world = Matrix.CreateScale(scale * 0.5f) * Matrix.CreateTranslation(position);
+            Vector3 position = Position;
+            Vector3 scale = Scale * Math.Max(0.5f, (1 - (Position.Y / 3.0f))) * (float)Math.Sqrt(Width * Depth);
+            position.Y = 0;
+
+            Matrix world = Matrix.CreateScale(scale) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(position);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
             foreach (ModelMesh mesh in shadowModel.Meshes)
@@ -98,6 +102,7 @@ namespace ToonDefense
                     e.Projection = Camera.Projection;
                     e.View = Camera.View;
                     e.World = world;
+                    e.Alpha = Math.Max(0.5f, (1 - (Position.Y / 3.0f))) * Math.Max(0.5f, (1 - (Position.Y / 3.0f)));
                 }
                 mesh.Draw();
             }
