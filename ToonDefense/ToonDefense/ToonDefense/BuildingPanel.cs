@@ -93,10 +93,10 @@ namespace ToonDefense
                     world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 4.0f, 0, tower.Position.Z + tower.Depth / 4.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 4.0f, 0, tower.Position.Z - tower.Depth / 4.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 4.0f, 0, tower.Position.Z + tower.Depth / 4.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 4.0f, 0, tower.Position.Z - tower.Depth / 4.0f)) &&
+                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z)) &&
+                    world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z)) &&
+                    world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z)))
                 {
                     GameplayComponent.LastInstance.SpawnComponents.Add(tower);
@@ -124,10 +124,10 @@ namespace ToonDefense
                     world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 4.0f, 0, tower.Position.Z + tower.Depth / 4.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 4.0f, 0, tower.Position.Z - tower.Depth / 4.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 4.0f, 0, tower.Position.Z + tower.Depth / 4.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 4.0f, 0, tower.Position.Z - tower.Depth / 4.0f)) &&
+                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z)) &&
+                    world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z)) &&
+                    world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z)))
                 {
                     spriteBatch.Draw(renderTarget, Vector2.Zero, Color.Lime);
