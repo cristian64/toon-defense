@@ -41,7 +41,7 @@ namespace ToonDefense.Spaceships
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = GameplayComponent.LastInstance.SpriteBatch;
             blackTexture = new Texture2D(GraphicsDevice, 1, 1, true, SurfaceFormat.Color);
             Color[] colors = new Color[1];
             colors[0] = Color.Black;
