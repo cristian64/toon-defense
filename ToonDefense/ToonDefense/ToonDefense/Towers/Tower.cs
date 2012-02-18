@@ -37,8 +37,9 @@ namespace ToonDefense.Towers
             #if DEBUG
             if (Target != null)
                 PrimitiveDrawings.DrawLine(GraphicsDevice, Camera, Position, Target.Position, Color.Violet);
-            //PrimitiveDrawings.DrawSphere(Game, GraphicsDevice, Camera, Position, Sight);
             #endif
+            if (Selected)
+                PrimitiveDrawings.DrawSphere(Game, GraphicsDevice, Camera, Position, Sight);
             base.Draw(gameTime);
         }
 
