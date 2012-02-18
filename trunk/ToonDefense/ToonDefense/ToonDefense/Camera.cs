@@ -11,6 +11,8 @@ namespace ToonDefense
     /// </summary>
     public class Camera : GameComponent
     {
+        public World World;
+
         private Matrix view;
         private Matrix projection;
 
@@ -128,6 +130,13 @@ namespace ToonDefense
                         position.Z -= 5 * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                     if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down) || Mouse.GetState().Y == Game.GraphicsDevice.PresentationParameters.BackBufferHeight - 1)
                         position.Z += 5 * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
+
+                    position.X = Math.Min(World.Scale.X / 2, position.X);
+                    position.X = Math.Max(-World.Scale.X / 2, position.X);
+                    position.Z -= 20;
+                    position.Z = Math.Min(World.Scale.Z / 2, position.Z);
+                    position.Z = Math.Max(-World.Scale.Z / 2, position.Z);
+                    position.Z += 20;
 
                     float increment = (prevMouseState.ScrollWheelValue - Mouse.GetState().ScrollWheelValue) / 1000.0f;
                     if (position.Y > 3 || increment > 0)
