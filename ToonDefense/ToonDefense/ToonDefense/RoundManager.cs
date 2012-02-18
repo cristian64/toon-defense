@@ -20,6 +20,7 @@ namespace ToonDefense
         double generationDelayCounter;
         List<Spaceship> pendentShips;
         int roundNumber;
+        int roundCount;
         Random random;
 
         double displayTimeCounter;
@@ -37,7 +38,11 @@ namespace ToonDefense
             generationDelay = 1000;
             generationDelayCounter = 0;
             pendentShips = new List<Spaceship>();
-            roundNumber = 1;
+            roundNumber = 0;
+            roundCount = 0;
+            foreach (MethodInfo i in GetType().GetMethods())
+                if (i.Name.Contains("Round"))
+                    roundCount++;
             random = new Random();
         }
 
@@ -64,7 +69,9 @@ namespace ToonDefense
 
                     if (spaceshipCounter == 0)
                     {
-                        MethodInfo methodInfo = GetType().GetMethod("Round1 " + (++roundNumber % 1));
+                        if (roundNumber > roundCount)
+                            roundNumber = 0;
+                        MethodInfo methodInfo = GetType().GetMethod("Round" + ++roundNumber);
                         if (methodInfo != null)
                         {
                             methodInfo.Invoke(this, null);
@@ -123,6 +130,20 @@ namespace ToonDefense
 
         public void Round1()
         {
+			generationDelay = 200;
+            pendentShips.Add(new Interceptor(Game, camera));
+        }
+
+        public void Round2()
+        {
+			generationDelay = 200;
+            for (int i = 0; i < 5; i++)
+                pendentShips.Add(new Interceptor(Game, camera));
+        }
+
+        public void Round3()
+        {
+			generationDelay = 1000;
             Interceptor interceptor = new Interceptor(Game, camera);
             pendentShips.Add(interceptor);
             BattleCruiser battleCruiser = new BattleCruiser(Game, camera);
