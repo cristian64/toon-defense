@@ -44,6 +44,7 @@ namespace ToonDefense
                     lineColor[2] = 47 / 255.0f;
                     lineColor[3] = 1.0f;
                     effect.Parameters["LineColor"].SetValue(lineColor);
+                    effect.Parameters["DiffuseIntensity"].SetValue(6.0f);
                 }
                 else
                 {
@@ -53,6 +54,7 @@ namespace ToonDefense
                     lineColor[2] = 0.0f;
                     lineColor[3] = 1.0f;
                     effect.Parameters["LineColor"].SetValue(lineColor);
+                    effect.Parameters["DiffuseIntensity"].SetValue(3.0f);
                 }
             }
         }
@@ -179,6 +181,19 @@ namespace ToonDefense
 
                 return boundingBox;
             }
+        }
+
+        public float? Intersects(Ray ray)
+        {
+            foreach (ModelMesh i in model.Meshes)
+            {
+                BoundingSphere boundingSphere = i.BoundingSphere;
+                boundingSphere.Center += Position;
+                float? intersection = boundingSphere.Intersects(ray);
+                if (intersection != null)
+                    return intersection;
+            }
+            return null;
         }
     }
 }

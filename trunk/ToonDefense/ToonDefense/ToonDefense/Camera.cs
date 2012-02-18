@@ -240,14 +240,26 @@ namespace ToonDefense
             Vector3 nearSource = new Vector3(x, y, 0);
             Vector3 farSource = new Vector3(x, y, 1);
 
-            Matrix world = Matrix.CreateTranslation(0, 0, 0);
-
-            Vector3 nearPoint = Game.GraphicsDevice.Viewport.Unproject(nearSource, Projection, View, world);
-            Vector3 farPoint = Game.GraphicsDevice.Viewport.Unproject(farSource, Projection, View, world);
+            Vector3 nearPoint = Game.GraphicsDevice.Viewport.Unproject(nearSource, Projection, View, Matrix.Identity);
+            Vector3 farPoint = Game.GraphicsDevice.Viewport.Unproject(farSource, Projection, View, Matrix.Identity);
 
             Vector3 direction = farPoint - nearPoint;
             direction.Normalize();
             return direction;
+        }
+
+        public Ray RayFromScreenToWorldRay(int x, int y)
+        {
+            Vector3 nearSource = new Vector3(x, y, 0);
+            Vector3 farSource = new Vector3(x, y, 1);
+
+            Vector3 nearPoint = Game.GraphicsDevice.Viewport.Unproject(nearSource, Projection, View, Matrix.Identity);
+            Vector3 farPoint = Game.GraphicsDevice.Viewport.Unproject(farSource, Projection, View, Matrix.Identity);
+
+            Vector3 direction = farPoint - nearPoint;
+            direction.Normalize();
+            Ray pickRay = new Ray(nearPoint, direction);
+            return pickRay;
         }
 
         public Vector3 RayFromScreenToFloor(int x, int y)
