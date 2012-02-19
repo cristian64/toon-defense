@@ -50,8 +50,17 @@ namespace ToonDefense
             base.LoadContent();
         }
 
+        MouseState prevMouseState;
         public override void Update(GameTime gameTime)
         {
+            MouseState currentMouseState = Mouse.GetState();
+            if (currentMouseState.RightButton == ButtonState.Pressed && prevMouseState.RightButton == ButtonState.Released)
+            {
+                Vector2 click = WorldUnitsToTextureUnits(Camera.RayFromScreenToFloor(currentMouseState.X, currentMouseState.Y));
+                Waypoints.Add(TextureUnitsToWorldUnits(click));
+                Console.WriteLine(click.X + " " + click.Y);
+            }
+            prevMouseState = currentMouseState;
             base.Update(gameTime);
         }
 
