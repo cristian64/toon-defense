@@ -39,25 +39,33 @@ namespace ToonDefense
         {
             MouseState currentMouseState = Mouse.GetState();
 
-            if (currentMouseState.RightButton == ButtonState.Pressed && prevMouseState.RightButton == ButtonState.Released)
+            Spaceship spaceship = selected as Spaceship;
+            if (spaceship != null && (spaceship.Health < 0 || spaceship.Destinations.Count == 0))
+                selected = null;
+
+            if (currentMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
             {
                 if (selected != null)
                     selected.Selected = false;
                 selected = null;
 
+                float distance = float.MaxValue;
+                Object candidate = null;
                 Ray ray = camera.RayFromScreenToWorldRay(currentMouseState.X, currentMouseState.Y);
                 foreach (DrawableGameComponent i in GameplayComponent.LastInstance.DrawableComponents)
                 {
                     if (i as Spaceship != null || i as Tower != null)
                     {
                         Object selectable = i as Object;
-                        if (selectable.Intersects(ray) != null)
-                        {
-                            selected = selectable;
-                            selected.Selected = true;
-                        }
+                        float? intersection = selectable.Intersects(ray);
+                        if (intersection != null && distance > intersection)
+                            candidate = selectable;
                     }
                 }
+
+                selected = candidate;
+                if (selected != null)
+                    selected.Selected = true;
             }
 
             prevMouseState = currentMouseState;
