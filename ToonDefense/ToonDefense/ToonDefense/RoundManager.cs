@@ -55,56 +55,59 @@ namespace ToonDefense
 
         public override void Update(GameTime gameTime)
         {
-            if (pendentShips.Count == 0)
+            if (GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
             {
-                roundDelayCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (roundDelayCounter > roundDelay)
+                if (pendentShips.Count == 0)
                 {
-                    roundDelayCounter = 0;
-
-                    int spaceshipCounter = 0;
-                    foreach (DrawableGameComponent i in GameplayComponent.LastInstance.DrawableComponents)
-                        if (i as Spaceship != null)
-                            spaceshipCounter++;
-
-                    if (spaceshipCounter == 0)
+                    roundDelayCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
+                    if (roundDelayCounter > roundDelay)
                     {
-                        if (roundNumber > roundCount)
-                            roundNumber = 0;
-                        MethodInfo methodInfo = GetType().GetMethod("Round" + ++roundNumber);
-                        if (methodInfo != null)
-                        {
-                            methodInfo.Invoke(this, null);
-                            displayTimeCounter = displayTime;
-                        }
+                        roundDelayCounter = 0;
 
-                        foreach (Spaceship i in pendentShips)
+                        int spaceshipCounter = 0;
+                        foreach (DrawableGameComponent i in GameplayComponent.LastInstance.DrawableComponents)
+                            if (i as Spaceship != null)
+                                spaceshipCounter++;
+
+                        if (spaceshipCounter == 0)
                         {
-                            i.Initialize();
-                            Vector3 noise = new Vector3((float)random.NextDouble() - 0.5f, 0, (float)random.NextDouble() - 0.5f);
-                            foreach (Vector3 j in world.Waypoints)
-                                i.Destinations.Add(j + noise);
-                            i.Position.X = i.Destinations[0].X;
-                            i.Position.Z = i.Destinations[0].Z;
-                            i.Destinations.RemoveAt(0);
+                            if (roundNumber > roundCount)
+                                roundNumber = 0;
+                            MethodInfo methodInfo = GetType().GetMethod("Round" + ++roundNumber);
+                            if (methodInfo != null)
+                            {
+                                methodInfo.Invoke(this, null);
+                                displayTimeCounter = displayTime;
+                            }
+
+                            foreach (Spaceship i in pendentShips)
+                            {
+                                i.Initialize();
+                                Vector3 noise = new Vector3((float)random.NextDouble() - 0.5f, 0, (float)random.NextDouble() - 0.5f);
+                                foreach (Vector3 j in world.Waypoints)
+                                    i.Destinations.Add(j + noise);
+                                i.Position.X = i.Destinations[0].X;
+                                i.Position.Z = i.Destinations[0].Z;
+                                i.Destinations.RemoveAt(0);
+                            }
                         }
                     }
                 }
-            }
-            else
-            {
-                generationDelayCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (generationDelayCounter > generationDelay)
+                else
                 {
-                    generationDelayCounter -= generationDelay;
-                    GameplayComponent.LastInstance.SpawnComponents.Add(pendentShips[0]);
-                    VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Up * 0.1f);
-                    VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Down * 0.1f);
-                    VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Left * 0.1f);
-                    VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Right * 0.1f);
-                    VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Forward * 0.1f);
-                    VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Backward * 0.1f);
-                    pendentShips.RemoveAt(0);
+                    generationDelayCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
+                    if (generationDelayCounter > generationDelay)
+                    {
+                        generationDelayCounter -= generationDelay;
+                        GameplayComponent.LastInstance.SpawnComponents.Add(pendentShips[0]);
+                        VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Up * 0.1f);
+                        VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Down * 0.1f);
+                        VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Left * 0.1f);
+                        VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Right * 0.1f);
+                        VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Forward * 0.1f);
+                        VortexParticleSystem.LastInstance.AddParticle(pendentShips[0].Position, Vector3.Backward * 0.1f);
+                        pendentShips.RemoveAt(0);
+                    }
                 }
             }
 
