@@ -117,7 +117,9 @@ namespace ToonDefense
                 GraphicsDevice.Clear(Color.White * 0.0f);
                 tower.Draw(gameTime);
                 GraphicsDevice.SetRenderTarget(null);
-                PrimitiveDrawings.DrawSphere(Game, GraphicsDevice, camera, tower.Position, tower.Sight);
+                Vector3 position = tower.Position;
+                position.Y = 0;
+                PrimitiveDrawings.DrawSphere(Game, GraphicsDevice, camera, position, tower.Sight);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
 
                 if (world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
