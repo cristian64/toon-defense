@@ -65,7 +65,7 @@ namespace ToonDefense
             camera = new Camera(Game);
             components.Add(camera);
 
-            world = new World(Game, camera, "map1");
+            world = new World(Game, camera, "map2");
             DrawableComponents.Add(world);
             camera.World = world;
             GuiComponents.Add(new RoundManager(Game, camera, world));

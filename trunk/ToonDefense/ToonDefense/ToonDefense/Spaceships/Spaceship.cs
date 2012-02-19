@@ -67,9 +67,9 @@ namespace ToonDefense.Spaceships
                     Position.Z += direction.Y * Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                     double rotation = Math.Atan2(-direction.Y, direction.X);
-                    if (rotation > 2)
-                        rotation *= -1;
-                    Rotation.Y += 10 * (float)gameTime.ElapsedGameTime.TotalSeconds * ((float)rotation - Rotation.Y);
+                    /*if (rotation > 3)
+                        rotation *= -1;*/
+                    Rotation.Y += 5 * (float)gameTime.ElapsedGameTime.TotalSeconds * ((float)rotation - Rotation.Y);
                 }
                 else
                 {
