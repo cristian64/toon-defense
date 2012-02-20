@@ -60,21 +60,32 @@ namespace ToonDefense.Spaceships
                 Vector2 destination = new Vector2(Destinations[0].X, Destinations[0].Z);
                 Vector2 direction = destination - position;
 
-                if (direction.LengthSquared() > Speed * Speed * gameTime.ElapsedGameTime.TotalSeconds * gameTime.ElapsedGameTime.TotalSeconds)
+                double seconds = gameTime.ElapsedGameTime.TotalSeconds;
+                if (direction.LengthSquared() > Speed * Speed * seconds * seconds)
                 {
                     direction.Normalize();
-                    Position.X += direction.X * Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    Position.Z += direction.Y * Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    Position.X += direction.X * Speed * (float)seconds;
+                    Position.Z += direction.Y * Speed * (float)seconds;
 
                     double rotation = Math.Atan2(-direction.Y, direction.X);
-                    /*if (rotation > 3)
-                        rotation *= -1;*/
-                    Rotation.Y += 5 * (float)gameTime.ElapsedGameTime.TotalSeconds * ((float)rotation - Rotation.Y);
+                    double difference = (float)rotation - Rotation.Y;
+                    if (Math.Abs(difference) > Math.Abs(Math.Abs(difference) - MathHelper.TwoPi))
+                        if (difference < 0)
+                            difference += MathHelper.TwoPi;
+                        else
+                            difference -= MathHelper.TwoPi;
+
+                    Rotation.Y += 5 * (float)seconds * (float)difference;
+                    if (Rotation.Y > MathHelper.TwoPi)
+                        Rotation.Y -= MathHelper.TwoPi;
+                    else if (Rotation.Y < -MathHelper.TwoPi)
+                        Rotation.Y += MathHelper.TwoPi;
                 }
                 else
                 {
-                    Position.X = destination.X;
-                    Position.Z = destination.Y;
+                    direction.Normalize();
+                    Position.X += direction.X * Speed * (float)seconds;
+                    Position.Z += direction.Y * Speed * (float)seconds;
                     Destinations.RemoveAt(0);
                 }
             }

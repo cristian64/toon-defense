@@ -89,6 +89,8 @@ namespace ToonDefense
                                 i.Position.X = i.Destinations[0].X;
                                 i.Position.Z = i.Destinations[0].Z;
                                 i.Destinations.RemoveAt(0);
+                                Vector3 direction = i.Destinations[0] - i.Position;
+                                i.Rotation.Y = (float)Math.Atan2(-direction.Z, direction.X);
                             }
                         }
                     }
