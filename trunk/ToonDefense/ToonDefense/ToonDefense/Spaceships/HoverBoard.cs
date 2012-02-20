@@ -14,13 +14,14 @@ namespace ToonDefense.Spaceships
 {
     public class HoverBoard : Spaceship
     {
+        static Random random = new Random();
         public HoverBoard(Game game, Camera camera)
             : base(game, camera)
         {
-            Speed = 0.5f;
-            InitialHealth = 100;
-            Reward = 30;
-            Position.Y = 0.2f;
+            Speed = 1.0f;
+            InitialHealth = 250;
+            Reward = 15;
+            Position.Y = 0.2f + (random.Next() % 30) / 100.0f;
         }
 
         protected override void LoadContent()

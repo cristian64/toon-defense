@@ -23,9 +23,9 @@ namespace ToonDefense.Towers
         {
             laserEmitter = new ParticleEmitter(LaserParticleSystem.LastInstance, 3, Position + Vector3.Up * 0.2f);
             Sight = 5;
-            Damage = 10;
+            Damage = 100;
             Delay = 100;
-            Price = 500;
+            Price = 3000;
         }
 
         protected override void LoadContent()

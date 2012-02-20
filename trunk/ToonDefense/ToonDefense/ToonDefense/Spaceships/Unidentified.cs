@@ -20,9 +20,9 @@ namespace ToonDefense.Spaceships
             : base(game, camera)
         {
             extraRotationY = 0;
-            Speed = 4;
-            InitialHealth = 500;
-            Reward = 250;
+            Speed = 3;
+            InitialHealth = 10000;
+            Reward = 90;
             Position.Y = 0.6f;
         }
 

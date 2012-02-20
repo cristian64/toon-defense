@@ -18,7 +18,7 @@ namespace ToonDefense.Spaceships
             : base(game, camera)
         {
             Speed = 1;
-            InitialHealth = 2000;
+            InitialHealth = 1000000;
             Reward = 1000;
         }
 

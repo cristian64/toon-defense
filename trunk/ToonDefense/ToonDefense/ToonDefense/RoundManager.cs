@@ -135,18 +135,473 @@ namespace ToonDefense
 
         public void Round1()
         {
-			generationDelay = 200;
-            pendentShips.Add(new Interceptor(Game, camera));
+			generationDelay = 100;
+            pendentShips.Add(new PaperAirplane(Game, camera));
         }
 
         public void Round2()
         {
-			generationDelay = 200;
+            generationDelay = 1500;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new PaperAirplane(Game, camera));
+        }
+
+        public void Round3()
+        {
+            generationDelay = 1500;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new HoverBoard(Game, camera));
+        }
+
+        public void Round4()
+        {
+            generationDelay = 600;
+            for (int i = 0; i < 5; i++)
+            {
+                pendentShips.Add(new PaperAirplane(Game, camera));
+                pendentShips.Add(new HoverBoard(Game, camera));
+            }
+        }
+
+        public void Round5()
+        {
+			generationDelay = 1800;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new Explorer(Game, camera));
+        }
+
+        public void Round6()
+        {
+            generationDelay = 500;
+            for (int i = 0; i < 5; i++)
+                pendentShips.Add(new Explorer(Game, camera));
+        }
+
+        public void Round7()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 15; i++)
+                pendentShips.Add(new Explorer(Game, camera));
+        }
+
+        public void Round8()
+        {
+            generationDelay = 500;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new Interceptor(Game, camera));
+        }
+
+        public void Round9()
+        {
+            generationDelay = 250;
             for (int i = 0; i < 5; i++)
                 pendentShips.Add(new Interceptor(Game, camera));
         }
 
-        public void Round3()
+        public void Round10()
+        {
+            generationDelay = 450;
+            for (int i = 0; i < 5; i++)
+            {
+                pendentShips.Add(new Interceptor(Game, camera));
+                pendentShips.Add(new Explorer(Game, camera));
+            }
+        }
+
+        public void Round11()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new Helicopter(Game, camera));
+        }
+
+        public void Round12()
+        {
+            generationDelay = 400;
+            for (int i = 0; i < 5; i++)
+                pendentShips.Add(new Helicopter(Game, camera));
+        }
+
+        public void Round13()
+        {
+            generationDelay = 400;
+            for (int i = 0; i < 10; i++)
+                pendentShips.Add(new Helicopter(Game, camera));
+        }
+
+        public void Round14()
+        {
+            generationDelay = 150;
+            for (int i = 0; i < 100; i++)
+                pendentShips.Add(new PaperAirplane(Game, camera));
+        }
+
+        public void Round15()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new DeltaDart(Game, camera));
+        }
+
+        public void Round16()
+        {
+            generationDelay = 100;
+            for (int i = 0; i < 5; i++)
+                pendentShips.Add(new DeltaDart(Game, camera));
+        }
+
+        public void Round17()
+        {
+            generationDelay = 400;
+            for (int i = 0; i < 10; i++)
+                pendentShips.Add(new DeltaDart(Game, camera));
+        }
+
+        public void Round18()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new Gunner(Game, camera));
+        }
+
+        public void Round19()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 4; i++)
+                pendentShips.Add(new DeltaDart(Game, camera));
+            for (int i = 0; i < 10; i++)
+                pendentShips.Add(new Helicopter(Game, camera));
+        }
+
+        public void Round20()
+        {
+            generationDelay = 750;
+            for (int i = 0; i < 7; i++)
+                pendentShips.Add(new Gunner(Game, camera));
+        }
+
+        public void Round21()
+        {
+            generationDelay = 500;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new DeltaDart(Game, camera));
+            for (int i = 0; i < 5; i++)
+                pendentShips.Add(new Gunner(Game, camera));
+        }
+
+        public void Round22()
+        {
+            generationDelay = 500;
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new Unidentified(Game, camera));
+        }
+
+        public void Round23()
+        {
+            generationDelay = 250;
+            for (int i = 0; i < 15; i++)
+                pendentShips.Add(new Helicopter(Game, camera));
+        }
+
+        public void Round24()
+        {
+            generationDelay = 500;
+            for (int i = 0; i < 2; i++)
+                pendentShips.Add(new Unidentified(Game, camera));
+        }
+
+        public void Round25()
+        {
+            generationDelay = 500;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new Unidentified(Game, camera));
+        }
+
+        public void Round26()
+        {
+            generationDelay = 500;
+            for (int i = 0; i < 5; i++)
+                pendentShips.Add(new DeltaDart(Game, camera));
+            for (int i = 0; i < 2; i++)
+                pendentShips.Add(new Unidentified(Game, camera));
+        }
+
+        public void Round27()
+        {
+            generationDelay = 500;
+            for (int i = 0; i < 5; i++)
+                pendentShips.Add(new DeltaDart(Game, camera));
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new Unidentified(Game, camera));
+        }
+
+        public void Round28()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 25; i++)
+                pendentShips.Add(new Gunner(Game, camera));
+        }
+
+        public void Round29()
+        {
+            generationDelay = 500;
+            for (int i = 0; i < 15; i++)
+                pendentShips.Add(new DeltaDart(Game, camera));
+        }
+
+        public void Round30()
+        {
+            generationDelay = 100;
+            for (int i = 0; i < 50; i++)
+                pendentShips.Add(new Interceptor(Game, camera));
+        }
+
+        public void Round31()
+        {
+            generationDelay = 200;
+            for (int i = 0; i < 30; i++)
+                pendentShips.Add(new Helicopter(Game, camera));
+        }
+
+        public void Round32()
+        {
+            generationDelay = 200;
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new Zeppelin(Game, camera));
+        }
+
+        public void Round32()
+        {
+            generationDelay = 500;
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new Zeppelin(Game, camera));
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new Unidentified(Game, camera));
+        }
+
+        public void Round33()
+        {
+            generationDelay = 500;
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new Zeppelin(Game, camera));
+            for (int i = 0; i < 2; i++)
+                pendentShips.Add(new Unidentified(Game, camera));
+        }
+
+        public void Round34()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new Zeppelin(Game, camera));
+            for (int i = 0; i < 5; i++)
+                pendentShips.Add(new Gunner(Game, camera));
+        }
+
+        public void Round35()
+        {
+            generationDelay = 5000;
+            for (int i = 0; i < 5; i++)
+                pendentShips.Add(new Zeppelin(Game, camera));
+        }
+
+        public void Round36()
+        {
+            generationDelay = 750;
+            for (int i = 0; i < 25; i++)
+                pendentShips.Add(new Helicopter(Game, camera));
+        }
+
+        public void Round37()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 20; i++)
+                pendentShips.Add(new DeltaDart(Game, camera));
+        }
+
+        public void Round38()
+        {
+            generationDelay = 100;
+            for (int i = 0; i < 200; i++)
+                pendentShips.Add(new PaperAirplane(Game, camera));
+        }
+
+        public void Round39()
+        {
+            generationDelay = 100;
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new BattleCruiser(Game, camera));
+        }
+
+        public void Round40()
+        {
+            generationDelay = 600;
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new BattleCruiser(Game, camera));
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new Gunner(Game, camera));
+        }
+
+        public void Round41()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 7; i++)
+                pendentShips.Add(new Unidentified(Game, camera));
+            for (int i = 0; i < 6; i++)
+                pendentShips.Add(new Gunner(Game, camera));
+        }
+
+        public void Round42()
+        {
+            generationDelay = 5000;
+            for (int i = 0; i < 2; i++)
+                pendentShips.Add(new BattleCruiser(Game, camera));
+        }
+
+        public void Round43()
+        {
+            generationDelay = 5000;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new BattleCruiser(Game, camera));
+        }
+
+        public void Round44()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 15; i++)
+                pendentShips.Add(new Unidentified(Game, camera));
+        }
+
+        public void Round45()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 10; i++)
+                pendentShips.Add(new Zeppelin(Game, camera));
+        }
+
+        public void Round46()
+        {
+            generationDelay = 5000;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new BattleCruiser(Game, camera));
+            for (int i = 0; i < 5; i++)
+                pendentShips.Add(new DeltaDart(Game, camera));
+        }
+
+        public void Round47()
+        {
+            generationDelay = 5000;
+            for (int i = 0; i < 4; i++)
+                pendentShips.Add(new BattleCruiser(Game, camera));
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new DeltaDart(Game, camera));
+        }
+
+        public void Round48()
+        {
+            generationDelay = 3000;
+            for (int i = 0; i < 4; i++)
+                pendentShips.Add(new Zeppelin(Game, camera));
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new BattleCruiser(Game, camera));
+        }
+
+        public void Round49()
+        {
+            generationDelay = 3000;
+            for (int i = 0; i < 5; i++)
+                pendentShips.Add(new Zeppelin(Game, camera));
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new BattleCruiser(Game, camera));
+        }
+
+        public void Round50()
+        {
+            generationDelay = 100;
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new Spectrum(Game, camera));
+        }
+
+        public void Round51()
+        {
+            generationDelay = 150;
+            for (int i = 0; i < 300; i++)
+                pendentShips.Add(new PaperAirplane(Game, camera));
+        }
+
+        public void Round52()
+        {
+            generationDelay = 5000;
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new Spectrum(Game, camera));
+        }
+
+        public void Round53()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 5; i++)
+                pendentShips.Add(new BattleCruiser(Game, camera));
+        }
+
+        public void Round54()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 20; i++)
+                pendentShips.Add(new DeltaDart(Game, camera));
+        }
+
+        public void Round55()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new Zeppelin(Game, camera));
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new Spectrum(Game, camera));
+        }
+
+        public void Round56()
+        {
+            generationDelay = 2000;
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new BattleCruiser(Game, camera));
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new Spectrum(Game, camera));
+        }
+
+        public void Round57()
+        {
+            generationDelay = 10000;
+            for (int i = 0; i < 2; i++)
+                pendentShips.Add(new Spectrum(Game, camera));
+        }
+
+        public void Round58()
+        {
+            generationDelay = 5000;
+            for (int i = 0; i < 7; i++)
+                pendentShips.Add(new BattleCruiser(Game, camera));
+        }
+
+        public void Round59()
+        {
+            generationDelay = 3000;
+            for (int i = 0; i < 4; i++)
+                pendentShips.Add(new Unidentified(Game, camera));
+            for (int i = 0; i < 3; i++)
+                pendentShips.Add(new Zeppelin(Game, camera));
+            for (int i = 0; i < 2; i++)
+                pendentShips.Add(new BattleCruiser(Game, camera));
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new Spectrum(Game, camera));
+        }
+
+        public void Round60()
+        {
+            generationDelay = 1000;
+            for (int i = 0; i < 1; i++)
+                pendentShips.Add(new ScienceVessel(Game, camera));
+        }
+
+        public void Zound16()
         {
 			generationDelay = 1000;
             Interceptor interceptor = new Interceptor(Game, camera);
