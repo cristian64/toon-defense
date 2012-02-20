@@ -17,9 +17,9 @@ namespace ToonDefense.Spaceships
         public BattleCruiser(Game game, Camera camera)
             : base(game, camera)
         {
-            Speed = 1.9f;
-            InitialHealth = 1000;
-            Reward = 500;
+            Speed = 2.4f;
+            InitialHealth = 80000;
+            Reward = 120;
             Position.Y = 1.2f;
         }
 

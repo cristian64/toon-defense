@@ -10,7 +10,7 @@ namespace ToonDefense
     public class Player : DrawableGameComponent
     {
         public int Lives = 100;
-        public int Money = 1000;
+        public int Money = 100;
         public int Kills = 0;
         SpriteBatch spriteBatch;
         Texture2D heart;

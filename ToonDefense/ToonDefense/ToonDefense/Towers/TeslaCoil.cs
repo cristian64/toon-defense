@@ -22,9 +22,9 @@ namespace ToonDefense.Towers
             : base(game, camera)
         {
             Sight = 3.5f;
-            Damage = 10;
+            Damage = 25;
             Delay = 400;
-            Price = 300;
+            Price = 100;
         }
 
         protected override void LoadContent()

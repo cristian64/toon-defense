@@ -17,10 +17,10 @@ namespace ToonDefense.Spaceships
         public Helicopter(Game game, Camera camera)
             : base(game, camera)
         {
-            Speed = 2.1f;
-            InitialHealth = 100;
-            Reward = 200;
-            Position.Y = 0.6f;
+            Speed = 1.7f;
+            InitialHealth = 700;
+            Reward = 50;
+            Position.Y = 1.2f;
         }
 
         protected override void LoadContent()

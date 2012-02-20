@@ -17,9 +17,9 @@ namespace ToonDefense.Spaceships
         public PaperAirplane(Game game, Camera camera)
             : base(game, camera)
         {
-            Speed = 2;
-            InitialHealth = 30;
-            Reward = 30;
+            Speed = 1.5f;
+            InitialHealth = 200;
+            Reward = 10;
             Position.Y = 1.3f;
         }
 
