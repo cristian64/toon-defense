@@ -157,7 +157,7 @@ namespace ToonDefense
                         target.X = -World.Scale.X / 2.0f + marginX;
                         position.X = -World.Scale.X / 2.0f + marginX;
                     }
-                    float marginZ = Position.Y / 3;
+                    float marginZ = Position.Y / 4;
                     if (target.Z > World.Scale.Z / 2.0f - marginZ)
                     {
                         target.Z = World.Scale.Z / 2.0f - marginZ;
@@ -195,9 +195,12 @@ namespace ToonDefense
         {
             set
             {
-                target = value;
-                position.X = target.X;
-                position.Z = target.Z - differenceZ;
+                if (!freeCamera)
+                {
+                    target = value;
+                    position.X = target.X;
+                    position.Z = target.Z - differenceZ;
+                }
             }
         }
 
