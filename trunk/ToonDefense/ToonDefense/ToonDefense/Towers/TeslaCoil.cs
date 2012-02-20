@@ -21,7 +21,7 @@ namespace ToonDefense.Towers
         public TeslaCoil(Game game, Camera camera)
             : base(game, camera)
         {
-            Sight = 5;
+            Sight = 3.5f;
             Damage = 10;
             Delay = 400;
             Price = 300;

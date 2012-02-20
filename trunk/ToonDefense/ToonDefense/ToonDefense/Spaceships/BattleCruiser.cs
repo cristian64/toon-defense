@@ -20,7 +20,7 @@ namespace ToonDefense.Spaceships
             Speed = 1.9f;
             InitialHealth = 1000;
             Reward = 500;
-            Position.Y = 2.6f;
+            Position.Y = 1.2f;
         }
 
         protected override void LoadContent()
