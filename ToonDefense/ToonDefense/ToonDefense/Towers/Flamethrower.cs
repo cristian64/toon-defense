@@ -19,7 +19,7 @@ namespace ToonDefense.Towers
         public Flamethower(Game game, Camera camera)
             : base(game, camera)
         {
-            Sight = 5;
+            Sight = 3;
             Damage = 1;
             Delay = 25;
             Price = 100;

@@ -19,7 +19,7 @@ namespace ToonDefense.Towers
         public PlasmaGenerator(Game game, Camera camera)
             : base(game, camera)
         {
-            Sight = 5;
+            Sight = 4;
             Damage = 10;
             Delay = 1000;
             Price = 100;
