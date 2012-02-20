@@ -42,6 +42,9 @@ namespace ToonDefense
             foreach (Vector2 i in Game.Content.Load<List<Vector2>>("maps\\" + MapName))
                 Waypoints.Add(TextureUnitsToWorldUnits(i));
 
+            // Move the camera to the start point.
+            Camera.Target = Waypoints[0];
+
             // Process buildable areas from the binary image.
             Texture2D buildableTexture = Game.Content.Load<Texture2D>("maps\\" + MapName + "buildable");
             buildableAreas = new Color[buildableTexture.Width * buildableTexture.Height];

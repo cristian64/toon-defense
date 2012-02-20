@@ -16,6 +16,8 @@ namespace ToonDefense
         private Matrix view;
         private Matrix projection;
 
+        private float differenceZ = 20;
+        private Vector3 target = Vector3.Zero;
         private Vector3 position = new Vector3(0, 0, 10);
         private Vector2 angles = Vector2.Zero;
 
@@ -82,7 +84,7 @@ namespace ToonDefense
         /// <summary>
         /// Gets or sets camera's target.
         /// </summary>
-        public Vector3 Target
+        public Vector3 Target2
         {
             get
             {
@@ -122,35 +124,80 @@ namespace ToonDefense
                 }
                 else
                 {
+                    float speed = 8;
                     if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left) || Mouse.GetState().X == 0)
-                        position.X -= 5 * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
-                    if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right) || Mouse.GetState().X == Game.GraphicsDevice.PresentationParameters.BackBufferWidth - 1)
-                        position.X += 5 * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
-                    if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.Up) || Mouse.GetState().Y == 0)
-                        position.Z -= 5 * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
-                    if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down) || Mouse.GetState().Y == Game.GraphicsDevice.PresentationParameters.BackBufferHeight - 1)
-                        position.Z += 5 * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
-
-                    position.X = Math.Min(World.Scale.X / 2, position.X);
-                    position.X = Math.Max(-World.Scale.X / 2, position.X);
-                    position.Z -= 20;
-                    position.Z = Math.Min(World.Scale.Z / 2, position.Z);
-                    position.Z = Math.Max(-World.Scale.Z / 2, position.Z);
-                    position.Z += 20;
-
-                    float increment = (prevMouseState.ScrollWheelValue - Mouse.GetState().ScrollWheelValue) / 1000.0f;
-                    if (position.Y > 3 || increment > 0)
                     {
-                        position.Y += increment;
-                        position.Z += increment;
+                        position.X -= speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
+                        target.X -= speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                     }
-                    projection = Matrix.CreatePerspectiveFieldOfView(0.4f, aspectRatio, nearPlaneDistance, farPlaneDistance);
-                    view = Matrix.CreateLookAt(position, new Vector3(position.X, position.Y - 15, position.Z - 20), Vector3.Up);
+                    if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right) || Mouse.GetState().X == Game.GraphicsDevice.PresentationParameters.BackBufferWidth - 1)
+                    {
+                        position.X += speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
+                        target.X += speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.Up) || Mouse.GetState().Y == 0)
+                    {
+                        position.Z -= speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
+                        target.Z -= speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down) || Mouse.GetState().Y == Game.GraphicsDevice.PresentationParameters.BackBufferHeight - 1)
+                    {
+                        position.Z += speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
+                        target.Z += speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
+                    }
+
+                    float marginX = Position.Y / 3;
+                    if (target.X > World.Scale.X / 2.0f - marginX)
+                    {
+                        target.X = World.Scale.X / 2.0f - marginX;
+                        position.X = World.Scale.X / 2.0f - marginX;
+                    }
+                    if (target.X < -World.Scale.X / 2.0f + marginX)
+                    {
+                        target.X = -World.Scale.X / 2.0f + marginX;
+                        position.X = -World.Scale.X / 2.0f + marginX;
+                    }
+                    float marginZ = Position.Y / 3;
+                    if (target.Z > World.Scale.Z / 2.0f - marginZ)
+                    {
+                        target.Z = World.Scale.Z / 2.0f - marginZ;
+                        position.Z = World.Scale.Z / 2.0f - marginZ + differenceZ;
+                    }
+                    if (target.Z < -World.Scale.Z / 2.0f + marginZ)
+                    {
+                        target.Z = -World.Scale.Z / 2.0f + marginZ;
+                        position.Z = -World.Scale.Z / 2.0f + marginZ + differenceZ;
+                    }
+
+                    float increment = (prevMouseState.ScrollWheelValue - Mouse.GetState().ScrollWheelValue) / 100.0f;
+                    if (position.Y > 5 && increment > 0)
+                    {
+                        position = position - (Vector3.Normalize(target - position));
+                        differenceZ = position.Z - target.Z;
+                    }
+                    else if (position.Y < 30 && increment < 0)
+                    {
+                        position = position + (Vector3.Normalize(target - position));
+                        differenceZ = position.Z - target.Z;
+                    }
+
+                    projection = Matrix.CreatePerspectiveFieldOfView(0.3f, aspectRatio, nearPlaneDistance, farPlaneDistance);
+                    view = Matrix.CreateLookAt(position, target, Vector3.Up);
 
                     prevMouseState = Mouse.GetState();
                 }
 
                 base.Update(gameTime);
+            }
+        }
+
+        public Vector3 Target
+        {
+            set
+            {
+                target = value;
+                position.X = target.X;
+                position.Z = target.Z - differenceZ;
             }
         }
 
@@ -164,11 +211,12 @@ namespace ToonDefense
                 if (freeCamera)
                 {
                     position = new Vector3(5, 3, 10);
-                    Target = new Vector3(8, 5.5f, 0);
+                    Target2 = new Vector3(8, 5.5f, 0);
                 }
                 else
                 {
-                    position = new Vector3(0, 15, 20);
+                    position = new Vector3(0, 15, differenceZ);
+                    target = new Vector3(0, 0, 0);
                 }
             }
         }
