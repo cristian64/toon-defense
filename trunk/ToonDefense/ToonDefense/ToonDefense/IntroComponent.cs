@@ -14,9 +14,23 @@ namespace ToonDefense
 {
     public class IntroComponent : DrawableGameComponent
     {
+        SpriteBatch spriteBatch;
+        SpriteFont titleFont;
+        SpriteFont subtitleFont;
+        Texture2D logo;
+
         public IntroComponent(Game game)
             : base(game)
         {
+        }
+
+        protected override void LoadContent()
+        {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            titleFont = Game.Content.Load<SpriteFont>("fonts\\title");
+            subtitleFont = Game.Content.Load<SpriteFont>("fonts\\subtitle");
+            logo = Game.Content.Load<Texture2D>("images\\logo");
+            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
@@ -26,13 +40,21 @@ namespace ToonDefense
 
         public override void Draw(GameTime gameTime)
         {
-            SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-            SpriteFont font = Game.Content.Load<SpriteFont>("fonts\\title");
+
             Vector2 position = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2, GraphicsDevice.PresentationParameters.BackBufferHeight / 2);
-            position -= font.MeasureString("Intro") / 2;
-            spriteBatch.DrawString(font, "Intro", position, Color.White);
+            position -= titleFont.MeasureString("Toon Defense") / 2;
+            spriteBatch.DrawString(titleFont, "Toon Defense", position, Color.White);
+
+            Vector2 position2 = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2, GraphicsDevice.PresentationParameters.BackBufferHeight / 2);
+            position2 -= subtitleFont.MeasureString("Christian Aguilera") / 2 - new Vector2(0, titleFont.MeasureString("Toon Defense").Y - 10);
+            spriteBatch.DrawString(subtitleFont, "Christian Aguilera", position2, Color.White);
+
+            Vector2 position3 = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2, GraphicsDevice.PresentationParameters.BackBufferHeight / 2);
+            position3 -= new Vector2(logo.Width, logo.Height) / 2 + new Vector2(0, titleFont.MeasureString("Toon Defense").Y) + new Vector2(0, logo.Height / 2);
+            spriteBatch.Draw(logo, position3, Color.White);
+
             spriteBatch.End();
             base.Draw(gameTime);
         }
