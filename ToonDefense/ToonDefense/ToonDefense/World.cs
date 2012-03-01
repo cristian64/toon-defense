@@ -57,12 +57,13 @@ namespace ToonDefense
         public override void Update(GameTime gameTime)
         {
             MouseState currentMouseState = Mouse.GetState();
-            if (currentMouseState.RightButton == ButtonState.Pressed && prevMouseState.RightButton == ButtonState.Released)
-            {
-                Vector2 click = WorldUnitsToTextureUnits(Camera.RayFromScreenToFloor(currentMouseState.X, currentMouseState.Y));
-                Waypoints.Add(TextureUnitsToWorldUnits(click));
-                Console.WriteLine(click.X + " " + click.Y);
-            }
+            if (ToonDefense.Debug)
+                if (currentMouseState.RightButton == ButtonState.Pressed && prevMouseState.RightButton == ButtonState.Released)
+                {
+                    Vector2 click = WorldUnitsToTextureUnits(Camera.RayFromScreenToFloor(currentMouseState.X, currentMouseState.Y));
+                    Waypoints.Add(TextureUnitsToWorldUnits(click));
+                    Console.WriteLine(click.X + " " + click.Y);
+                }
             prevMouseState = currentMouseState;
             base.Update(gameTime);
         }
@@ -79,10 +80,9 @@ namespace ToonDefense
                 basicEffect.World = world;
                 mesh.Draw();
             }
-            #if DEBUG
-            for (int i = 0; i < Waypoints.Count - 1; i++)
-                PrimitiveDrawings.DrawLine(GraphicsDevice, Camera, Waypoints[i], Waypoints[i + 1], Color.White);
-            #endif
+            if (ToonDefense.Debug)
+                for (int i = 0; i < Waypoints.Count - 1; i++)
+                    PrimitiveDrawings.DrawLine(GraphicsDevice, Camera, Waypoints[i], Waypoints[i + 1], Color.White);
 
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
