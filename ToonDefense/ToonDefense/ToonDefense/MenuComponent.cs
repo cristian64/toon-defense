@@ -14,6 +14,8 @@ namespace ToonDefense
 {
     public class MenuComponent : DrawableGameComponent
     {
+        MouseState prevMouseState;
+
         public MenuComponent(Game game)
             : base(game)
         {
@@ -21,6 +23,12 @@ namespace ToonDefense
 
         public override void Update(GameTime gameTime)
         {
+            MouseState currentMouseState = Mouse.GetState();
+
+            if (currentMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
+                Game.Components.Add(new FadeOutComponent(Game, 0, 1000, new GameplayComponent(Game), new FadeInComponent(Game, 1000, 1000)));
+
+            prevMouseState = currentMouseState;
             base.Update(gameTime);
         }
 

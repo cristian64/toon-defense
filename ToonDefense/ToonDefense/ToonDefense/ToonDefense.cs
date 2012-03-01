@@ -16,8 +16,10 @@ namespace ToonDefense
     /// </summary>
     public class ToonDefense : Microsoft.Xna.Framework.Game
     {
+        public static bool Debug = false;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        KeyboardState prevKeyboardState;
 
         public ToonDefense()
         {
@@ -25,8 +27,8 @@ namespace ToonDefense
             graphics.PreparingDeviceSettings += preparingDeviceSettings;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            graphics.PreferredBackBufferWidth = 1300;
-            graphics.PreferredBackBufferHeight = 730;
+            graphics.PreferredBackBufferWidth = (int)(0.8 * GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width);
+            graphics.PreferredBackBufferHeight = (int)(0.8 * GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
             //graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             //graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             //graphics.IsFullScreen = true;
@@ -49,7 +51,7 @@ namespace ToonDefense
         {
             Components.Add(new IntroComponent(this));
             Components.Add(new FadeInComponent(this, 1000, 1000));
-            //Components.Add(new FadeOutComponent(this, 10000, 1000, new MenuComponent(this), new FadeInComponent(this, 1000, 1000)));
+            Components.Add(new FadeOutComponent(this, 10000, 1000, new MenuComponent(this), new FadeInComponent(this, 1000, 1000)));
             //Components.Add(new GameplayComponent(this));
             //Components.Add(new FadeInComponent(this, 0, 300));
             base.Initialize();
@@ -75,9 +77,6 @@ namespace ToonDefense
             base.UnloadContent();
         }
 
-        bool escapePressed = false;
-        bool f12Pressed = false;
-
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -85,19 +84,15 @@ namespace ToonDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            KeyboardState currentKeyboardState = Keyboard.GetState();
+
             // Allows the game to exit
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !escapePressed)
-            {
-                escapePressed = true;
+            if (currentKeyboardState.IsKeyDown(Keys.Escape) && prevKeyboardState.IsKeyUp(Keys.Escape))
                 Components.Add(new FadeOutComponent(this, 0, 500));
-            }
-            if (Keyboard.GetState().IsKeyUp(Keys.Escape))
-                escapePressed = false;
 
             // Allows the game to change size of the screen
-            if (Keyboard.GetState().IsKeyDown(Keys.F12) && !f12Pressed)
+            if (currentKeyboardState.IsKeyDown(Keys.F11) && prevKeyboardState.IsKeyUp(Keys.F11))
             {
-                f12Pressed = true;
                 if (!graphics.IsFullScreen)
                 {
                     graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
@@ -111,8 +106,18 @@ namespace ToonDefense
                 graphics.IsFullScreen = !graphics.IsFullScreen;
                 graphics.ApplyChanges();
             }
-            if (Keyboard.GetState().IsKeyUp(Keys.F12))
-                f12Pressed = false;
+
+            // Allows the game to change antialiasing
+            if (currentKeyboardState.IsKeyDown(Keys.F12) && prevKeyboardState.IsKeyUp(Keys.F12))
+            {
+                graphics.PreferMultiSampling = !graphics.PreferMultiSampling;
+                graphics.ApplyChanges();
+            }
+            // Allows the game to show debug features
+            if (currentKeyboardState.IsKeyDown(Keys.F1) && prevKeyboardState.IsKeyUp(Keys.F1))
+                Debug = !Debug;
+
+            prevKeyboardState = currentKeyboardState;
 
             base.Update(gameTime);
         }
