@@ -34,10 +34,9 @@ namespace ToonDefense.Towers
 
         public override void Draw(GameTime gameTime)
         {
-            #if DEBUG
-            if (Target != null)
-                PrimitiveDrawings.DrawLine(GraphicsDevice, Camera, Position, Target.Position, Color.Violet);
-            #endif
+            if (ToonDefense.Debug)
+                if (Target != null)
+                    PrimitiveDrawings.DrawLine(GraphicsDevice, Camera, Position, Target.Position, Color.Violet);
             if (Selected)
             {
                 Vector3 position = Position;

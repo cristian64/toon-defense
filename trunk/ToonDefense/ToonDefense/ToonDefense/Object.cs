@@ -83,10 +83,11 @@ namespace ToonDefense
 
         public override void Draw(GameTime gameTime)
         {
-            #if DEBUG
-            Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
-            PrimitiveDrawings.DrawBoundingBox(Game.GraphicsDevice, Camera, world, BoundingBox, Color.White);
-            #endif
+            if (ToonDefense.Debug)
+            {
+                Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
+                PrimitiveDrawings.DrawBoundingBox(Game.GraphicsDevice, Camera, world, BoundingBox, Color.White);
+            }
             base.Draw(gameTime);
         }
 

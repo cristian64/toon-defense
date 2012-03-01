@@ -97,9 +97,7 @@ namespace ToonDefense
             particleSystems.Add(forceFieldParticleSystem);
             particleSystems.Add(plasmaParticleSystem);
 
-            #if DEBUG
             DrawableComponents.Add(new Axis(Game, camera));
-            #endif
 
             foreach (DrawableGameComponent i in DrawableComponents)
                 i.Initialize();
