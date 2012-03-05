@@ -55,6 +55,7 @@ namespace ToonDefense.Towers
 
         public override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
             foreach (ModelMeshPart part in model.Meshes[0].MeshParts)
             {
