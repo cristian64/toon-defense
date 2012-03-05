@@ -91,7 +91,8 @@ namespace ToonDefense
             }
             else if (Mouse.GetState().LeftButton == ButtonState.Released && tower != null)
             {
-                if (world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
+                if (!isOnPanel(Mouse.GetState()) &&
+                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
@@ -122,9 +123,9 @@ namespace ToonDefense
                 Vector3 position = tower.Position;
                 position.Y = 0;
                 PrimitiveDrawings.DrawSphere(Game, GraphicsDevice, camera, position, tower.Sight);
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
 
-                if (world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
+                if (!isOnPanel(Mouse.GetState()) &&
+                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
@@ -134,15 +135,17 @@ namespace ToonDefense
                     world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z)))
                 {
+                    spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
                     spriteBatch.Draw(renderTarget, Vector2.Zero, Color.Lime);
                     spriteBatch.Draw(renderTarget, Vector2.Zero, Color.Lime);
                     spriteBatch.Draw(renderTarget, Vector2.Zero, Color.Lime);
                 }
                 else
                 {
-                    spriteBatch.Draw(renderTarget, Vector2.Zero, Color.Red);
-                    spriteBatch.Draw(renderTarget, Vector2.Zero, Color.Red);
-                    spriteBatch.Draw(renderTarget, Vector2.Zero, Color.Red);
+                    spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+                    spriteBatch.Draw(renderTarget, Vector2.Zero, Color.Red * 0.4f);
+                    spriteBatch.Draw(renderTarget, Vector2.Zero, Color.Red * 0.4f);
+                    spriteBatch.Draw(renderTarget, Vector2.Zero, Color.Red * 0.4f);
                 }
                 spriteBatch.End();
             }
@@ -182,6 +185,11 @@ namespace ToonDefense
 
             return position.X <= mouseState.X && mouseState.X <= position.X + 64 &&
                 position.Y <= mouseState.Y && mouseState.Y <= position.Y + 64;
+        }
+
+        private bool isOnPanel(MouseState mouseState)
+        {
+            return isOnButton(mouseState, 1) || isOnButton(mouseState, 2) || isOnButton(mouseState, 3) || isOnButton(mouseState, 4) || isOnButton(mouseState, 5);
         }
     }
 }
