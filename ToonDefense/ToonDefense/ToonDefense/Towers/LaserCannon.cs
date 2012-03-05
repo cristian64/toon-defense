@@ -64,6 +64,7 @@ namespace ToonDefense.Towers
             if (Target != null)
                 PrimitiveDrawings.DrawPyramid(GraphicsDevice, Camera, Position + Vector3.Up * 0.2f, Target.Position, Color.Magenta);
 
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
             foreach (ModelMesh mesh in model.Meshes)
             {
