@@ -49,11 +49,11 @@ namespace ToonDefense
         /// </summary>
         protected override void Initialize()
         {
-            //Components.Add(new IntroComponent(this));
-            //Components.Add(new FadeInComponent(this, 1000, 1000));
-            //Components.Add(new FadeOutComponent(this, 10000, 1000, new MenuComponent(this), new FadeInComponent(this, 1000, 1000)));
-            Components.Add(new GameplayComponent(this));
-            Components.Add(new FadeInComponent(this, 0, 300));
+            Components.Add(new IntroComponent(this));
+            Components.Add(new FadeInComponent(this, 500, 500));
+            Components.Add(new FadeOutComponent(this, 2500, 500, new MenuComponent(this), new FadeInComponent(this, 500, 500)));
+            /*Components.Add(new GameplayComponent(this));
+            Components.Add(new FadeInComponent(this, 0, 300));*/
             base.Initialize();
         }
 
