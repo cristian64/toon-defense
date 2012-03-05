@@ -30,6 +30,7 @@ namespace ToonDefense
         Camera camera;
         World world;
         public SpeedLevel SpeedLevel;
+        public String map;
 
         FireParticleSystem fireParticleSystem;
         ExplosionParticleSystem explosionParticleSystem;
@@ -45,9 +46,10 @@ namespace ToonDefense
 
         public static GameplayComponent LastInstance = null;
 
-        public GameplayComponent(Game game)
+        public GameplayComponent(Game game, String map)
             : base(game)
         {
+            this.map = map;
             SpawnComponents = new List<DrawableGameComponent>();
             DrawableComponents = new List<DrawableGameComponent>();
             GuiComponents = new List<DrawableGameComponent>();
@@ -65,7 +67,7 @@ namespace ToonDefense
             camera = new Camera(Game);
             components.Add(camera);
 
-            world = new World(Game, camera, "map1");
+            world = new World(Game, camera, map);
             DrawableComponents.Add(world);
             camera.World = world;
             GuiComponents.Add(new RoundManager(Game, camera, world));
