@@ -37,9 +37,6 @@ namespace ToonDefense
             map1button = Game.Content.Load<Texture2D>("maps\\map1button");
             map2button = Game.Content.Load<Texture2D>("maps\\map2button");
             map3button = Game.Content.Load<Texture2D>("maps\\map3button");
-            map1buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2 - map1button.Width - 25, buttonsHeight);
-            map2buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2, buttonsHeight);
-            map3buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2 + map1button.Width + 25, buttonsHeight);
             base.LoadContent();
         }
 
@@ -56,6 +53,10 @@ namespace ToonDefense
                 else if (onButton(map3buttonPosition))
                     Game.Components.Add(new FadeOutComponent(Game, 0, 500, new GameplayComponent(Game, "map3"), new FadeInComponent(Game, 500, 500)));
             }
+
+            map1buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2 - map1button.Width - 25, GraphicsDevice.PresentationParameters.BackBufferHeight / 2 - map1button.Height / 2.0f);
+            map2buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2, GraphicsDevice.PresentationParameters.BackBufferHeight / 2 - map1button.Height / 2.0f);
+            map3buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2 + map1button.Width + 25, GraphicsDevice.PresentationParameters.BackBufferHeight / 2 - map1button.Height / 2.0f);
 
             prevMouseState = currentMouseState;
             base.Update(gameTime);

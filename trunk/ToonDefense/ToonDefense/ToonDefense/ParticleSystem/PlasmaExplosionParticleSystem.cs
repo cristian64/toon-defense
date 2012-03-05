@@ -33,7 +33,7 @@ namespace ToonDefense.ParticleSystem
         {
             settings.TextureName = "plasmaexplosion";
 
-            settings.MaxParticles = 100;
+            settings.MaxParticles = 10000;
 
             settings.Duration = TimeSpan.FromSeconds(2);
             settings.DurationRandomness = 1;

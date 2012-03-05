@@ -39,10 +39,6 @@ namespace ToonDefense.Towers
 
         public override void Shoot()
         {
-            Vector3 targetDirection =  Vector3.Normalize(Target.Destinations[0] - Target.Position);
-            targetDirection.Y = 0;
-            Vector3 direction = Vector3.Normalize(Target.Position + Target.Speed * targetDirection - Position);
-            FireParticleSystem.LastInstance.AddParticle(Position + direction, 3 * direction);
             Target.Health -= Damage;
             base.Shoot();
         }
@@ -55,6 +51,7 @@ namespace ToonDefense.Towers
                 targetDirection.Y = 0;
                 Vector3 direction = Vector3.Normalize(Target.Position + Target.Speed * targetDirection - Position);
                 Rotation.Y = (float)Math.Atan2(-direction.Z, direction.X);
+                FireParticleSystem.LastInstance.AddParticle(Position + direction, 3 * direction); 
             }
             base.Update(gameTime);
         }
