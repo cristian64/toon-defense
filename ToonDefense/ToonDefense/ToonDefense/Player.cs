@@ -34,6 +34,13 @@ namespace ToonDefense
             base.LoadContent();
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            if (ToonDefense.Debug)
+                Money += 100;
+            base.Update(gameTime);
+        }
+
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
