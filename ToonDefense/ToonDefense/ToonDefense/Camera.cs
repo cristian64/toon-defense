@@ -16,7 +16,8 @@ namespace ToonDefense
         private Matrix view;
         private Matrix projection;
 
-        private float differenceZ = 20;
+        private float height = 30;
+        private float differenceZ = 30;
         private Vector3 target = Vector3.Zero;
         private Vector3 position = new Vector3(0, 0, 10);
         private Vector2 angles = Vector2.Zero;
@@ -146,42 +147,40 @@ namespace ToonDefense
                         target.Z += speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                     }
 
-                    float marginX = Position.Y / 3;
-                    if (target.X > World.Scale.X / 2.0f - marginX)
+                    if (target.X > World.Scale.X / 2.0f)
                     {
-                        target.X = World.Scale.X / 2.0f - marginX;
-                        position.X = World.Scale.X / 2.0f - marginX;
+                        target.X = World.Scale.X / 2.0f;
+                        position.X = World.Scale.X / 2.0f;
                     }
-                    if (target.X < -World.Scale.X / 2.0f + marginX)
+                    if (target.X < -World.Scale.X / 2.0f)
                     {
-                        target.X = -World.Scale.X / 2.0f + marginX;
-                        position.X = -World.Scale.X / 2.0f + marginX;
+                        target.X = -World.Scale.X / 2.0f;
+                        position.X = -World.Scale.X / 2.0f;
                     }
-                    float marginZ = Position.Y / 4;
-                    if (target.Z > World.Scale.Z / 2.0f - marginZ)
+                    if (target.Z > World.Scale.Z / 2.0f)
                     {
-                        target.Z = World.Scale.Z / 2.0f - marginZ;
-                        position.Z = World.Scale.Z / 2.0f - marginZ + differenceZ;
+                        target.Z = World.Scale.Z / 2.0f;
+                        position.Z = World.Scale.Z / 2.0f + differenceZ;
                     }
-                    if (target.Z < -World.Scale.Z / 2.0f + marginZ)
+                    if (target.Z < -World.Scale.Z / 2.0f)
                     {
-                        target.Z = -World.Scale.Z / 2.0f + marginZ;
-                        position.Z = -World.Scale.Z / 2.0f + marginZ + differenceZ;
+                        target.Z = -World.Scale.Z / 2.0f;
+                        position.Z = -World.Scale.Z / 2.0f + differenceZ;
                     }
 
                     float increment = (prevMouseState.ScrollWheelValue - Mouse.GetState().ScrollWheelValue) / 100.0f;
-                    if (position.Y > 5 && increment > 0)
+                    if (increment > 0)
                     {
                         position = position - (Vector3.Normalize(target - position));
                         differenceZ = position.Z - target.Z;
                     }
-                    else if (position.Y < 30 && increment < 0)
+                    else if (increment < 0)
                     {
                         position = position + (Vector3.Normalize(target - position));
                         differenceZ = position.Z - target.Z;
                     }
 
-                    projection = Matrix.CreatePerspectiveFieldOfView(0.3f, aspectRatio, nearPlaneDistance, farPlaneDistance);
+                    projection = Matrix.CreatePerspectiveFieldOfView(0.2f, aspectRatio, nearPlaneDistance, farPlaneDistance);
                     view = Matrix.CreateLookAt(position, target, Vector3.Up);
 
                     prevMouseState = Mouse.GetState();
@@ -193,13 +192,18 @@ namespace ToonDefense
 
         public Vector3 Target
         {
+            get
+            {
+                return target;
+            }
+
             set
             {
                 if (!freeCamera)
                 {
                     target = value;
                     position.X = target.X;
-                    position.Z = target.Z - differenceZ;
+                    position.Z = target.Z + differenceZ;
                 }
             }
         }
@@ -218,7 +222,7 @@ namespace ToonDefense
                 }
                 else
                 {
-                    position = new Vector3(0, 15, differenceZ);
+                    position = new Vector3(0, height, differenceZ);
                     target = new Vector3(0, 0, 0);
                 }
             }
