@@ -32,6 +32,7 @@ namespace ToonDefense
         MissileLauncher missileLauncher;
         Texture2D plasmaGeneratorThumbnail;
         PlasmaGenerator plasmaGenerator;
+        SpriteFont font;
 
         public BuildingPanel(Game game, Camera camera, World world, Player player)
             : base(game)
@@ -56,6 +57,7 @@ namespace ToonDefense
             missileLauncher = new MissileLauncher(Game, camera);
             plasmaGeneratorThumbnail = Game.Content.Load<Texture2D>("images\\plasmageneratorthumbnail");
             plasmaGenerator = new PlasmaGenerator(Game, camera);
+            font = Game.Content.Load<SpriteFont>("fonts\\price");
             base.LoadContent();
         }
 
@@ -161,8 +163,15 @@ namespace ToonDefense
             Color color = (price <= player.Money) ? Color.White : Color.White * 0.3f;
             Vector2 position = new Vector2(GraphicsDevice.Viewport.Width - button.Width * shift, GraphicsDevice.Viewport.Height - button.Height);
             spriteBatch.Draw(button, position, color);
-            spriteBatch.Draw(button, position, color);
             spriteBatch.Draw(thumbnail, new Vector2(GraphicsDevice.Viewport.Width - button.Width * shift, GraphicsDevice.Viewport.Height - button.Height), color);
+
+            Vector2 pricePosition = position + new Vector2(40, 70) - font.MeasureString(price.ToString()) / 2;
+            spriteBatch.DrawString(font, price.ToString(), pricePosition + Vector2.UnitX, Color.Black);
+            spriteBatch.DrawString(font, price.ToString(), pricePosition - Vector2.UnitX, Color.Black);
+            spriteBatch.DrawString(font, price.ToString(), pricePosition + Vector2.UnitY, Color.Black);
+            spriteBatch.DrawString(font, price.ToString(), pricePosition - Vector2.UnitY, Color.Black);
+            spriteBatch.DrawString(font, price.ToString(), pricePosition, price <= player.Money ? Color.White : Color.Tomato);
+
         }
 
         private bool isOnButton(MouseState mouseState, int shift)
