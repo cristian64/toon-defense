@@ -14,11 +14,18 @@ namespace ToonDefense
 {
     public class MenuComponent : DrawableGameComponent
     {
+        Texture2D controlsTexture;
         MouseState prevMouseState;
 
         public MenuComponent(Game game)
             : base(game)
         {
+        }
+
+        protected override void LoadContent()
+        {
+            controlsTexture = Game.Content.Load<Texture2D>("images\\controls");
+            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
@@ -39,8 +46,10 @@ namespace ToonDefense
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             SpriteFont font = Game.Content.Load<SpriteFont>("fonts\\title");
             Vector2 position = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2, GraphicsDevice.PresentationParameters.BackBufferHeight / 2);
-            position -= font.MeasureString("Menu") / 2;
-            spriteBatch.DrawString(font, "Menu", position, Color.White);
+            position -= font.MeasureString("Click on a map to start the game") / 2;
+            position.Y = 100;
+            spriteBatch.DrawString(font, "Click on a map to start the game", position, Color.White);
+            spriteBatch.Draw(controlsTexture, new Vector2(0, GraphicsDevice.PresentationParameters.BackBufferHeight - controlsTexture.Height), Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }

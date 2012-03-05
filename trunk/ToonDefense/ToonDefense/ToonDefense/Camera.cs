@@ -16,8 +16,8 @@ namespace ToonDefense
         private Matrix view;
         private Matrix projection;
 
-        private float height = 30;
-        private float differenceZ = 30;
+        private float height = 40;
+        private float differenceZ = 50;
         private Vector3 target = Vector3.Zero;
         private Vector3 position = new Vector3(0, 0, 10);
         private Vector2 angles = Vector2.Zero;
@@ -43,7 +43,6 @@ namespace ToonDefense
             heightOver2 = Game.GraphicsDevice.PresentationParameters.BackBufferHeight / 2;
             aspectRatio = Game.GraphicsDevice.PresentationParameters.BackBufferWidth / (float)Game.GraphicsDevice.PresentationParameters.BackBufferHeight;
             UpdateProjection();
-            Mouse.SetPosition(widthOver2, heightOver2);
             FreeCamera = false;
         }
 
@@ -125,7 +124,9 @@ namespace ToonDefense
                 }
                 else
                 {
-                    float speed = 8;
+                    float speed = 12;
+                    if (GameplayComponent.LastInstance.SpeedLevel == SpeedLevel.FAST)
+                        speed = 12/4.0f;
                     if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left) || Mouse.GetState().X == 0)
                     {
                         position.X -= speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
