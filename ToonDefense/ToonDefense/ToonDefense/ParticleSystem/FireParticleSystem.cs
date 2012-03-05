@@ -33,9 +33,9 @@ namespace ToonDefense.ParticleSystem
         {
             settings.TextureName = "fire";
 
-            settings.MaxParticles = 2400;
+            settings.MaxParticles = 10000;
 
-            settings.Duration = TimeSpan.FromSeconds(0.8f);
+            settings.Duration = TimeSpan.FromSeconds(0.6f);
 
             settings.DurationRandomness = 1;
 

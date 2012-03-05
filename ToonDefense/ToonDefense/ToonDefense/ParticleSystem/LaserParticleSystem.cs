@@ -33,7 +33,7 @@ namespace ToonDefense.ParticleSystem
         {
             settings.TextureName = "laser";
 
-            settings.MaxParticles = 3000;
+            settings.MaxParticles = 10000;
 
             settings.Duration = TimeSpan.FromSeconds(0.5f);
             settings.DurationRandomness = 0;

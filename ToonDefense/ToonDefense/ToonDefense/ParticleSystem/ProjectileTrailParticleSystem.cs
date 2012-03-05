@@ -33,7 +33,7 @@ namespace ToonDefense.ParticleSystem
         {
             settings.TextureName = "smoke";
 
-            settings.MaxParticles = 1000;
+            settings.MaxParticles = 10000;
 
             settings.Duration = TimeSpan.FromSeconds(0.5f);
 
