@@ -52,6 +52,7 @@ namespace ToonDefense
 
             basicEffect.Projection = camera.Projection;
             basicEffect.View = camera.View;
+            basicEffect.World = Matrix.Identity;
             basicEffect.CurrentTechnique.Passes[0].Apply();
 
             Vector3 direction = Vector3.Normalize(destination - source);
