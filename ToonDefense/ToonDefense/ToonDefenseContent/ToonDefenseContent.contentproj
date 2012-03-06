@@ -54,14 +54,14 @@
     <Compile Include="models\box.fbx">
       <Name>box</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="models\explorer.fbx">
       <Name>explorer</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -89,14 +89,14 @@
     <Compile Include="models\battlecruiser.fbx">
       <Name>battlecruiser</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="models\map.fbx">
       <Name>map</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -110,7 +110,7 @@
     <Compile Include="models\shadow.fbx">
       <Name>shadow</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -178,7 +178,7 @@
     <Compile Include="models\interceptor.fbx">
       <Name>interceptor</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -199,14 +199,14 @@
     <Compile Include="models\sciencevessel.fbx">
       <Name>sciencevessel</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="models\unidentified.fbx">
       <Name>unidentified</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -220,7 +220,7 @@
     <Compile Include="models\zeppelin.fbx">
       <Name>zeppelin</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -241,7 +241,7 @@
     <Compile Include="models\deltadart.fbx">
       <Name>deltadart</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -269,7 +269,7 @@
     <Compile Include="models\teslacoil.fbx">
       <Name>teslacoil</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -283,7 +283,7 @@
     <Compile Include="models\sphere.fbx">
       <Name>sphere</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -314,7 +314,7 @@
     <Compile Include="models\gunner.fbx">
       <Name>gunner</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -328,7 +328,7 @@
     <Compile Include="models\paperairplane.fbx">
       <Name>paperairplane</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -342,7 +342,7 @@
     <Compile Include="models\hoverboard.fbx">
       <Name>hoverboard</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -356,7 +356,7 @@
     <Compile Include="models\spectrum.fbx">
       <Name>spectrum</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -370,7 +370,7 @@
     <Compile Include="models\helicopter.fbx">
       <Name>helicopter</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -384,7 +384,7 @@
     <Compile Include="models\missilelauncher.fbx">
       <Name>missilelauncher</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -405,14 +405,14 @@
     <Compile Include="models\missile.fbx">
       <Name>missile</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="models\plasmagenerator.fbx">
       <Name>plasmagenerator</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -440,14 +440,14 @@
     <Compile Include="models\lasercannon.fbx">
       <Name>lasercannon</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="models\flamethrower.fbx">
       <Name>flamethrower</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>TrianglePickingProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -607,6 +607,12 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TrianglePickingPipeline\TrianglePickingPipeline.csproj">
+      <Project>{6E057267-64D1-4CDB-BD01-2BC69B880534}</Project>
+      <Name>TrianglePickingPipeline</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
