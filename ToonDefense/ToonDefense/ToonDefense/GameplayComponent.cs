@@ -31,6 +31,7 @@ namespace ToonDefense
         World world;
         public SpeedLevel SpeedLevel;
         public String map;
+        Texture2D background;
 
         FireParticleSystem fireParticleSystem;
         ExplosionParticleSystem explosionParticleSystem;
@@ -115,6 +116,7 @@ namespace ToonDefense
         protected override void LoadContent()
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+            background = Game.Content.Load<Texture2D>("images\\background");
             base.LoadContent();
         }
 
@@ -181,7 +183,9 @@ namespace ToonDefense
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            SpriteBatch.Begin();
+            SpriteBatch.Draw(background, new Rectangle(0, 0, GraphicsDevice.PresentationParameters.BackBufferWidth, GraphicsDevice.PresentationParameters.BackBufferWidth), Color.White);
+            SpriteBatch.End();
 
             foreach (DrawableGameComponent i in DrawableComponents)
                 i.Draw(gameTime);
