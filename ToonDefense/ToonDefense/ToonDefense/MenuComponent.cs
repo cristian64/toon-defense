@@ -77,7 +77,6 @@ namespace ToonDefense
             base.Draw(gameTime);
         }
 
-        int buttonsHeight = 200;
         private void drawMapButtons()
         {
             spriteBatch.Draw(map1button, map1buttonPosition, onButton(map1buttonPosition) ? Color.White : Color.White * 0.7f);
