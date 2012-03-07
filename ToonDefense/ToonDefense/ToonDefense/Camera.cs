@@ -9,7 +9,7 @@ namespace ToonDefense
     /// <summary>
     /// First person camera component for the demos, rotated by mouse.
     /// </summary>
-    public class Camera : GameComponent
+    public class Camera : DrawableGameComponent
     {
         public World World;
 
