@@ -31,7 +31,6 @@ namespace ToonDefense
         private float farPlaneDistance = 10000.0f;
 
         public bool Grabbing = false;
-        private bool grabbingBlocked = false;
         private MouseState prevMouseState = new MouseState();
 
         /// <summary>
@@ -151,25 +150,10 @@ namespace ToonDefense
                         target.Z += speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                     }
 
-                    if (!grabbingBlocked && currentMouseState.LeftButton == ButtonState.Pressed && (currentMouseState.X != prevMouseState.X || currentMouseState.Y != prevMouseState.Y))
-                    {
-                        if (Game.GraphicsDevice.PresentationParameters.BackBufferWidth - 80 * 5 <= currentMouseState.X &&
-                            currentMouseState.X <= Game.GraphicsDevice.PresentationParameters.BackBufferWidth &&
-                            Game.GraphicsDevice.PresentationParameters.BackBufferHeight - 80 <= currentMouseState.Y &&
-                            currentMouseState.Y <= Game.GraphicsDevice.PresentationParameters.BackBufferHeight)
-                        {
-                            grabbingBlocked = true;
-                        }
-                        else
-                        {
-                            Grabbing = true;
-                        }
-                    }
+                    if (BuildingPanel.LastInstance.Tower == null && currentMouseState.LeftButton == ButtonState.Pressed && (currentMouseState.X != prevMouseState.X || currentMouseState.Y != prevMouseState.Y))
+                        Grabbing = true;
                     else if (currentMouseState.LeftButton == ButtonState.Released)
-                    {
                         Grabbing = false;
-                        grabbingBlocked = false;
-                    }
                     if (Grabbing && (currentMouseState.X != prevMouseState.X || currentMouseState.Y != prevMouseState.Y))
                     {
                         Vector3 currentPosition = RayFromScreenToFloor(currentMouseState.X, currentMouseState.Y);
