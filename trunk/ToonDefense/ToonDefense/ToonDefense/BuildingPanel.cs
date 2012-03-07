@@ -15,7 +15,9 @@ namespace ToonDefense
 {
     public class BuildingPanel : DrawableGameComponent
     {
-        Tower tower;
+        public static BuildingPanel LastInstance = null;
+
+        public Tower Tower;
         Camera camera;
         World world;
         Player player;
@@ -40,6 +42,8 @@ namespace ToonDefense
             this.camera = camera;
             this.world = world;
             this.player = player;
+
+            LastInstance = this;
         }
 
         protected override void LoadContent()
@@ -66,47 +70,47 @@ namespace ToonDefense
             if (renderTarget.Width != GraphicsDevice.Viewport.Width || renderTarget.Height != GraphicsDevice.Viewport.Height)
                 renderTarget = new RenderTarget2D(GraphicsDevice, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
 
-            if (!camera.Grabbing && Mouse.GetState().LeftButton == ButtonState.Pressed && tower == null && GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
+            if (!camera.Grabbing && Mouse.GetState().LeftButton == ButtonState.Pressed && Tower == null && GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
             {
                 if (isOnButton(Mouse.GetState(), 5) && forceExtractor.Price <= player.Money)
-                    tower = new TeslaCoil(Game, camera);
+                    Tower = new TeslaCoil(Game, camera);
                 else if (isOnButton(Mouse.GetState(), 4) && plasmaGenerator.Price <= player.Money)
-                    tower = new PlasmaGenerator(Game, camera);
+                    Tower = new PlasmaGenerator(Game, camera);
                 else if (isOnButton(Mouse.GetState(), 3) && missileLauncher.Price <= player.Money)
-                    tower = new MissileLauncher(Game, camera);
+                    Tower = new MissileLauncher(Game, camera);
                 else if (isOnButton(Mouse.GetState(), 2) && flamethrower.Price <= player.Money)
-                    tower = new Flamethower(Game, camera);
+                    Tower = new Flamethower(Game, camera);
                 else if (isOnButton(Mouse.GetState(), 1) && laserCannon.Price <= player.Money)
-                    tower = new LaserCannon(Game, camera);
+                    Tower = new LaserCannon(Game, camera);
 
-                if (tower != null)
-                    tower.Initialize();
+                if (Tower != null)
+                    Tower.Initialize();
             }
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed && tower != null)
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && Tower != null)
             {
                 Vector3 floorPosition = camera.RayFromScreenToFloor(Mouse.GetState().X, Mouse.GetState().Y);
-                tower.Position.X = floorPosition.X;
-                tower.Position.Z = floorPosition.Z;
+                Tower.Position.X = floorPosition.X;
+                Tower.Position.Z = floorPosition.Z;
             }
-            else if (Mouse.GetState().LeftButton == ButtonState.Released && tower != null)
+            else if (Mouse.GetState().LeftButton == ButtonState.Released && Tower != null)
             {
                 if (!isOnPanel(Mouse.GetState()) &&
-                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z)))
+                    world.IsBuildable(new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z + Tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z - Tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X - Tower.Width / 2.0f, 0, Tower.Position.Z + Tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X - Tower.Width / 2.0f, 0, Tower.Position.Z - Tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X, 0, Tower.Position.Z - Tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X - Tower.Width / 2.0f, 0, Tower.Position.Z)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X, 0, Tower.Position.Z - Tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X, 0, Tower.Position.Z)))
                 {
-                    GameplayComponent.LastInstance.SpawnComponents.Add(tower);
-                    world.SetNotBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f), new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f));
-                    player.Money -= tower.Price;
+                    GameplayComponent.LastInstance.SpawnComponents.Add(Tower);
+                    world.SetNotBuildable(new Vector3(Tower.Position.X - Tower.Width / 2.0f, 0, Tower.Position.Z - Tower.Depth / 2.0f), new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z + Tower.Depth / 2.0f));
+                    player.Money -= Tower.Price;
                 }
-                tower = null;
+                Tower = null;
             }
 
             base.Update(gameTime);
@@ -114,26 +118,26 @@ namespace ToonDefense
 
         public override void Draw(GameTime gameTime)
         {
-            if (tower != null)
+            if (Tower != null)
             {
                 GraphicsDevice.SetRenderTarget(renderTarget);
                 GraphicsDevice.Clear(Color.White * 0.0f);
-                tower.Draw(gameTime);
+                Tower.Draw(gameTime);
                 GraphicsDevice.SetRenderTarget(null);
-                Vector3 position = tower.Position;
+                Vector3 position = Tower.Position;
                 position.Y = 0;
-                PrimitiveDrawings.DrawSphere(Game, GraphicsDevice, camera, position, tower.Sight);
+                PrimitiveDrawings.DrawSphere(Game, GraphicsDevice, camera, position, Tower.Sight);
 
                 if (!isOnPanel(Mouse.GetState()) &&
-                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z - tower.Depth / 2.0f)) &&
-                    world.IsBuildable(new Vector3(tower.Position.X, 0, tower.Position.Z)))
+                    world.IsBuildable(new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z + Tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z - Tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X - Tower.Width / 2.0f, 0, Tower.Position.Z + Tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X - Tower.Width / 2.0f, 0, Tower.Position.Z - Tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X, 0, Tower.Position.Z - Tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X - Tower.Width / 2.0f, 0, Tower.Position.Z)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X, 0, Tower.Position.Z - Tower.Depth / 2.0f)) &&
+                    world.IsBuildable(new Vector3(Tower.Position.X, 0, Tower.Position.Z)))
                 {
                     spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
                     spriteBatch.Draw(renderTarget, Vector2.Zero, Color.Lime);
