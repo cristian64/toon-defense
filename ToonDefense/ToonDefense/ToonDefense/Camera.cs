@@ -30,6 +30,8 @@ namespace ToonDefense
         private float nearPlaneDistance = 0.1f;
         private float farPlaneDistance = 10000.0f;
 
+        public bool Grabbing = false;
+        private bool grabbingBlocked = false;
         private MouseState prevMouseState = new MouseState();
 
         /// <summary>
@@ -112,6 +114,7 @@ namespace ToonDefense
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
+            MouseState currentMouseState = Mouse.GetState();
             if (Game.IsActive && Enabled)
             {
                 aspectRatio = Game.GraphicsDevice.PresentationParameters.BackBufferWidth / (float)Game.GraphicsDevice.PresentationParameters.BackBufferHeight;
@@ -127,25 +130,55 @@ namespace ToonDefense
                     float speed = 12;
                     if (GameplayComponent.LastInstance.SpeedLevel == SpeedLevel.FAST)
                         speed = 12/4.0f;
-                    if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left) || Mouse.GetState().X == 0)
+                    if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left) || currentMouseState.X == 0)
                     {
                         position.X -= speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                         target.X -= speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                     }
-                    if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right) || Mouse.GetState().X == Game.GraphicsDevice.PresentationParameters.BackBufferWidth - 1)
+                    if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right) || currentMouseState.X == Game.GraphicsDevice.PresentationParameters.BackBufferWidth - 1)
                     {
                         position.X += speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                         target.X += speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                     }
-                    if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.Up) || Mouse.GetState().Y == 0)
+                    if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.Up) || currentMouseState.Y == 0)
                     {
                         position.Z -= speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                         target.Z -= speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                     }
-                    if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down) || Mouse.GetState().Y == Game.GraphicsDevice.PresentationParameters.BackBufferHeight - 1)
+                    if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down) || currentMouseState.Y == Game.GraphicsDevice.PresentationParameters.BackBufferHeight - 1)
                     {
                         position.Z += speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                         target.Z += speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
+                    }
+
+                    if (!grabbingBlocked && currentMouseState.LeftButton == ButtonState.Pressed && (currentMouseState.X != prevMouseState.X || currentMouseState.Y != prevMouseState.Y))
+                    {
+                        if (Game.GraphicsDevice.PresentationParameters.BackBufferWidth - 80 * 5 <= currentMouseState.X &&
+                            currentMouseState.X <= Game.GraphicsDevice.PresentationParameters.BackBufferWidth &&
+                            Game.GraphicsDevice.PresentationParameters.BackBufferHeight - 80 <= currentMouseState.Y &&
+                            currentMouseState.Y <= Game.GraphicsDevice.PresentationParameters.BackBufferHeight)
+                        {
+                            grabbingBlocked = true;
+                        }
+                        else
+                        {
+                            Grabbing = true;
+                        }
+                    }
+                    else if (currentMouseState.LeftButton == ButtonState.Released)
+                    {
+                        Grabbing = false;
+                        grabbingBlocked = false;
+                    }
+                    if (Grabbing && (currentMouseState.X != prevMouseState.X || currentMouseState.Y != prevMouseState.Y))
+                    {
+                        Vector3 currentPosition = RayFromScreenToFloor(currentMouseState.X, currentMouseState.Y);
+                        Vector3 previousPosition = RayFromScreenToFloor(prevMouseState.X, prevMouseState.Y);
+
+                        position.X -= currentPosition.X - previousPosition.X;
+                        position.Z -= currentPosition.Z - previousPosition.Z;
+                        target.X -= currentPosition.X - previousPosition.X;
+                        target.Z -= currentPosition.Z - previousPosition.Z;
                     }
 
                     if (target.X > World.Scale.X / 2.0f)
@@ -169,7 +202,7 @@ namespace ToonDefense
                         position.Z = -World.Scale.Z / 2.0f + differenceZ;
                     }
 
-                    float increment = (prevMouseState.ScrollWheelValue - Mouse.GetState().ScrollWheelValue) / 100.0f;
+                    float increment = (prevMouseState.ScrollWheelValue - currentMouseState.ScrollWheelValue) / 100.0f;
                     if (increment > 0)
                     {
                         position = position - (Vector3.Normalize(target - position));
