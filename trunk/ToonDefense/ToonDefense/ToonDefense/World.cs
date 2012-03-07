@@ -71,7 +71,7 @@ namespace ToonDefense
         public override void Draw(GameTime gameTime)
         {
             Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
-            GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
+            GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
             GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
             foreach (ModelMesh mesh in model.Meshes)
             {
