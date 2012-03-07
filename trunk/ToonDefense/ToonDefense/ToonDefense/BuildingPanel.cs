@@ -66,7 +66,7 @@ namespace ToonDefense
             if (renderTarget.Width != GraphicsDevice.Viewport.Width || renderTarget.Height != GraphicsDevice.Viewport.Height)
                 renderTarget = new RenderTarget2D(GraphicsDevice, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed && tower == null && GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
+            if (!camera.Grabbing && Mouse.GetState().LeftButton == ButtonState.Pressed && tower == null && GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
             {
                 if (isOnButton(Mouse.GetState(), 5) && forceExtractor.Price <= player.Money)
                     tower = new TeslaCoil(Game, camera);
