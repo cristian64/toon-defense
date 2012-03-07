@@ -25,7 +25,6 @@ namespace ToonDefense
         public List<DrawableGameComponent> DrawableComponents;
         public List<DrawableGameComponent> GuiComponents;
         List<DrawableGameComponent> particleSystems;
-        List<GameComponent> components;
         Player player;
         Camera camera;
         World world;
@@ -55,7 +54,6 @@ namespace ToonDefense
             DrawableComponents = new List<DrawableGameComponent>();
             GuiComponents = new List<DrawableGameComponent>();
             particleSystems = new List<DrawableGameComponent>();
-            components = new List<GameComponent>();
 
             LastInstance = this;
         }
@@ -66,7 +64,6 @@ namespace ToonDefense
             GuiComponents.Add(player);
 
             camera = new Camera(Game);
-            components.Add(camera);
 
             world = new World(Game, camera, map);
             DrawableComponents.Add(world);
@@ -75,6 +72,7 @@ namespace ToonDefense
             GuiComponents.Add(new BuildingPanel(Game, camera, world, player));
             GuiComponents.Add(new SpeedPanel(Game));
             GuiComponents.Add(new SelectingPanel(Game, camera, world));
+            GuiComponents.Add(camera);
 
             fireParticleSystem = new FireParticleSystem(Game, Game.Content, camera);
             explosionParticleSystem = new ExplosionParticleSystem(Game, Game.Content, camera);
@@ -105,8 +103,6 @@ namespace ToonDefense
             foreach (DrawableGameComponent i in DrawableComponents)
                 i.Initialize();
             foreach (DrawableGameComponent i in particleSystems)
-                i.Initialize();
-            foreach (GameComponent i in components)
                 i.Initialize();
             foreach (DrawableGameComponent i in GuiComponents)
                 i.Initialize();
@@ -169,8 +165,6 @@ namespace ToonDefense
                 foreach (DrawableGameComponent i in particleSystems)
                     i.Update(gameTime);
             }
-            foreach (GameComponent i in components)
-                i.Update(gameTime);
             foreach (DrawableGameComponent i in GuiComponents)
                 i.Update(gameTime);
             base.Update(gameTime);

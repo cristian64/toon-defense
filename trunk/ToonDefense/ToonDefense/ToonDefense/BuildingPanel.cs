@@ -168,6 +168,8 @@ namespace ToonDefense
         private void drawButton(Texture2D thumbnail, int shift, int price)
         {
             Color color = (price <= player.Money) ? Color.White : Color.White * 0.3f;
+            if (GameplayComponent.LastInstance.SpeedLevel == SpeedLevel.PAUSED)
+                color = Color.White * 0.3f;
             Vector2 position = new Vector2(GraphicsDevice.Viewport.Width - button.Width * shift, GraphicsDevice.Viewport.Height - button.Height);
             spriteBatch.Draw(button, position, color);
             spriteBatch.Draw(thumbnail, new Vector2(GraphicsDevice.Viewport.Width - button.Width * shift, GraphicsDevice.Viewport.Height - button.Height), color);
@@ -184,11 +186,11 @@ namespace ToonDefense
         private bool isOnButton(MouseState mouseState, int shift)
         {
             Vector2 position = new Vector2(GraphicsDevice.Viewport.Width - button.Width * shift, GraphicsDevice.Viewport.Height - button.Height);
-            position.X += (80 - 64) / 2;
-            position.Y += (80 - 64) / 2;
+            position.X += (80 - 74) / 2;
+            position.Y += (80 - 74) / 2;
 
-            return position.X <= mouseState.X && mouseState.X <= position.X + 64 &&
-                position.Y <= mouseState.Y && mouseState.Y <= position.Y + 64;
+            return position.X <= mouseState.X && mouseState.X <= position.X + 74 &&
+                position.Y <= mouseState.Y && mouseState.Y <= position.Y + 74;
         }
 
         private bool isOnPanel(MouseState mouseState)
