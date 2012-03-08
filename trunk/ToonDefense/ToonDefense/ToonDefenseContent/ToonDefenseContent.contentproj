@@ -662,9 +662,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="sounds\ost.mp3">
+    <Compile Include="sounds\ost.wma">
       <Name>ost</Name>
-      <Importer>Mp3Importer</Importer>
+      <Importer>WmaImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
