@@ -25,6 +25,8 @@ namespace ToonDefense
         MouseState prevMouseState;
         SpriteBatch spriteBatch;
 
+        bool created;
+
         public MenuComponent(Game game)
             : base(game)
         {
@@ -44,14 +46,23 @@ namespace ToonDefense
         {
             MouseState currentMouseState = Mouse.GetState();
 
-            if (currentMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
+            if (!created && currentMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
             {
                 if (onButton(map1buttonPosition))
+                {
                     Game.Components.Add(new FadeOutComponent(Game, 0, 500, new GameplayComponent(Game, "map1"), new FadeInComponent(Game, 500, 500)));
+                    created = true;
+                }
                 else if (onButton(map2buttonPosition))
+                {
                     Game.Components.Add(new FadeOutComponent(Game, 0, 500, new GameplayComponent(Game, "map2"), new FadeInComponent(Game, 500, 500)));
+                    created = true;
+                }
                 else if (onButton(map3buttonPosition))
+                {
                     Game.Components.Add(new FadeOutComponent(Game, 0, 500, new GameplayComponent(Game, "map3"), new FadeInComponent(Game, 500, 500)));
+                    created = true;
+                }
             }
 
             map1buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2 - map1button.Width - 25, GraphicsDevice.PresentationParameters.BackBufferHeight / 2 - map1button.Height / 2.0f);

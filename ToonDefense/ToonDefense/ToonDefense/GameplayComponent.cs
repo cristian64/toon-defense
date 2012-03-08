@@ -44,6 +44,9 @@ namespace ToonDefense
         ForceFieldParticleSystem forceFieldParticleSystem;
         PlasmaParticleSystem plasmaParticleSystem;
 
+        SoundEffect explosion;
+        SoundEffect portal;
+
         public static GameplayComponent LastInstance = null;
 
         public GameplayComponent(Game game, String map)
@@ -113,6 +116,8 @@ namespace ToonDefense
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             background = Game.Content.Load<Texture2D>("images\\background");
+            explosion = Game.Content.Load<SoundEffect>("sounds\\explosion");
+            portal = Game.Content.Load<SoundEffect>("sounds\\portal");
             base.LoadContent();
         }
 
@@ -137,6 +142,7 @@ namespace ToonDefense
                             for (int j = 0; j < 30; j++)
                                 explosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
                             DrawableComponents.RemoveAt(i);
+                            explosion.Play();
                         }
                         else if (spaceship.Destinations.Count == 0)
                         {
@@ -147,6 +153,7 @@ namespace ToonDefense
                                 plasmaExplosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
                             spaceship.Health = 0;
                             DrawableComponents.RemoveAt(i);
+                            portal.Play();
                         }
                     }
                     else
