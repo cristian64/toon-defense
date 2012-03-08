@@ -15,6 +15,7 @@ namespace ToonDefense.Towers
 {
     public class TeslaCoil : Tower
     {
+        static SoundEffect soundEffect;
         ParticleEmitter forceFieldEmitter;
         Vector3 headPosition;
 
@@ -33,6 +34,8 @@ namespace ToonDefense.Towers
             texture = Game.Content.Load<Texture2D>("models\\teslacoiltexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
+            if (soundEffect == null)
+                soundEffect = Game.Content.Load<SoundEffect>("sounds\\bubble");
 
             Position.Y = Height / 2.0f;
             forceFieldEmitter = new ParticleEmitter(ForceFieldParticleSystem.LastInstance, 1, Position);
@@ -44,6 +47,7 @@ namespace ToonDefense.Towers
         {
             ForceFieldParticleSystem.LastInstance.AddParticle(Target.Position, Position - Target.Position);
             Target.Health -= Damage;
+            soundEffect.Play();
             base.Shoot();
         }
 

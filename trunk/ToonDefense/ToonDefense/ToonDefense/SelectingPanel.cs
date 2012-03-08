@@ -74,6 +74,18 @@ namespace ToonDefense
 
         public override void Draw(GameTime gameTime)
         {
+            Spaceship spaceship = selected as Spaceship;
+            if (spaceship != null)
+            {
+
+            }
+
+            Tower tower = selected as Tower;
+            if (tower != null)
+            {
+
+            }
+
             base.Draw(gameTime);
         }
     }

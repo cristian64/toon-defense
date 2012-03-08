@@ -109,6 +109,7 @@ namespace ToonDefense
                     GameplayComponent.LastInstance.SpawnComponents.Add(Tower);
                     world.SetNotBuildable(new Vector3(Tower.Position.X - Tower.Width / 2.0f, 0, Tower.Position.Z - Tower.Depth / 2.0f), new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z + Tower.Depth / 2.0f));
                     player.Money -= Tower.Price;
+                    Game.Content.Load<SoundEffect>("sounds\\build").Play();
                 }
                 Tower = null;
             }
