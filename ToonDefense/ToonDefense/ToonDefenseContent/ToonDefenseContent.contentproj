@@ -655,16 +655,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="sounds\ost.wav">
-      <Name>ost</Name>
+    <Compile Include="sounds\upgrade.wav">
+      <Name>upgrade</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="sounds\upgrade.wav">
-      <Name>upgrade</Name>
-      <Importer>WavImporter</Importer>
+    <Compile Include="sounds\ost.mp3">
+      <Name>ost</Name>
+      <Importer>Mp3Importer</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
