@@ -61,6 +61,16 @@ namespace ToonDefense
                         else
                             GameplayComponent.LastInstance.SpeedLevel = SpeedLevel.NORMAL;
                     }
+
+                    if (GameplayComponent.LastInstance.SpeedLevel == SpeedLevel.FAST)
+                        GameplayComponent.LastInstance.Ost.Pitch = 1.0f;
+                    else
+                        GameplayComponent.LastInstance.Ost.Pitch = 0.0f;
+
+                    if (GameplayComponent.LastInstance.SpeedLevel == SpeedLevel.PAUSED)
+                        GameplayComponent.LastInstance.Ost.Pause();
+                    else
+                        GameplayComponent.LastInstance.Ost.Resume();
                 }
             }
 
