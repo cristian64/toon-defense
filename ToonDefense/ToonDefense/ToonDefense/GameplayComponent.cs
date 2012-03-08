@@ -46,6 +46,7 @@ namespace ToonDefense
 
         SoundEffect explosion;
         SoundEffect portal;
+        public SoundEffectInstance Ost;
 
         public static GameplayComponent LastInstance = null;
 
@@ -118,6 +119,9 @@ namespace ToonDefense
             background = Game.Content.Load<Texture2D>("images\\background");
             explosion = Game.Content.Load<SoundEffect>("sounds\\explosion");
             portal = Game.Content.Load<SoundEffect>("sounds\\portal");
+            Ost = Game.Content.Load<SoundEffect>("sounds\\ost").CreateInstance();
+            Ost.Play();
+
             base.LoadContent();
         }
 
@@ -167,7 +171,11 @@ namespace ToonDefense
                 foreach (DrawableGameComponent i in DrawableComponents)
                     i.Update(gameTime);
                 foreach (DrawableGameComponent i in SpawnComponents)
+                {
                     DrawableComponents.Add(i);
+                    if (i as Spaceship != null)
+                        portal.Play();
+                }
                 SpawnComponents.Clear();
                 foreach (DrawableGameComponent i in particleSystems)
                     i.Update(gameTime);
