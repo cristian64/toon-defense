@@ -16,6 +16,7 @@ namespace ToonDefense.Projectiles
 {
     public class Plasma : Projectile
     {
+        SoundEffect sound;
         public Plasma(Game game, Camera camera)
             :base(game, camera)
         {
@@ -26,6 +27,7 @@ namespace ToonDefense.Projectiles
 
         protected override void LoadContent()
         {
+            sound = Game.Content.Load<SoundEffect>("sounds\\plasma");
             base.LoadContent();
         }
 
@@ -59,6 +61,7 @@ namespace ToonDefense.Projectiles
                         PlasmaExplosionParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
                         Target.Health -= Damage;
                         NoTarget = true;
+                        sound.Play();
                     }
                 }
             }
