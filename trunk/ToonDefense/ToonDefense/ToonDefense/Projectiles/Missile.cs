@@ -16,6 +16,7 @@ namespace ToonDefense.Projectiles
 {
     public class Missile : Projectile
     {
+        SoundEffect sound;
         public Missile(Game game, Camera camera)
             :base(game, camera)
         {
@@ -32,6 +33,7 @@ namespace ToonDefense.Projectiles
             effect.Parameters["Texture"].SetValue(texture);
             effect.Parameters["LineThickness"].SetValue(0.0f);
             effect.Parameters["DiffuseIntensity"].SetValue(4.0f);
+            sound = Game.Content.Load<SoundEffect>("sounds\\missile");
             base.LoadContent();
         }
 
@@ -69,6 +71,7 @@ namespace ToonDefense.Projectiles
                         ExplosionParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
                         Target.Health -= Damage;
                         NoTarget = true;
+                        sound.Play();
                     }
                 }
             }

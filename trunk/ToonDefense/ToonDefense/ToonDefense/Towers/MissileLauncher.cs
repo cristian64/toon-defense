@@ -16,6 +16,7 @@ namespace ToonDefense.Towers
 {
     public class MissileLauncher : Tower
     {
+        SoundEffect sound;
         public MissileLauncher(Game game, Camera camera)
             : base(game, camera)
         {
@@ -31,6 +32,7 @@ namespace ToonDefense.Towers
             texture = Game.Content.Load<Texture2D>("models\\missilelaunchertexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
+            sound = Game.Content.Load<SoundEffect>("sounds\\missileout");
 
             Position.Y = Height / 2.0f;
 
@@ -47,6 +49,7 @@ namespace ToonDefense.Towers
             direction.Y = 0;
             missile.Position = Position + new Vector3(0, Height - 0.5f, 0) + 0.3f * direction;
             GameplayComponent.LastInstance.SpawnComponents.Add(missile);
+            sound.Play();
             base.Shoot();
         }
 
