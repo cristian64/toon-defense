@@ -15,6 +15,7 @@ namespace ToonDefense.Towers
 {
     public class LaserCannon : Tower
     {
+        SoundEffectInstance sound;
         ParticleEmitter laserEmitter;
         Vector3 headPosition;
 
@@ -23,7 +24,7 @@ namespace ToonDefense.Towers
         {
             laserEmitter = new ParticleEmitter(LaserParticleSystem.LastInstance, 3, Position + Vector3.Up * 0.2f);
             Sight = 5;
-            Damage = 100;
+            Damage = 5;
             Delay = 100;
             Price = 3000;
         }
@@ -34,6 +35,7 @@ namespace ToonDefense.Towers
             texture = Game.Content.Load<Texture2D>("models\\lasercannontexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
+            sound = Game.Content.Load<SoundEffect>("sounds\\laser").CreateInstance();
 
             Position.Y = Height / 2.0f;
             headPosition = Position + new Vector3(0, Height / 2 + 0.15f, 0);
@@ -56,6 +58,12 @@ namespace ToonDefense.Towers
         public override void Update(GameTime gameTime)
         {
             laserEmitter.Update(gameTime, Position + Vector3.Up * 0.2f);
+
+            if (Target != null && sound.State != SoundState.Playing)
+                sound.Play();
+            else if (Target == null && sound.State == SoundState.Playing)
+                sound.Stop();
+
             base.Update(gameTime);
         }
 
