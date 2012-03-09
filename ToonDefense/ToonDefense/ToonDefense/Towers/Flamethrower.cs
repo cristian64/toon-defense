@@ -49,8 +49,9 @@ namespace ToonDefense.Towers
         {
             if (Target != null)
             {
-                Vector3 targetDirection = Vector3.Normalize(Target.Destinations[0] - Target.Position);
+                Vector3 targetDirection = Target.Destinations[0] - Target.Position;
                 targetDirection.Y = 0;
+                targetDirection.Normalize();
                 Vector3 direction = Vector3.Normalize(Target.Position + Target.Speed * targetDirection - Position);
                 Rotation.Y = (float)Math.Atan2(-direction.Z, direction.X);
                 FireParticleSystem.LastInstance.AddParticle(Position + direction, 3 * direction); 
