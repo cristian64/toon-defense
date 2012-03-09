@@ -16,11 +16,12 @@ namespace ToonDefense.Towers
 {
     public class Flamethower : Tower
     {
+        SoundEffectInstance sound;
         public Flamethower(Game game, Camera camera)
             : base(game, camera)
         {
             Sight = 3;
-            Damage = 25;
+            Damage = 1;
             Delay = 32;
             Price = 2000;
         }
@@ -31,6 +32,7 @@ namespace ToonDefense.Towers
             texture = Game.Content.Load<Texture2D>("models\\flamethrowertexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
+            sound = Game.Content.Load<SoundEffect>("sounds\\flame").CreateInstance();
 
             Position.Y = Height / 2.0f;
 
@@ -53,6 +55,12 @@ namespace ToonDefense.Towers
                 Rotation.Y = (float)Math.Atan2(-direction.Z, direction.X);
                 FireParticleSystem.LastInstance.AddParticle(Position + direction, 3 * direction); 
             }
+
+            if (Target != null && sound.State != SoundState.Playing)
+                sound.Play();
+            if (Target == null && sound.State == SoundState.Playing)
+                sound.Stop();
+
             base.Update(gameTime);
         }
 
