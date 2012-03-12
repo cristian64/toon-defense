@@ -73,6 +73,7 @@ namespace ToonDefense
             DrawableComponents.Add(world);
             camera.World = world;
             GuiComponents.Add(new RoundManager(Game, camera, world));
+            GuiComponents.Add(new LabelManager(Game, camera, world));
             GuiComponents.Add(new BuildingPanel(Game, camera, world, player));
             GuiComponents.Add(new SpeedPanel(Game));
             GuiComponents.Add(new SelectingPanel(Game, camera, world));
@@ -147,6 +148,7 @@ namespace ToonDefense
                                 explosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
                             DrawableComponents.RemoveAt(i);
                             explosion.Play();
+                            LabelManager.LastInstance.AddLabel("+" + spaceship.Reward, 2000, spaceship.Position, Color.Lime);
                         }
                         else if (spaceship.Destinations.Count == 0)
                         {
