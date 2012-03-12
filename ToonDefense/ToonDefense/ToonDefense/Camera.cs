@@ -350,5 +350,11 @@ namespace ToonDefense
         {
             return Game.GraphicsDevice.Viewport.Project(position, Projection, View, Matrix.Identity);
         }
+
+        public Vector2 RayFromWorldToScreen2(Vector3 position)
+        {
+            Vector3 aux = Game.GraphicsDevice.Viewport.Project(position, Projection, View, Matrix.Identity);
+            return new Vector2(aux.X, aux.Y);
+        }
     }
 }

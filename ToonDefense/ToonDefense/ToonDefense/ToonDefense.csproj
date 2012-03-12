@@ -126,6 +126,7 @@
     <Compile Include="Box.cs" />
     <Compile Include="BuildingPanel.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="LabelManager.cs" />
     <Compile Include="SelectingPanel.cs" />
     <Compile Include="SpeedPanel.cs" />
     <Compile Include="FadeInComponent.cs" />
