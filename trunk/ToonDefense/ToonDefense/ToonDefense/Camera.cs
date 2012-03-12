@@ -30,6 +30,8 @@ namespace ToonDefense
         private float nearPlaneDistance = 0.1f;
         private float farPlaneDistance = 10000.0f;
 
+        public int GrabbingX = 0;
+        public int GrabbingY = 0;
         public bool Grabbing = false;
         private MouseState prevMouseState = new MouseState();
 
@@ -150,10 +152,16 @@ namespace ToonDefense
                         target.Z += speed * ((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000);
                     }
 
-                    if (BuildingPanel.LastInstance.Tower == null && currentMouseState.LeftButton == ButtonState.Pressed && (currentMouseState.X != prevMouseState.X || currentMouseState.Y != prevMouseState.Y))
+                    if (!Grabbing && BuildingPanel.LastInstance.Tower == null && currentMouseState.LeftButton == ButtonState.Pressed && (currentMouseState.X != prevMouseState.X || currentMouseState.Y != prevMouseState.Y))
+                    {
                         Grabbing = true;
+                        GrabbingX = currentMouseState.X;
+                        GrabbingY = currentMouseState.Y;
+                    }
                     else if (currentMouseState.LeftButton == ButtonState.Released)
+                    {
                         Grabbing = false;
+                    }
                     if (Grabbing && (currentMouseState.X != prevMouseState.X || currentMouseState.Y != prevMouseState.Y))
                     {
                         Vector3 currentPosition = RayFromScreenToFloor(currentMouseState.X, currentMouseState.Y);
