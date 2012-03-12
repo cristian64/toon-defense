@@ -88,7 +88,16 @@ namespace ToonDefense
 
             // Allows the game to exit
             if (currentKeyboardState.IsKeyDown(Keys.Escape) && prevKeyboardState.IsKeyUp(Keys.Escape))
-                Components.Add(new FadeOutComponent(this, 0, 500));
+            {
+                if (Components[0] as MenuComponent != null && Components.Count == 1)
+                {
+                    Components.Add(new FadeOutComponent(this, 0, 500));
+                }
+                else if (Components[0] as GameplayComponent != null && Components.Count == 1)
+                {
+                    Components.Add(new FadeOutComponent(this, 0, 500, new MenuComponent(this), new FadeInComponent(this, 500, 500)));
+                }
+            }
 
             // Allows the game to change size of the screen
             if (currentKeyboardState.IsKeyDown(Keys.F11) && prevKeyboardState.IsKeyUp(Keys.F11))
