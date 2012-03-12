@@ -20,6 +20,7 @@ namespace ToonDefense
         Camera camera;
         World world;
         SpriteBatch spriteBatch;
+        SpriteFont font;
         MouseState prevMouseState;
 
         public SelectingPanel(Game game, Camera camera, World world)
@@ -32,6 +33,7 @@ namespace ToonDefense
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            font = Game.Content.Load<SpriteFont>("fonts\\selection");
             base.LoadContent();
         }
 
@@ -43,7 +45,9 @@ namespace ToonDefense
             if (spaceship != null && (spaceship.Health < 0 || spaceship.Destinations.Count == 0))
                 selected = null;
 
-            if (currentMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
+            int grabbingAmount = Math.Abs(currentMouseState.X - camera.GrabbingX) + Math.Abs(currentMouseState.Y - camera.GrabbingY);
+
+            if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 5))
             {
                 if (selected != null)
                     selected.Selected = false;
@@ -74,16 +78,18 @@ namespace ToonDefense
 
         public override void Draw(GameTime gameTime)
         {
-            Spaceship spaceship = selected as Spaceship;
+            /*Spaceship spaceship = selected as Spaceship;
             if (spaceship != null)
             {
 
             }
 
-            Tower tower = selected as Tower;
-            if (tower != null)
+            Tower tower = selected as Tower;*/
+            if (selected != null)
             {
-
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+                spriteBatch.DrawString(font, selected.ToString(), new Vector2(1300, 0), Color.White);
+                spriteBatch.End();
             }
 
             base.Draw(gameTime);

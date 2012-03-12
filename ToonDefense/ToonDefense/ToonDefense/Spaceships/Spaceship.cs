@@ -105,5 +105,15 @@ namespace ToonDefense.Spaceships
             }
             base.Draw(gameTime);
         }
+
+        public override string ToString()
+        {
+            String aux = "";
+            aux += Name + "\n";
+            aux += "Health: " + Health + "/" + InitialHealth + "\n";
+            aux += "Speed: " + Speed + "\n";
+            aux += "Reward: " + Reward;
+            return aux;
+        }
     }
 }
