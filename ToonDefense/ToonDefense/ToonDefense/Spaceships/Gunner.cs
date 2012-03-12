@@ -17,6 +17,7 @@ namespace ToonDefense.Spaceships
         public Gunner(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Gunner";
             Speed = 0.7f;
             InitialHealth = 3300;
             Reward = 80;

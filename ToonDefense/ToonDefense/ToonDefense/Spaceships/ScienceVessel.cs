@@ -17,6 +17,7 @@ namespace ToonDefense.Spaceships
         public ScienceVessel(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Science Vessel";
             Speed = 1;
             InitialHealth = 1000000;
             Reward = 1000;

@@ -17,6 +17,7 @@ namespace ToonDefense.Spaceships
         public Spectrum(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Spectrum";
             Speed = 1;
             InitialHealth = 300000;
             Reward = 150;

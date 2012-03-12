@@ -20,6 +20,7 @@ namespace ToonDefense.Towers
         public MissileLauncher(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Missile Launcher";
             Sight = 5;
             Damage = 350;
             Delay = 750;

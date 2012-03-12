@@ -18,6 +18,7 @@ namespace ToonDefense.Spaceships
         public Explorer(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Explorer";
             Speed = 2.0f;
             InitialHealth = 300;
             Reward = 30;

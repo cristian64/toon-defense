@@ -22,6 +22,7 @@ namespace ToonDefense.Towers
         public LaserCannon(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Laser Cannon";
             laserEmitter = new ParticleEmitter(LaserParticleSystem.LastInstance, 3, Position + Vector3.Up * 0.2f);
             Sight = 5;
             Damage = 5;

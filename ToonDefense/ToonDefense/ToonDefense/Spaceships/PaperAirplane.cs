@@ -17,6 +17,7 @@ namespace ToonDefense.Spaceships
         public PaperAirplane(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Paper Airplane";
             Speed = 1.5f;
             InitialHealth = 200;
             Reward = 10;

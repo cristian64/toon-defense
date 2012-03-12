@@ -19,6 +19,8 @@ namespace ToonDefense
         public Vector3 Scale;
         public Vector3 Rotation;
 
+        public String Name;
+
         protected Model model;
         protected Texture2D texture;
         protected Effect effect;
