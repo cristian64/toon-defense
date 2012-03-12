@@ -189,12 +189,12 @@ namespace ToonDefense
                     float increment = (prevMouseState.ScrollWheelValue - currentMouseState.ScrollWheelValue) / 100.0f;
                     if (increment > 0)
                     {
-                        position = position - (Vector3.Normalize(target - position));
+                        position = position - 5 * (Vector3.Normalize(target - position));
                         differenceZ = position.Z - target.Z;
                     }
                     else if (increment < 0)
                     {
-                        position = position + (Vector3.Normalize(target - position));
+                        position = position + 5 * (Vector3.Normalize(target - position));
                         differenceZ = position.Z - target.Z;
                     }
 

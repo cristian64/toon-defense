@@ -35,11 +35,12 @@ namespace ToonDefense
             basicEffect.DiffuseColor = new Vector3(1);
 
             // Process XML file with waypoints and real size of the map.
-            Scale.X = Game.Content.Load<List<Vector2>>("maps\\" + MapName).First().X;
-            Scale.Z = Game.Content.Load<List<Vector2>>("maps\\" + MapName).First().Y;
-            Game.Content.Load<List<Vector2>>("maps\\" + MapName).RemoveAt(0);
+            List<Vector2> mapWaypoints = new List<Vector2>(Game.Content.Load<List<Vector2>>("maps\\" + MapName));
+            Scale.X = mapWaypoints.First().X;
+            Scale.Z = mapWaypoints.First().Y;
+            mapWaypoints.RemoveAt(0);
             Waypoints = new List<Vector3>();
-            foreach (Vector2 i in Game.Content.Load<List<Vector2>>("maps\\" + MapName))
+            foreach (Vector2 i in mapWaypoints)
                 Waypoints.Add(TextureUnitsToWorldUnits(i));
 
             // Move the camera to the start point.
