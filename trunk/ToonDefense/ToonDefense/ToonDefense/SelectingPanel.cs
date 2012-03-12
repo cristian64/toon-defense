@@ -42,7 +42,7 @@ namespace ToonDefense
             MouseState currentMouseState = Mouse.GetState();
 
             Spaceship spaceship = selected as Spaceship;
-            if (spaceship != null && (spaceship.Health < 0 || spaceship.Destinations.Count == 0))
+            if (spaceship != null && (spaceship.Health <= 0 || spaceship.Destinations.Count == 0))
                 selected = null;
 
             int grabbingAmount = Math.Abs(currentMouseState.X - camera.GrabbingX) + Math.Abs(currentMouseState.Y - camera.GrabbingY);
@@ -87,8 +87,15 @@ namespace ToonDefense
             Tower tower = selected as Tower;*/
             if (selected != null)
             {
+                String text = selected.ToString();
+                Vector2 position = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth - font.MeasureString(text).X, 0);
+                position += new Vector2(-35, 25);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-                spriteBatch.DrawString(font, selected.ToString(), new Vector2(1300, 0), Color.White);
+                spriteBatch.DrawString(font, text, position + Vector2.UnitX, Color.Black);
+                spriteBatch.DrawString(font, text, position - Vector2.UnitX, Color.Black);
+                spriteBatch.DrawString(font, text, position + Vector2.UnitY, Color.Black);
+                spriteBatch.DrawString(font, text, position - Vector2.UnitY, Color.Black);
+                spriteBatch.DrawString(font, text, position, Color.White);
                 spriteBatch.End();
             }
 

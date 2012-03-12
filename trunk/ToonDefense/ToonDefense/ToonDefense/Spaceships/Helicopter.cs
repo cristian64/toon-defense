@@ -36,7 +36,10 @@ namespace ToonDefense.Spaceships
 
         public override void Update(GameTime gameTime)
         {
-            propellerRotation += MathHelper.Pi / 0.13f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (GameplayComponent.LastInstance.SpeedLevel == SpeedLevel.FAST)
+                propellerRotation += MathHelper.Pi / 0.13f * (float)gameTime.ElapsedGameTime.TotalSeconds / 4;
+            else
+                propellerRotation += MathHelper.Pi / 0.13f * (float)gameTime.ElapsedGameTime.TotalSeconds;
             base.Update(gameTime);
         }
 
