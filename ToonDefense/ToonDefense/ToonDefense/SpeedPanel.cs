@@ -20,6 +20,8 @@ namespace ToonDefense
         Texture2D pauseButtonOn;
         Texture2D playButton;
         Texture2D playButtonOn;
+        Texture2D soundButton;
+        Texture2D soundButtonOn;
         MouseState prevMouseState;
         int size;
 
@@ -35,7 +37,9 @@ namespace ToonDefense
             pauseButtonOn = Game.Content.Load<Texture2D>("images\\pauseon");
             playButton = Game.Content.Load<Texture2D>("images\\play");
             playButtonOn = Game.Content.Load<Texture2D>("images\\playon");
-            size = playButtonOn.Width;
+            soundButton = Game.Content.Load<Texture2D>("images\\sound");
+            soundButtonOn = Game.Content.Load<Texture2D>("images\\soundon");
+            size = 32;
             base.LoadContent();
         }
 
@@ -49,12 +53,19 @@ namespace ToonDefense
                 {
                     if (0 <= currentMouseState.X && currentMouseState.X <= size)
                     {
+                        if (SoundEffect.MasterVolume == 0)
+                            SoundEffect.MasterVolume = 1;
+                        else
+                            SoundEffect.MasterVolume = 0;
+                    }
+                    else if (size + 1 <= currentMouseState.X && currentMouseState.X <= size * 2)
+                    {
                         if (GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
                             GameplayComponent.LastInstance.SpeedLevel = SpeedLevel.PAUSED;
                         else
                             GameplayComponent.LastInstance.SpeedLevel = SpeedLevel.NORMAL;
                     }
-                    else if (size + 1 <= currentMouseState.X && currentMouseState.X <= size * 2)
+                    else if (size * 2 + 1 <= currentMouseState.X && currentMouseState.X <= size * 3)
                     {
                         if (GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.FAST)
                             GameplayComponent.LastInstance.SpeedLevel = SpeedLevel.FAST;
@@ -83,19 +94,23 @@ namespace ToonDefense
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             if (GameplayComponent.LastInstance.SpeedLevel == SpeedLevel.NORMAL)
             {
-                spriteBatch.Draw(pauseButton, new Vector2(0, GraphicsDevice.Viewport.Height - size), Color.White);
-                spriteBatch.Draw(playButton, new Vector2(size, GraphicsDevice.Viewport.Height - size), Color.White);
+                spriteBatch.Draw(pauseButton, new Rectangle(size, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
+                spriteBatch.Draw(playButton, new Rectangle(size * 2, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
             }
             if (GameplayComponent.LastInstance.SpeedLevel == SpeedLevel.PAUSED)
             {
-                spriteBatch.Draw(pauseButtonOn, new Vector2(0, GraphicsDevice.Viewport.Height - size), Color.White);
-                spriteBatch.Draw(playButton, new Vector2(size, GraphicsDevice.Viewport.Height - size), Color.White);
+                spriteBatch.Draw(pauseButtonOn, new Rectangle(size, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
+                spriteBatch.Draw(playButton, new Rectangle(size * 2, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
             }
             if (GameplayComponent.LastInstance.SpeedLevel == SpeedLevel.FAST)
             {
-                spriteBatch.Draw(pauseButton, new Vector2(0, GraphicsDevice.Viewport.Height - size), Color.White);
-                spriteBatch.Draw(playButtonOn, new Vector2(size, GraphicsDevice.Viewport.Height - size), Color.White);
+                spriteBatch.Draw(pauseButton, new Rectangle(size, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
+                spriteBatch.Draw(playButtonOn, new Rectangle(size * 2, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
             }
+            if (SoundEffect.MasterVolume == 0)
+                spriteBatch.Draw(soundButton, new Rectangle(0, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
+            else
+                spriteBatch.Draw(soundButtonOn, new Rectangle(0, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
