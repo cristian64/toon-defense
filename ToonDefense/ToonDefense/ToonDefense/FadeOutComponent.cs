@@ -45,7 +45,13 @@ namespace ToonDefense
             if (milliseconds > delay + duration)
             {
                 if (Game.Components.IndexOf(this) > 0)
+                {
+                    GameplayComponent gameplayComponent = Game.Components[Game.Components.IndexOf(this) - 1] as GameplayComponent;
+                    if (gameplayComponent != null)
+                        gameplayComponent.Ost.Stop();
                     Game.Components.RemoveAt(Game.Components.IndexOf(this) - 1);
+
+                }
                 Game.Components.Remove(this);
                 if (nextComponent != null)
                     Game.Components.Add(nextComponent);
