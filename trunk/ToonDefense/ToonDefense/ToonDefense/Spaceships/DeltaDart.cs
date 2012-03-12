@@ -18,6 +18,7 @@ namespace ToonDefense.Spaceships
         public DeltaDart(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Delta Dart";
             Speed = 4;
             InitialHealth = 1100;
             Reward = 70;

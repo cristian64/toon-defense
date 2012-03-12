@@ -17,6 +17,7 @@ namespace ToonDefense.Spaceships
         public Interceptor(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Interceptor";
             Speed = 3.5f;
             InitialHealth = 350;
             Reward = 50;

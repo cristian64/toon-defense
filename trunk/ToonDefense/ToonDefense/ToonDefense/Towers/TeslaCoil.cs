@@ -22,6 +22,7 @@ namespace ToonDefense.Towers
         public TeslaCoil(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Force Extractor";
             Sight = 3.5f;
             Damage = 20;
             Delay = 600;

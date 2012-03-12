@@ -19,6 +19,7 @@ namespace ToonDefense.Spaceships
         public Unidentified(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Unidentified";
             extraRotationY = 0;
             Speed = 3;
             InitialHealth = 10000;

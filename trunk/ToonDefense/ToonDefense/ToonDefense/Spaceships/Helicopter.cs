@@ -17,6 +17,7 @@ namespace ToonDefense.Spaceships
         public Helicopter(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Helicopter";
             Speed = 1.7f;
             InitialHealth = 700;
             Reward = 50;

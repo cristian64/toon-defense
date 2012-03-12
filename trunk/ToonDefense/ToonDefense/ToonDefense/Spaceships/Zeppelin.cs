@@ -17,6 +17,7 @@ namespace ToonDefense.Spaceships
         public Zeppelin(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Zeppelin";
             Speed = 1.6f;
             InitialHealth = 50000;
             Reward = 90;

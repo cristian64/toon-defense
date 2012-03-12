@@ -20,6 +20,7 @@ namespace ToonDefense.Towers
         public Flamethower(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Flamethrower";
             Sight = 3;
             Damage = 1;
             Delay = 32;

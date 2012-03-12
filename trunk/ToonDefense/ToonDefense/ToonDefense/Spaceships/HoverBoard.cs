@@ -18,6 +18,7 @@ namespace ToonDefense.Spaceships
         public HoverBoard(Game game, Camera camera)
             : base(game, camera)
         {
+            Name = "Hoverboard";
             Speed = 1.0f;
             InitialHealth = 250;
             Reward = 15;
