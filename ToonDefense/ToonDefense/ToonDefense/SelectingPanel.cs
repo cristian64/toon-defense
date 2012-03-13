@@ -21,6 +21,7 @@ namespace ToonDefense
         World world;
         SpriteBatch spriteBatch;
         SpriteFont font;
+        SpriteFont font2;
         MouseState prevMouseState;
 
         public SelectingPanel(Game game, Camera camera, World world)
@@ -34,6 +35,7 @@ namespace ToonDefense
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Game.Content.Load<SpriteFont>("fonts\\selection");
+            font2 = Game.Content.Load<SpriteFont>("fonts\\selectionname");
             base.LoadContent();
         }
 
@@ -78,25 +80,36 @@ namespace ToonDefense
 
         public override void Draw(GameTime gameTime)
         {
-            /*Spaceship spaceship = selected as Spaceship;
-            if (spaceship != null)
-            {
-
-            }
-
-            Tower tower = selected as Tower;*/
             if (selected != null)
             {
-                String text = selected.ToString();
-                Vector2 position = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth - font.MeasureString(text).X, 0);
-                position += new Vector2(-35, 25);
+                string[] text = selected.ToText();
+                Vector2 position = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth - Math.Max(font2.MeasureString(selected.Name).X, font.MeasureString(text[0]).X + font.MeasureString(text[1]).X), 0);
+                position += new Vector2(-20, 10);
+                Vector2 position2 = position + new Vector2(0, font2.MeasureString(selected.Name).Y);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-                spriteBatch.DrawString(font, text, position + Vector2.UnitX, Color.Black);
-                spriteBatch.DrawString(font, text, position - Vector2.UnitX, Color.Black);
-                spriteBatch.DrawString(font, text, position + Vector2.UnitY, Color.Black);
-                spriteBatch.DrawString(font, text, position - Vector2.UnitY, Color.Black);
-                spriteBatch.DrawString(font, text, position, Color.White);
+                spriteBatch.DrawString(font2, selected.Name, position + Vector2.UnitX, Color.Black);
+                spriteBatch.DrawString(font2, selected.Name, position - Vector2.UnitX, Color.Black);
+                spriteBatch.DrawString(font2, selected.Name, position + Vector2.UnitY, Color.Black);
+                spriteBatch.DrawString(font2, selected.Name, position - Vector2.UnitY, Color.Black);
+                spriteBatch.DrawString(font2, selected.Name, position, selected as Spaceship != null ? Color.Red : Color.Lime);
+                spriteBatch.DrawString(font, text[0], position2 + Vector2.UnitX, Color.Black);
+                spriteBatch.DrawString(font, text[0], position2 - Vector2.UnitX, Color.Black);
+                spriteBatch.DrawString(font, text[0], position2 + Vector2.UnitY, Color.Black);
+                spriteBatch.DrawString(font, text[0], position2 - Vector2.UnitY, Color.Black);
+                spriteBatch.DrawString(font, text[0], position2, Color.White);
+                position2 += new Vector2(font.MeasureString(text[0]).X, 0);
+                spriteBatch.DrawString(font, text[1], position2 + Vector2.UnitX, Color.Black);
+                spriteBatch.DrawString(font, text[1], position2 - Vector2.UnitX, Color.Black);
+                spriteBatch.DrawString(font, text[1], position2 + Vector2.UnitY, Color.Black);
+                spriteBatch.DrawString(font, text[1], position2 - Vector2.UnitY, Color.Black);
+                spriteBatch.DrawString(font, text[1], position2, Color.White);
                 spriteBatch.End();
+
+                Tower tower = selected as Tower;
+                if (tower != null)
+                {
+
+                }
             }
 
             base.Draw(gameTime);

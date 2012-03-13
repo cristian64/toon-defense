@@ -46,7 +46,7 @@ namespace ToonDefense
         {
             MouseState currentMouseState = Mouse.GetState();
 
-            if (!created && currentMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
+            if (!created && currentMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released && Game.Components.Count == 1)
             {
                 if (onButton(map1buttonPosition))
                 {

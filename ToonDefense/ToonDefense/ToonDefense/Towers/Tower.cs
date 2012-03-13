@@ -89,14 +89,21 @@ namespace ToonDefense.Towers
             }
         }
 
-        public override string ToString()
+        public override string[] ToText()
         {
-            String aux = "";
-            aux += Name + "\n";
-            aux += "Sight: " + Sight + "\n";
-            aux += "Damage: " + Damage + "\n";
-            aux += "Delay: " + Delay + "ms\n";
-            aux += "Price: " + Price;
+            String aux1 = "";
+            aux1 += "Sight:  \n";
+            aux1 += "Damage:  \n";
+            aux1 += "Delay:  \n";
+            aux1 += "Price:  ";
+            String aux2 = "";
+            aux2 += Sight + "\n";
+            aux2 += Damage + "\n";
+            aux2 += Delay + "\n";
+            aux2 += Price;
+            string[] aux = new string[2];
+            aux[0] = aux1;
+            aux[1] = aux2;
             return aux;
         }
     }

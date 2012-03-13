@@ -402,5 +402,9 @@ namespace ToonDefense
             result = rayDistance;
         }
 
+        public virtual string[] ToText()
+        {
+            return new string[2];
+        }
     }
 }

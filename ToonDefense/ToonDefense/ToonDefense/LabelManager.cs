@@ -62,7 +62,7 @@ namespace ToonDefense
                     Label label = labels[i];
                     label.Duration -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                     label.Color = label.Color * Math.Min(1.0f, (label.Duration / 1000.0f));
-                    label.Position += new Vector3(0, 0.005f, 0);
+                    label.Position += new Vector3(0, 0.01f, 0);
 
                     if (label.Duration <= 0)
                         labels.RemoveAt(i);
