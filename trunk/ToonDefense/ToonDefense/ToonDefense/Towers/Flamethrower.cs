@@ -53,11 +53,12 @@ namespace ToonDefense.Towers
                 Vector3 targetDirection = Target.Destinations[0] - Target.Position;
                 targetDirection.Y = 0;
                 targetDirection.Normalize();
-                Vector3 direction = Target.Position + Target.Speed * targetDirection - Position;
+                Vector3 direction = Target.Position + Target.Speed * 0.5f * targetDirection - Position;
                 direction.Y = 0;
                 direction.Normalize();
+                Vector3 direction2 = Vector3.Normalize(Target.Position + Target.Speed * 0.5f * targetDirection - Position);
                 Rotation.Y = (float)Math.Atan2(-direction.Z, direction.X);
-                FireParticleSystem.LastInstance.AddParticle(Position + direction, 3 * direction); 
+                FireParticleSystem.LastInstance.AddParticle(Position + direction, 3 * direction2); 
             }
 
             if (Target != null && sound.State != SoundState.Playing)
