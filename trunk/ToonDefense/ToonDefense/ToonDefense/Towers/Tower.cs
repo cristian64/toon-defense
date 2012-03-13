@@ -21,6 +21,8 @@ namespace ToonDefense.Towers
         public float Delay;
         public float DelayCounter;
         public int Price;
+        public int UpgradePrice;
+        public bool Upgraded;
 
         public Tower(Game game, Camera camera)
             : base(game, camera)
@@ -30,6 +32,14 @@ namespace ToonDefense.Towers
             Damage = 10;
             Delay = 1000;
             Price = 100;
+            UpgradePrice = 100;
+            Upgraded = false;
+        }
+
+        public virtual void Upgrade()
+        {
+            texture = Game.Content.Load<Texture2D>("models\\gold");
+            Upgraded = true;
         }
 
         public override void Draw(GameTime gameTime)

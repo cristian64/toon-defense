@@ -25,6 +25,16 @@ namespace ToonDefense.Towers
             Damage = 100;
             Delay = 1000;
             Price = 500;
+            UpgradePrice = 600;
+            Upgraded = false;
+        }
+
+        public override void Upgrade()
+        {
+            Sight = 5;
+            Damage = 200;
+            Delay = 800;
+            base.Upgrade();
         }
 
         protected override void LoadContent()
