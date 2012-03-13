@@ -164,9 +164,26 @@ namespace ToonDefense
                     }
                     else
                     {
-                        Projectile projectile = DrawableComponents[i] as Projectile;
-                        if (projectile != null && projectile.NoTarget)
-                            DrawableComponents.RemoveAt(i);
+                        Tower tower = DrawableComponents[i] as Tower;
+                        if (tower != null)
+                        {
+                            if (tower.Sold == true)
+                            {
+                                player.Money += (tower.Price + (tower.Upgraded ? tower.UpgradePrice : 0)) / 2;
+                                for (int j = 0; j < 30; j++)
+                                    explosionSmokeParticleSystem.AddParticle(tower.Position, Vector3.Zero);
+                                DrawableComponents.RemoveAt(i);
+                                explosion.Play();
+                                world.SetBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f), new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f));
+                                LabelManager.LastInstance.AddLabel("+" + (tower.Price + (tower.Upgraded ? tower.UpgradePrice : 0)) / 2, 2000, tower.Position, Color.Lime);
+                            }
+                        }
+                        else
+                        {
+                            Projectile projectile = DrawableComponents[i] as Projectile;
+                            if (projectile != null && projectile.NoTarget)
+                                DrawableComponents.RemoveAt(i);
+                        }
                     }
                 }
 

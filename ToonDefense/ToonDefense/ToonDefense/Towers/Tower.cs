@@ -50,6 +50,8 @@ namespace ToonDefense.Towers
             texture = Game.Content.Load<Texture2D>("models\\gold");
             effect.Parameters["Texture"].SetValue(texture);
             upgradingSound.Play();
+            Player.LastInstance.Money -= UpgradePrice;
+            LabelManager.LastInstance.AddLabel("-" + UpgradePrice, 2000, Position, Color.Red);
             Upgraded = true;
         }
 
