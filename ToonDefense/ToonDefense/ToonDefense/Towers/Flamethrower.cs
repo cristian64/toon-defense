@@ -22,7 +22,7 @@ namespace ToonDefense.Towers
         {
             Name = "Flamethrower";
             Sight = 3;
-            Damage = 1;
+            Damage = 25;
             Delay = 32;
             Price = 2000;
         }
@@ -53,7 +53,9 @@ namespace ToonDefense.Towers
                 Vector3 targetDirection = Target.Destinations[0] - Target.Position;
                 targetDirection.Y = 0;
                 targetDirection.Normalize();
-                Vector3 direction = Vector3.Normalize(Target.Position + Target.Speed * targetDirection - Position);
+                Vector3 direction = Target.Position + Target.Speed * targetDirection - Position;
+                direction.Y = 0;
+                direction.Normalize();
                 Rotation.Y = (float)Math.Atan2(-direction.Z, direction.X);
                 FireParticleSystem.LastInstance.AddParticle(Position + direction, 3 * direction); 
             }
