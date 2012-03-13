@@ -125,5 +125,15 @@ namespace ToonDefense
                 for (int j = (int)discrete1.Y; j < discrete2.Y; j++)
                     buildableAreas[i + j * texture.Width] = Color.White;
         }
+
+        public void SetBuildable(Vector3 position1, Vector3 position2)
+        {
+            Vector2 discrete1 = WorldUnitsToTextureUnits(position1);
+            Vector2 discrete2 = WorldUnitsToTextureUnits(position2);
+
+            for (int i = (int)discrete1.X; i < discrete2.X; i++)
+                for (int j = (int)discrete1.Y; j < discrete2.Y; j++)
+                    buildableAreas[i + j * texture.Width] = Color.Black;
+        }
     }
 }

@@ -55,6 +55,10 @@ namespace ToonDefense
             if (spaceship != null && (spaceship.Health <= 0 || spaceship.Destinations.Count == 0))
                 selected = null;
 
+            Tower tower = selected as Tower;
+            if (tower != null && tower.Sold)
+                selected = null;
+
             int grabbingAmount = Math.Abs(currentMouseState.X - camera.GrabbingX) + Math.Abs(currentMouseState.Y - camera.GrabbingY);
 
             if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 5) &&
