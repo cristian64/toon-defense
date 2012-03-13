@@ -106,13 +106,19 @@ namespace ToonDefense.Spaceships
             base.Draw(gameTime);
         }
 
-        public override string ToString()
+        public override string[] ToText()
         {
-            String aux = "";
-            aux += Name + "\n";
-            aux += "Health: " + Health + "/" + InitialHealth + "\n";
-            aux += "Speed: " + Speed + "\n";
-            aux += "Reward: " + Reward;
+            String aux1 = "";
+            aux1 += "Health:  \n";
+            aux1 += "Speed:  \n";
+            aux1 += "Reward:  ";
+            String aux2 = "";
+            aux2 += Health + "/" + InitialHealth + "\n";
+            aux2 += Speed + "\n";
+            aux2 += Reward;
+            string[] aux = new string[2];
+            aux[0] = aux1;
+            aux[1] = aux2;
             return aux;
         }
     }
