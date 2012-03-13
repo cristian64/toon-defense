@@ -23,6 +23,8 @@ namespace ToonDefense.Towers
         public int Price;
         public int UpgradePrice;
         public bool Upgraded;
+        SoundEffect upgradingSound;
+        public bool Sold;
 
         public Tower(Game game, Camera camera)
             : base(game, camera)
@@ -34,11 +36,20 @@ namespace ToonDefense.Towers
             Price = 100;
             UpgradePrice = 100;
             Upgraded = false;
+            Sold = false;
+        }
+
+        protected override void LoadContent()
+        {
+            upgradingSound = Game.Content.Load<SoundEffect>("sounds\\upgrade");
+            base.LoadContent();
         }
 
         public virtual void Upgrade()
         {
             texture = Game.Content.Load<Texture2D>("models\\gold");
+            effect.Parameters["Texture"].SetValue(texture);
+            upgradingSound.Play();
             Upgraded = true;
         }
 
