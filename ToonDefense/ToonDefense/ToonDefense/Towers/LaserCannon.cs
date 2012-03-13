@@ -25,7 +25,7 @@ namespace ToonDefense.Towers
             Name = "Laser Cannon";
             laserEmitter = new ParticleEmitter(LaserParticleSystem.LastInstance, 3, Position + Vector3.Up * 0.2f);
             Sight = 5;
-            Damage = 10;
+            Damage = 100;
             Delay = 100;
             Price = 3000;
             UpgradePrice = 10000;
@@ -35,7 +35,7 @@ namespace ToonDefense.Towers
         public override void Upgrade()
         {
             Sight = 6;
-            Damage = 30;
+            Damage = 300;
             base.Upgrade();
         }
 
@@ -80,7 +80,10 @@ namespace ToonDefense.Towers
         public override void Draw(GameTime gameTime)
         {
             if (Target != null)
-                PrimitiveDrawings.DrawPyramid(GraphicsDevice, Camera, Position + Vector3.Up * 0.2f, Target.Position, Color.Magenta);
+                if (Upgraded)
+                    PrimitiveDrawings.DrawPyramid(GraphicsDevice, Camera, Position + Vector3.Up * 0.2f, Target.Position, Color.Yellow);
+                else
+                    PrimitiveDrawings.DrawPyramid(GraphicsDevice, Camera, Position + Vector3.Up * 0.2f, Target.Position, Color.Magenta);
 
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
