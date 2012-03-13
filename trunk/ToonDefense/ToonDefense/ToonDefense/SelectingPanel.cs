@@ -22,6 +22,11 @@ namespace ToonDefense
         SpriteBatch spriteBatch;
         SpriteFont font;
         SpriteFont font2;
+        SpriteFont font3;
+        Texture2D greenButton;
+        Texture2D redButton;
+        Vector2 greenButtonPosition;
+        Vector2 redButtonPosition;
         MouseState prevMouseState;
 
         public SelectingPanel(Game game, Camera camera, World world)
@@ -36,6 +41,9 @@ namespace ToonDefense
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Game.Content.Load<SpriteFont>("fonts\\selection");
             font2 = Game.Content.Load<SpriteFont>("fonts\\selectionname");
+            font3 = Game.Content.Load<SpriteFont>("fonts\\buttontext");
+            greenButton = Game.Content.Load<Texture2D>("images\\greenbutton");
+            redButton = Game.Content.Load<Texture2D>("images\\redbutton");
             base.LoadContent();
         }
 
@@ -97,22 +105,66 @@ namespace ToonDefense
                 spriteBatch.DrawString(font, text[0], position2 + Vector2.UnitY, Color.Black);
                 spriteBatch.DrawString(font, text[0], position2 - Vector2.UnitY, Color.Black);
                 spriteBatch.DrawString(font, text[0], position2, Color.White);
-                position2 += new Vector2(font.MeasureString(text[0]).X, 0);
-                spriteBatch.DrawString(font, text[1], position2 + Vector2.UnitX, Color.Black);
-                spriteBatch.DrawString(font, text[1], position2 - Vector2.UnitX, Color.Black);
-                spriteBatch.DrawString(font, text[1], position2 + Vector2.UnitY, Color.Black);
-                spriteBatch.DrawString(font, text[1], position2 - Vector2.UnitY, Color.Black);
-                spriteBatch.DrawString(font, text[1], position2, Color.White);
-                spriteBatch.End();
+                Vector2 position3 = position2 + new Vector2(font.MeasureString(text[0]).X, 0);
+                spriteBatch.DrawString(font, text[1], position3 + Vector2.UnitX, Color.Black);
+                spriteBatch.DrawString(font, text[1], position3 - Vector2.UnitX, Color.Black);
+                spriteBatch.DrawString(font, text[1], position3 + Vector2.UnitY, Color.Black);
+                spriteBatch.DrawString(font, text[1], position3 - Vector2.UnitY, Color.Black);
+                spriteBatch.DrawString(font, text[1], position3, Color.White);
+                
 
                 Tower tower = selected as Tower;
                 if (tower != null)
                 {
+                    redButtonPosition = position2 + new Vector2(0, font.MeasureString(text[0]).Y + 5);
+                    String redText = "Sell  for  " + (tower.Price / 2).ToString();
+                    Vector2 redTextPosition = redButtonPosition + new Vector2((redButton.Width - font3.MeasureString(redText).X) / 2, (redButton.Height - font3.MeasureString(redText).Y) / 2);
+                    if (GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
+                    {
+                        spriteBatch.Draw(redButton, redButtonPosition, IsOnSell(Mouse.GetState().X, Mouse.GetState().Y) ? Color.Crimson : Color.White);
+                        spriteBatch.DrawString(font3, redText, redTextPosition, Color.White);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(redButton, redButtonPosition, Color.White * 0.5f);
+                        spriteBatch.DrawString(font3, redText, redTextPosition, Color.White * 0.5f);
+                    }
 
+                    greenButtonPosition = redButtonPosition + new Vector2(0, redButton.Height + 2);
+                    String greenText = "Upgrade  for  " + (tower.Price).ToString();
+                    Vector2 greenTextPosition = greenButtonPosition + new Vector2((greenButton.Width - font3.MeasureString(greenText).X) / 2, (greenButton.Height - font3.MeasureString(greenText).Y) / 2);
+                    if (GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
+                    {
+                        spriteBatch.Draw(greenButton, greenButtonPosition, IsOnUpgrade(Mouse.GetState().X, Mouse.GetState().Y) ? Color.LimeGreen : Color.White);
+                        spriteBatch.DrawString(font3, greenText, greenTextPosition, Color.White);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(greenButton, greenButtonPosition, Color.White * 0.5f);
+                        spriteBatch.DrawString(font3, greenText, greenTextPosition, Color.White * 0.5f);
+                    }
                 }
+
+                spriteBatch.End();
             }
 
             base.Draw(gameTime);
+        }
+
+        public bool IsOnSell(int x, int y)
+        {
+            Tower tower = selected as Tower;
+            return tower != null &&
+                redButtonPosition.X <= x && x <= redButtonPosition.X + redButton.Width &&
+                redButtonPosition.Y <= y && y <= redButtonPosition.Y + redButton.Height;
+        }
+
+        public bool IsOnUpgrade(int x, int y)
+        {
+            Tower tower = selected as Tower;
+            return tower != null &&
+                greenButtonPosition.X <= x && x <= greenButtonPosition.X + greenButton.Width &&
+                greenButtonPosition.Y <= y && y <= greenButtonPosition.Y + greenButton.Height;
         }
     }
 }
