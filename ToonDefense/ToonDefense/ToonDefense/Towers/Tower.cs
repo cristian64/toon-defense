@@ -123,7 +123,7 @@ namespace ToonDefense.Towers
             aux2 += Sight + "\n";
             aux2 += Damage + "\n";
             aux2 += Delay + "\n";
-            aux2 += Price;
+            aux2 += Price + (Upgraded ? " + " + UpgradePrice : "");
             string[] aux = new string[2];
             aux[0] = aux1;
             aux[1] = aux2;
