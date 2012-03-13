@@ -15,6 +15,7 @@ namespace ToonDefense
 {
     public class SpeedPanel : DrawableGameComponent
     {
+        public static SpeedPanel LastInstance = null;
         SpriteBatch spriteBatch;
         Texture2D pauseButton;
         Texture2D pauseButtonOn;
@@ -28,6 +29,7 @@ namespace ToonDefense
         public SpeedPanel(Game game)
             : base(game)
         {
+            LastInstance = this;
         }
 
         protected override void LoadContent()
@@ -114,6 +116,13 @@ namespace ToonDefense
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public bool IsOnButtons(int x, int y)
+        {
+            Rectangle rectangle = new Rectangle(0, GraphicsDevice.Viewport.Height - size, size * 3, size);
+            return rectangle.X <= x && x <= rectangle.X + rectangle.Width &&
+                rectangle.Y <= y && y <= rectangle.Y + rectangle.Height;
         }
     }
 }

@@ -9,6 +9,7 @@ namespace ToonDefense
 {
     public class Player : DrawableGameComponent
     {
+        public static Player LastInstance = null;
         public int Lives = 100;
         public int Money = 100;
         public int Kills = 0;
@@ -21,6 +22,7 @@ namespace ToonDefense
         public Player(Game game)
             : base(game)
         {
+            LastInstance = this;
         }
 
         protected override void LoadContent()

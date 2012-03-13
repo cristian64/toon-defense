@@ -57,7 +57,9 @@ namespace ToonDefense
 
             int grabbingAmount = Math.Abs(currentMouseState.X - camera.GrabbingX) + Math.Abs(currentMouseState.Y - camera.GrabbingY);
 
-            if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 5))
+            if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 5) &&
+                !IsOnSell(currentMouseState.X, currentMouseState.Y) && !IsOnUpgrade(currentMouseState.X, currentMouseState.Y) &&
+                !SpeedPanel.LastInstance.IsOnButtons(currentMouseState.X, currentMouseState.Y))
             {
                 if (selected != null)
                     selected.Selected = false;
@@ -117,7 +119,7 @@ namespace ToonDefense
                 if (tower != null)
                 {
                     redButtonPosition = position2 + new Vector2(0, font.MeasureString(text[0]).Y + 5);
-                    String redText = "Sell  for  " + (tower.Price / 2).ToString();
+                    String redText = "Sell  for  " + ((tower.Price + (tower.Upgraded ? tower.UpgradePrice : 0)) / 2).ToString();
                     Vector2 redTextPosition = redButtonPosition + new Vector2((redButton.Width - font3.MeasureString(redText).X) / 2, (redButton.Height - font3.MeasureString(redText).Y) / 2);
                     if (GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
                     {
@@ -131,9 +133,13 @@ namespace ToonDefense
                     }
 
                     greenButtonPosition = redButtonPosition + new Vector2(0, redButton.Height + 2);
-                    String greenText = "Upgrade  for  " + (tower.Price).ToString();
+                    String greenText = "";
+                    if (tower.Upgraded)
+                        greenText = "Upgraded";
+                    else
+                        greenText = "Upgrade  for  " + (tower.UpgradePrice).ToString();
                     Vector2 greenTextPosition = greenButtonPosition + new Vector2((greenButton.Width - font3.MeasureString(greenText).X) / 2, (greenButton.Height - font3.MeasureString(greenText).Y) / 2);
-                    if (GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
+                    if (!tower.Upgraded && GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED && tower.UpgradePrice <= Player.LastInstance.Money)
                     {
                         spriteBatch.Draw(greenButton, greenButtonPosition, IsOnUpgrade(Mouse.GetState().X, Mouse.GetState().Y) ? Color.LimeGreen : Color.White);
                         spriteBatch.DrawString(font3, greenText, greenTextPosition, Color.White);
