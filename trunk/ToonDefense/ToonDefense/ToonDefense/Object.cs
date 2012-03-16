@@ -31,6 +31,8 @@ namespace ToonDefense
         public Texture2D shadowTexture;
         public BasicEffect shadowEffect;
 
+        public float[] lineColor;
+
         private bool selected;
         public bool Selected
         {
@@ -40,23 +42,18 @@ namespace ToonDefense
                 selected = value;
                 if (selected)
                 {
-                    /*float[] lineColor = new float[4];
-                    lineColor[0] = 173 / 255.0f;
-                    lineColor[1] = 1.0f;
-                    lineColor[2] = 47 / 255.0f;
-                    lineColor[3] = 1.0f;
-                    effect.Parameters["LineColor"].SetValue(lineColor);*/
+                    effect.Parameters["LineColor"].SetValue(lineColor);
                     effect.Parameters["DiffuseIntensity"].SetValue(10.0f);
-                    effect.Parameters["LineThickness"].SetValue(0.04f);
+                    effect.Parameters["LineThickness"].SetValue(0.08f);
                 }
                 else
                 {
-                    /*float[] lineColor = new float[4];
+                    float[] lineColor = new float[4];
                     lineColor[0] = 0.0f;
                     lineColor[1] = 0.0f;
                     lineColor[2] = 0.0f;
                     lineColor[3] = 1.0f;
-                    effect.Parameters["LineColor"].SetValue(lineColor);*/
+                    effect.Parameters["LineColor"].SetValue(lineColor);
                     effect.Parameters["DiffuseIntensity"].SetValue(3.0f);
                     effect.Parameters["LineThickness"].SetValue(0.02f);
                 }
