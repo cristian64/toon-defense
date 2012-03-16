@@ -29,6 +29,12 @@ namespace ToonDefense.Towers
         public Tower(Game game, Camera camera)
             : base(game, camera)
         {
+            lineColor = new float[4];
+            lineColor[0] = 0 / 255.0f;
+            lineColor[1] = 0 / 255.0f;
+            lineColor[2] = 0 / 255.0f;
+            lineColor[3] = 1.0f;
+
             Target = null;
             Sight = 5;
             Damage = 10;

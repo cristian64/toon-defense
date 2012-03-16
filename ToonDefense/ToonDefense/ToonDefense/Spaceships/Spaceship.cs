@@ -26,6 +26,12 @@ namespace ToonDefense.Spaceships
         public Spaceship(Game game, Camera camera)
             :base(game, camera)
         {
+            lineColor = new float[4];
+            lineColor[0] = 255 / 255.0f;
+            lineColor[1] = 0 / 255.0f;
+            lineColor[2] = 0 / 255.0f;
+            lineColor[3] = 1.0f;
+
             Destinations = new List<Vector3>();
             Speed = 3;
             InitialHealth = 100;
