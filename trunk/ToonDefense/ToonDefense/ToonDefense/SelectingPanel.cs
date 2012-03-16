@@ -177,7 +177,7 @@ namespace ToonDefense
         public bool IsOnSell(int x, int y)
         {
             Tower tower = selected as Tower;
-            return tower != null &&
+            return tower != null && BuildingPanel.LastInstance.Tower == null &&
                 redButtonPosition.X <= x && x <= redButtonPosition.X + redButton.Width &&
                 redButtonPosition.Y <= y && y <= redButtonPosition.Y + redButton.Height;
         }
@@ -185,7 +185,7 @@ namespace ToonDefense
         public bool IsOnUpgrade(int x, int y)
         {
             Tower tower = selected as Tower;
-            return tower != null &&
+            return tower != null && BuildingPanel.LastInstance.Tower == null &&
                 greenButtonPosition.X <= x && x <= greenButtonPosition.X + greenButton.Width &&
                 greenButtonPosition.Y <= y && y <= greenButtonPosition.Y + greenButton.Height;
         }

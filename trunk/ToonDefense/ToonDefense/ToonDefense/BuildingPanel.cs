@@ -95,8 +95,7 @@ namespace ToonDefense
             }
             else if (Mouse.GetState().LeftButton == ButtonState.Released && Tower != null)
             {
-                if (!isOnPanel(Mouse.GetState()) &&
-                    world.IsBuildable(new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z + Tower.Depth / 2.0f)) &&
+                if (world.IsBuildable(new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z + Tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z - Tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(Tower.Position.X - Tower.Width / 2.0f, 0, Tower.Position.Z + Tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(Tower.Position.X - Tower.Width / 2.0f, 0, Tower.Position.Z - Tower.Depth / 2.0f)) &&
@@ -130,8 +129,7 @@ namespace ToonDefense
                 position.Y = 0;
                 PrimitiveDrawings.DrawSphere(Game, GraphicsDevice, camera, position, Tower.Sight);
 
-                if (!isOnPanel(Mouse.GetState()) &&
-                    world.IsBuildable(new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z + Tower.Depth / 2.0f)) &&
+                if (world.IsBuildable(new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z + Tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(Tower.Position.X + Tower.Width / 2.0f, 0, Tower.Position.Z - Tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(Tower.Position.X - Tower.Width / 2.0f, 0, Tower.Position.Z + Tower.Depth / 2.0f)) &&
                     world.IsBuildable(new Vector3(Tower.Position.X - Tower.Width / 2.0f, 0, Tower.Position.Z - Tower.Depth / 2.0f)) &&
