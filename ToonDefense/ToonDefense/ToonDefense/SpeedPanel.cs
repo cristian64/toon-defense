@@ -24,6 +24,7 @@ namespace ToonDefense
         Texture2D soundButton;
         Texture2D soundButtonOn;
         MouseState prevMouseState;
+        KeyboardState prevKeyboardState;
         int size;
 
         public SpeedPanel(Game game)
@@ -87,7 +88,27 @@ namespace ToonDefense
                 }
             }
 
+            KeyboardState currentKeyboardState = Keyboard.GetState();
+            if (currentKeyboardState.IsKeyDown(Keys.Space) && prevKeyboardState.IsKeyUp(Keys.Space))
+            {
+                if (GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
+                    GameplayComponent.LastInstance.SpeedLevel = SpeedLevel.PAUSED;
+                else
+                    GameplayComponent.LastInstance.SpeedLevel = SpeedLevel.NORMAL;
+
+                if (GameplayComponent.LastInstance.SpeedLevel == SpeedLevel.FAST)
+                    GameplayComponent.LastInstance.Ost.Pitch = 1.0f;
+                else
+                    GameplayComponent.LastInstance.Ost.Pitch = 0.0f;
+
+                if (GameplayComponent.LastInstance.SpeedLevel == SpeedLevel.PAUSED)
+                    GameplayComponent.LastInstance.Ost.Pause();
+                else
+                    GameplayComponent.LastInstance.Ost.Resume();
+            }
+
             prevMouseState = currentMouseState;
+            prevKeyboardState = currentKeyboardState;
             base.Update(gameTime);
         }
 
