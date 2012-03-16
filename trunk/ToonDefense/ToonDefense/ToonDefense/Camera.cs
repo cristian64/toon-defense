@@ -202,8 +202,11 @@ namespace ToonDefense
                     }
                     else if (increment < 0)
                     {
-                        position = position + 5 * (Vector3.Normalize(target - position));
-                        differenceZ = position.Z - target.Z;
+                        if ((position + 5 * (Vector3.Normalize(target - position))).Y > 0)
+                        {
+                            position = position + 5 * (Vector3.Normalize(target - position));
+                            differenceZ = position.Z - target.Z;
+                        }
                     }
 
                     projection = Matrix.CreatePerspectiveFieldOfView(0.2f, aspectRatio, nearPlaneDistance, farPlaneDistance);
