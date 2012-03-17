@@ -34,6 +34,7 @@ namespace ToonDefense
         public int GrabbingY = 0;
         public bool Grabbing = false;
         private MouseState prevMouseState = new MouseState();
+        private KeyboardState prevKeyboardState;
 
         /// <summary>
         /// Initializes new camera component.
@@ -118,6 +119,9 @@ namespace ToonDefense
             MouseState currentMouseState = Mouse.GetState();
             if (Game.IsActive && Enabled)
             {
+                if (Keyboard.GetState().IsKeyDown(Keys.F10) && prevKeyboardState.IsKeyUp(Keys.F10))
+                    FreeCamera = !freeCamera;
+
                 aspectRatio = Game.GraphicsDevice.PresentationParameters.BackBufferWidth / (float)Game.GraphicsDevice.PresentationParameters.BackBufferHeight;
                 if (freeCamera)
                 {
@@ -214,6 +218,8 @@ namespace ToonDefense
 
                     prevMouseState = Mouse.GetState();
                 }
+
+                prevKeyboardState = Keyboard.GetState();
 
                 base.Update(gameTime);
             }

@@ -123,7 +123,7 @@ namespace ToonDefense
                 graphics.ApplyChanges();
             }
             // Allows the game to show debug features
-            if (currentKeyboardState.IsKeyDown(Keys.F1) && prevKeyboardState.IsKeyUp(Keys.F1))
+            if (currentKeyboardState.IsKeyDown(Keys.F9) && prevKeyboardState.IsKeyUp(Keys.F9))
                 Debug = !Debug;
 
             prevKeyboardState = currentKeyboardState;
