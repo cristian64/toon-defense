@@ -121,13 +121,21 @@ namespace ToonDefense
             if (displayTimeCounter > 0)
             {
                 float alpha = (displayTimeCounter <= 300) ? (float)(displayTimeCounter / 300) : 1.0f;
+                alpha = (displayTime - displayTimeCounter <= 300) ? (float)((displayTime - displayTimeCounter) / 300) : alpha;
                 displayTimeCounter = Math.Max(0, displayTimeCounter - gameTime.ElapsedGameTime.TotalMilliseconds);
                 spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
                 String text = "Round " + roundNumber;
                 Vector2 position = new Vector2(GraphicsDevice.Viewport.Width / 2 - spriteFont.MeasureString(text).X / 2, GraphicsDevice.Viewport.Height / 2 - spriteFont.MeasureString(text).Y / 2);
-                spriteBatch.DrawString(spriteFont, text, position, Color.Black * 0.7f * alpha * alpha);
-                spriteBatch.DrawString(spriteFont, text, position + Vector2.UnitY, Color.Black * 0.2f * alpha * alpha);
-                spriteBatch.DrawString(spriteFont, text, position - Vector2.One, Color.White * 0.9f * alpha);
+
+                spriteBatch.DrawString(spriteFont, text, position + 3 * Vector2.UnitX, Color.Black * 0.25f * alpha);
+                spriteBatch.DrawString(spriteFont, text, position - 3 * Vector2.UnitX, Color.Black * 0.25f * alpha);
+                spriteBatch.DrawString(spriteFont, text, position + 3 * Vector2.UnitY, Color.Black * 0.25f * alpha);
+                spriteBatch.DrawString(spriteFont, text, position - 3 * Vector2.UnitY, Color.Black * 0.25f * alpha);
+                spriteBatch.DrawString(spriteFont, text, position + Vector2.UnitX, Color.White * alpha * alpha * alpha);
+                spriteBatch.DrawString(spriteFont, text, position - Vector2.UnitX, Color.White * alpha * alpha * alpha);
+                spriteBatch.DrawString(spriteFont, text, position + Vector2.UnitY, Color.White * alpha * alpha * alpha);
+                spriteBatch.DrawString(spriteFont, text, position - Vector2.UnitY, Color.White * alpha * alpha * alpha);
+                spriteBatch.DrawString(spriteFont, text, position, Color.Black * alpha);
                 spriteBatch.End();
             }
             base.Draw(gameTime);
@@ -137,6 +145,7 @@ namespace ToonDefense
         {
 			generationDelay = 100;
             pendentShips.Add(new PaperAirplane(Game, camera));
+            pendentShips.Add(new EquipoME(Game, camera));
         }
 
         public void Round2()
