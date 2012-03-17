@@ -34,6 +34,7 @@ namespace ToonDefense
             //graphics.IsFullScreen = true;
             graphics.PreferMultiSampling = true;
             this.Window.Title = "Toon Defense";
+            this.Window.AllowUserResizing = true; 
         }
 
         private void preparingDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e)
