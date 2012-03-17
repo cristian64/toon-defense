@@ -92,13 +92,13 @@ namespace ToonDefense
             }
 
             if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 5) &&
-                IsOnSell(currentMouseState.X, currentMouseState.Y))
+                IsOnSell(currentMouseState.X, currentMouseState.Y) && GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
             {
                 (Selection as Tower).Sold = true;
             }
 
             if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 5) &&
-                IsOnUpgrade(currentMouseState.X, currentMouseState.Y))
+                IsOnUpgrade(currentMouseState.X, currentMouseState.Y) && GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
             {
                 if ((Selection as Tower).UpgradePrice <= Player.LastInstance.Money)
                     (Selection as Tower).Upgrade();
