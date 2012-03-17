@@ -44,7 +44,7 @@ namespace ToonDefense
                 {
                     effect.Parameters["LineColor"].SetValue(lineColor);
                     effect.Parameters["DiffuseIntensity"].SetValue(10.0f);
-                    effect.Parameters["LineThickness"].SetValue(0.08f);
+                    effect.Parameters["LineThickness"].SetValue(0.05f);
                 }
                 else
                 {
