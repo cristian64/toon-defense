@@ -24,7 +24,7 @@ namespace ToonDefense
         Random random;
 
         double displayTimeCounter;
-        static double displayTime = 5000;
+        static double displayTime = 3000;
         SpriteBatch spriteBatch;
         SpriteFont spriteFont;
 
@@ -131,10 +131,10 @@ namespace ToonDefense
                 spriteBatch.DrawString(spriteFont, text, position - 3 * Vector2.UnitX, Color.Black * 0.25f * alpha);
                 spriteBatch.DrawString(spriteFont, text, position + 3 * Vector2.UnitY, Color.Black * 0.25f * alpha);
                 spriteBatch.DrawString(spriteFont, text, position - 3 * Vector2.UnitY, Color.Black * 0.25f * alpha);
-                spriteBatch.DrawString(spriteFont, text, position + Vector2.UnitX, Color.White * alpha * alpha * alpha);
-                spriteBatch.DrawString(spriteFont, text, position - Vector2.UnitX, Color.White * alpha * alpha * alpha);
-                spriteBatch.DrawString(spriteFont, text, position + Vector2.UnitY, Color.White * alpha * alpha * alpha);
-                spriteBatch.DrawString(spriteFont, text, position - Vector2.UnitY, Color.White * alpha * alpha * alpha);
+                spriteBatch.DrawString(spriteFont, text, position + Vector2.UnitX, Color.White * alpha * alpha * alpha * alpha);
+                spriteBatch.DrawString(spriteFont, text, position - Vector2.UnitX, Color.White * alpha * alpha * alpha * alpha);
+                spriteBatch.DrawString(spriteFont, text, position + Vector2.UnitY, Color.White * alpha * alpha * alpha * alpha);
+                spriteBatch.DrawString(spriteFont, text, position - Vector2.UnitY, Color.White * alpha * alpha * alpha * alpha);
                 spriteBatch.DrawString(spriteFont, text, position, Color.Black * alpha);
                 spriteBatch.End();
             }
