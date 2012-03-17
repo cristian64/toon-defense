@@ -130,7 +130,7 @@ namespace ToonDefense
                     e.Projection = camera.Projection;
                     e.View = camera.View;
                     e.World = world;
-                    e.Alpha = 0.25f;
+                    e.Alpha = 0.35f;
                 }
                 mm.Draw();
             }
