@@ -25,17 +25,17 @@ namespace ToonDefense.Towers
             Name = "Laser Cannon";
             laserEmitter = new ParticleEmitter(LaserParticleSystem.LastInstance, 3, Position + Vector3.Up * 0.2f);
             Sight = 5;
-            Damage = 100;
+            Damage = 20;
             Delay = 100;
-            Price = 3000;
-            UpgradePrice = 10000;
+            Price = 1000;
+            UpgradePrice = 2000;
             Upgraded = false;
         }
 
         public override void Upgrade()
         {
             Sight = 6;
-            Damage = 300;
+            Damage = 30;
             base.Upgrade();
         }
 

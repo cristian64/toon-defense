@@ -19,8 +19,8 @@ namespace ToonDefense.Spaceships
         {
             Name = "Zeppelin";
             Speed = 1.6f;
-            InitialHealth = 50000;
-            Reward = 90;
+            InitialHealth = 5000;
+            Reward = 30;
             Position.Y = 1.7f;
         }
 

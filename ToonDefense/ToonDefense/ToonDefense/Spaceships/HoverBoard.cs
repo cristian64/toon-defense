@@ -19,9 +19,9 @@ namespace ToonDefense.Spaceships
             : base(game, camera)
         {
             Name = "Hoverboard";
-            Speed = 1.0f;
-            InitialHealth = 250;
-            Reward = 15;
+            Speed = 2;
+            InitialHealth = 300;
+            Reward = 5;
             Position.Y = 0.2f + (random.Next() % 30) / 100.0f;
         }
 

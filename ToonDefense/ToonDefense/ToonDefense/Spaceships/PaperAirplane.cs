@@ -19,8 +19,8 @@ namespace ToonDefense.Spaceships
         {
             Name = "Paper Airplane";
             Speed = 1.5f;
-            InitialHealth = 200;
-            Reward = 10;
+            InitialHealth = 100;
+            Reward = 5;
             Position.Y = 1.3f;
         }
 

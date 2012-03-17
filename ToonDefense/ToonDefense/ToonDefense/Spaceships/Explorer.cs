@@ -19,9 +19,9 @@ namespace ToonDefense.Spaceships
             : base(game, camera)
         {
             Name = "Explorer";
-            Speed = 2.0f;
-            InitialHealth = 300;
-            Reward = 30;
+            Speed = 2.5f;
+            InitialHealth = 500;
+            Reward = 10;
             Position.Y = 1.15f;
         }
 

@@ -68,9 +68,10 @@ namespace ToonDefense
             int margin = 25;
             int topTextures = 3;
             int topFonts = 3;
+            String killsText = Kills.ToString() + " kills in " + RoundManager.LastInstance.RoundNumber + " rounds";
             int livesSize = (int)font.MeasureString(Lives.ToString()).X;
             int moneySize = (int)font.MeasureString(Money.ToString()).X;
-            int killsSize = (int)font.MeasureString(Kills.ToString()).X;
+            int killsSize = (int)font.MeasureString(killsText).X;
 
             spriteBatch.Draw(heart, new Rectangle(padding, topTextures, size, size), Color.White);
             spriteBatch.DrawString(font, Lives.ToString(), new Vector2(padding + size + padding, topFonts), Color.Black * alpha);
@@ -81,8 +82,8 @@ namespace ToonDefense
             spriteBatch.DrawString(font, Money.ToString(), new Vector2(padding + size + padding + livesSize + margin + size + padding - 1, topFonts - 1), Color.White * 0.9f);
 
             spriteBatch.Draw(skull, new Rectangle(padding + size + padding + livesSize + margin + size + padding + moneySize + margin, topTextures, size, size), Color.White);
-            spriteBatch.DrawString(font, Kills.ToString(), new Vector2(padding + size + padding + livesSize + margin + size + padding + moneySize + margin + size + padding, topFonts), Color.Black * alpha);
-            spriteBatch.DrawString(font, Kills.ToString(), new Vector2(padding + size + padding + livesSize + margin + size + padding + moneySize + margin + size + padding - 1, topFonts - 1), Color.White * 0.9f);
+            spriteBatch.DrawString(font, killsText, new Vector2(padding + size + padding + livesSize + margin + size + padding + moneySize + margin + size + padding, topFonts), Color.Black * alpha);
+            spriteBatch.DrawString(font, killsText, new Vector2(padding + size + padding + livesSize + margin + size + padding + moneySize + margin + size + padding - 1, topFonts - 1), Color.White * 0.9f);
 
             if (Lives <= 0)
             {

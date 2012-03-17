@@ -22,8 +22,8 @@ namespace ToonDefense.Spaceships
             Name = "Unidentified";
             extraRotationY = 0;
             Speed = 3;
-            InitialHealth = 10000;
-            Reward = 90;
+            InitialHealth = 4000;
+            Reward = 25;
             Position.Y = 0.6f;
         }
 

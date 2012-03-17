@@ -19,8 +19,8 @@ namespace ToonDefense.Spaceships
         {
             Name = "Helicopter";
             Speed = 1.7f;
-            InitialHealth = 700;
-            Reward = 50;
+            InitialHealth = 2500;
+            Reward = 15;
             Position.Y = 1.2f;
         }
 

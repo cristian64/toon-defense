@@ -21,19 +21,19 @@ namespace ToonDefense.Towers
             : base(game, camera)
         {
             Name = "Plasma Generator";
-            Sight = 5;
-            Damage = 100;
+            Sight = 4;
+            Damage = 70;
             Delay = 1000;
-            Price = 500;
-            UpgradePrice = 600;
+            Price = 150;
+            UpgradePrice = 400;
             Upgraded = false;
         }
 
         public override void Upgrade()
         {
-            Sight = 5;
-            Damage = 200;
-            Delay = 800;
+            Sight = 4.5f;
+            Damage = 130;
+            Delay = 1000;
             base.Upgrade();
         }
 
@@ -56,7 +56,7 @@ namespace ToonDefense.Towers
             plasma.Initialize();
             plasma.Target = Target;
             plasma.Damage = Damage;
-            plasma.Position = Position + new Vector3(-0.55f, Height - 0.4f, 0);
+            plasma.Position = Position + new Vector3(-0.45f, Height - 0.4f, 0);
             GameplayComponent.LastInstance.SpawnComponents.Add(plasma);
             sound.Play();
             base.Shoot();

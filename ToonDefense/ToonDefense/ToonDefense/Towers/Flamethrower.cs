@@ -22,17 +22,17 @@ namespace ToonDefense.Towers
         {
             Name = "Flamethrower";
             Sight = 3;
-            Damage = 75;
-            Delay = 100;
-            Price = 2000;
-            UpgradePrice = 3000;
+            Damage = 15;
+            Delay = 90;
+            Price = 700;
+            UpgradePrice = 900;
             Upgraded = false;
         }
 
         public override void Upgrade()
         {
-            Sight = 4;
-            Damage = 50;
+            Sight = 3.5f;
+            Damage = 20;
             base.Upgrade();
         }
 
@@ -82,18 +82,26 @@ namespace ToonDefense.Towers
         {
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
-            foreach (ModelMesh mesh in model.Meshes)
+            foreach (ModelMeshPart part in model.Meshes[1].MeshParts)
             {
-                foreach (ModelMeshPart part in mesh.MeshParts)
-                {
-                    part.Effect = effect;
-                    effect.Parameters["World"].SetValue(world);
-                    effect.Parameters["View"].SetValue(Camera.View);
-                    effect.Parameters["Projection"].SetValue(Camera.Projection);
-                    effect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Transpose(Matrix.Invert(world)));
-                }
-                mesh.Draw();
+                part.Effect = effect;
+                effect.Parameters["World"].SetValue(world);
+                effect.Parameters["View"].SetValue(Camera.View);
+                effect.Parameters["Projection"].SetValue(Camera.Projection);
+                effect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Transpose(Matrix.Invert(world)));
             }
+            model.Meshes[1].Draw();
+
+            world = Matrix.CreateScale(Scale) * Matrix.CreateTranslation(Position);
+            foreach (ModelMeshPart part in model.Meshes[0].MeshParts)
+            {
+                part.Effect = effect;
+                effect.Parameters["World"].SetValue(world);
+                effect.Parameters["View"].SetValue(Camera.View);
+                effect.Parameters["Projection"].SetValue(Camera.Projection);
+                effect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Transpose(Matrix.Invert(world)));
+            }
+            model.Meshes[0].Draw();
 
             base.Draw(gameTime);
         }
