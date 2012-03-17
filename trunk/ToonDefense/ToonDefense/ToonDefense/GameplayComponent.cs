@@ -65,8 +65,6 @@ namespace ToonDefense
         public override void Initialize()
         {
             player = new Player(Game);
-            GuiComponents.Add(player);
-
             camera = new Camera(Game);
 
             world = new World(Game, camera, map);
@@ -78,6 +76,7 @@ namespace ToonDefense
             GuiComponents.Add(new SelectingPanel(Game, camera, world));
             GuiComponents.Add(new BuildingPanel(Game, camera, world, player));
             GuiComponents.Add(camera);
+            GuiComponents.Add(player);
 
             fireParticleSystem = new FireParticleSystem(Game, Game.Content, camera);
             explosionParticleSystem = new ExplosionParticleSystem(Game, Game.Content, camera);
