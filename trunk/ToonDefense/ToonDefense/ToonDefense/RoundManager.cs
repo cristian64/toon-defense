@@ -145,7 +145,6 @@ namespace ToonDefense
         {
 			generationDelay = 100;
             pendentShips.Add(new PaperAirplane(Game, camera));
-            pendentShips.Add(new EquipoME(Game, camera));
         }
 
         public void Round2()

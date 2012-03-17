@@ -257,6 +257,8 @@ namespace ToonDefense
                 }
                 else
                 {
+                    height = 40;
+                    differenceZ = 50;
                     position = new Vector3(0, height, differenceZ);
                     target = new Vector3(0, 0, 0);
                 }
