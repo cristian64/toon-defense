@@ -45,6 +45,7 @@ namespace ToonDefense
         PlasmaParticleSystem plasmaParticleSystem;
 
         SoundEffect explosion;
+        SoundEffect sold;
         SoundEffect portal;
         public SoundEffectInstance Ost;
 
@@ -119,6 +120,7 @@ namespace ToonDefense
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             background = Game.Content.Load<Texture2D>("images\\background");
             explosion = Game.Content.Load<SoundEffect>("sounds\\explosion");
+            sold = Game.Content.Load<SoundEffect>("sounds\\sold");
             portal = Game.Content.Load<SoundEffect>("sounds\\portal");
             Ost = Game.Content.Load<SoundEffect>("sounds\\ost").CreateInstance();
             Ost.Play();
@@ -173,7 +175,7 @@ namespace ToonDefense
                                 for (int j = 0; j < 30; j++)
                                     explosionSmokeParticleSystem.AddParticle(tower.Position, Vector3.Zero);
                                 DrawableComponents.RemoveAt(i);
-                                explosion.Play();
+                                sold.Play();
                                 world.SetBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f), new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f));
                                 LabelManager.LastInstance.AddLabel("+" + (tower.Price + (tower.Upgraded ? tower.UpgradePrice : 0)) / 2, 2000, tower.Position, Color.Lime);
                             }
