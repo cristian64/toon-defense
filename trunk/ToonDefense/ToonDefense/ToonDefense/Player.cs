@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace ToonDefense
 {
@@ -38,8 +39,8 @@ namespace ToonDefense
 
         public override void Update(GameTime gameTime)
         {
-            if (ToonDefense.Debug)
-                Money += 100;
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftControl) && Keyboard.GetState().IsKeyDown(Keys.RightControl))
+                Money += 1000;
             base.Update(gameTime);
         }
 
