@@ -42,7 +42,7 @@ namespace ToonDefense
             generationDelay = 1000;
             generationDelayCounter = 0;
             pendentShips = new List<Spaceship>();
-            RoundNumber = 0;
+            RoundNumber = 39;
             roundCount = 0;
             rounds = new List<MethodInfo>();
             foreach (MethodInfo i in GetType().GetMethods())
@@ -80,9 +80,7 @@ namespace ToonDefense
 
                         if (spaceshipCounter == 0)
                         {
-                            if (RoundNumber >= roundCount)
-                                RoundNumber = 0;
-                            MethodInfo methodInfo = rounds[RoundNumber++];
+                            MethodInfo methodInfo = rounds[Math.Min(roundCount - 1, RoundNumber++)];
                             if (methodInfo != null)
                             {
                                 methodInfo.Invoke(this, null);
@@ -135,7 +133,7 @@ namespace ToonDefense
                 spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
                 String text = "Round " + RoundNumber;
                 String text2 = roundCount - RoundNumber + " rounds more to go";
-                if (roundCount - RoundNumber == 1)
+                if (roundCount - RoundNumber == 0)
                     text2 = "Last round";
                 else if (roundCount < RoundNumber)
                     text2 = "How many rounds can you still fuck, bitch?";
