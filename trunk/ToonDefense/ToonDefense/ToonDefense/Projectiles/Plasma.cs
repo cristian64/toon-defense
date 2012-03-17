@@ -20,7 +20,7 @@ namespace ToonDefense.Projectiles
         public Plasma(Game game, Camera camera)
             :base(game, camera)
         {
-            Speed = Vector3.Up;
+            Speed = 2 * Vector3.Up;
             Acceleration = 15;
             Friction = 10;
         }
