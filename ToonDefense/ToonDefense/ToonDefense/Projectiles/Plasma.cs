@@ -34,6 +34,12 @@ namespace ToonDefense.Projectiles
         public override void Update(GameTime gameTime)
         {
             PlasmaParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
+
+            if (Target == null || Target.Health <= 0)
+            {
+                FindTarget();
+            }
+
             if (Target != null && Target.Health > 0)
             {
                 if (gameTime.ElapsedGameTime.TotalMilliseconds > 0)

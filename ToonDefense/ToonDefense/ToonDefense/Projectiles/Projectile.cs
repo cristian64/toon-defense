@@ -27,5 +27,24 @@ namespace ToonDefense.Projectiles
             :base(game, camera)
         {
         }
+
+        public void FindTarget()
+        {
+            Target = null;
+            float minDistance = float.MaxValue;
+            foreach (DrawableGameComponent i in GameplayComponent.LastInstance.DrawableComponents)
+            {
+                Spaceship spaceship = i as Spaceship;
+                if (spaceship != null)
+                {
+                    float distance = (spaceship.Position - Position).LengthSquared();
+                    if (distance < minDistance && spaceship.Health > 0)
+                    {
+                        Target = spaceship;
+                        minDistance = distance;
+                    }
+                }
+            }
+        }
     }
 }
