@@ -19,8 +19,8 @@ namespace ToonDefense.Spaceships
         {
             Name = "Science Vessel";
             Speed = 1;
-            InitialHealth = 1000000;
-            Reward = 1000;
+            InitialHealth = 15000;
+            Reward = 55;
         }
 
         protected override void LoadContent()

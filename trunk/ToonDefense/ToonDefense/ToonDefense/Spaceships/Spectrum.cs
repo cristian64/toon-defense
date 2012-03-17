@@ -19,8 +19,8 @@ namespace ToonDefense.Spaceships
         {
             Name = "Spectrum";
             Speed = 1;
-            InitialHealth = 300000;
-            Reward = 150;
+            InitialHealth = 10000;
+            Reward = 50;
             Position.Y = 0.9f;
         }
 

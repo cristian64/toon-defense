@@ -22,17 +22,18 @@ namespace ToonDefense.Towers
         {
             Name = "Missile Launcher";
             Sight = 5;
-            Damage = 350;
-            Delay = 750;
-            Price = 1000;
-            UpgradePrice = 2000;
+            Damage = 70;
+            Delay = 700;
+            Price = 500;
+            UpgradePrice = 650;
             Upgraded = false;
         }
 
         public override void Upgrade()
         {
             Sight = 8;
-            Damage = 1000;
+            Damage = 50;
+            Delay = 350;
             base.Upgrade();
         }
 

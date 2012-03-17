@@ -24,18 +24,18 @@ namespace ToonDefense.Towers
         {
             Name = "Force Extractor";
             Sight = 3.5f;
-            Damage = 20;
+            Damage = 30;
             Delay = 600;
-            Price = 35;
+            Price = 50;
             UpgradePrice = 100;
             Upgraded = false;
         }
 
         public override void Upgrade()
         {
-            Sight = 4;
-            Damage = 50;
-            Delay = 500;
+            Sight = 4.5f;
+            Damage = 60;
+            Delay = 400;
             base.Upgrade();
         }
 
