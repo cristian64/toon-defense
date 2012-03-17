@@ -20,6 +20,8 @@ namespace ToonDefense
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         KeyboardState prevKeyboardState;
+        public static SoundEffectInstance Ost;
+        public static bool PlayOst;
 
         public ToonDefense()
         {
@@ -66,6 +68,7 @@ namespace ToonDefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Ost = Content.Load<SoundEffect>("sounds\\ost").CreateInstance();
             base.LoadContent();
         }
 
@@ -85,6 +88,8 @@ namespace ToonDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (PlayOst && Ost.State == SoundState.Stopped)
+                Ost.Play();
             KeyboardState currentKeyboardState = Keyboard.GetState();
 
             // Allows the game to exit

@@ -41,6 +41,11 @@ namespace ToonDefense
             map1button = Game.Content.Load<Texture2D>("maps\\map1button");
             map2button = Game.Content.Load<Texture2D>("maps\\map2button");
             map3button = Game.Content.Load<Texture2D>("maps\\map3button");
+
+            ToonDefense.Ost.Play();
+            ToonDefense.PlayOst = true;
+            ToonDefense.Ost.Pitch = 0.0f;
+
             base.LoadContent();
         }
 

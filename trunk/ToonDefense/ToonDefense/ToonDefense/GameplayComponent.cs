@@ -47,7 +47,6 @@ namespace ToonDefense
         SoundEffect explosion;
         SoundEffect sold;
         SoundEffect portal;
-        public SoundEffectInstance Ost;
 
         public static GameplayComponent LastInstance = null;
 
@@ -122,8 +121,8 @@ namespace ToonDefense
             explosion = Game.Content.Load<SoundEffect>("sounds\\explosion");
             sold = Game.Content.Load<SoundEffect>("sounds\\sold");
             portal = Game.Content.Load<SoundEffect>("sounds\\portal");
-            Ost = Game.Content.Load<SoundEffect>("sounds\\ost").CreateInstance();
-            Ost.Play();
+            ToonDefense.Ost.Play();
+            ToonDefense.Ost.Pitch = 0.0f;
 
             base.LoadContent();
         }
