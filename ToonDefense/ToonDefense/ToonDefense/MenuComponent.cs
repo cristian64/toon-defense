@@ -15,6 +15,7 @@ namespace ToonDefense
     public class MenuComponent : DrawableGameComponent
     {
         Texture2D controlsTexture;
+        Texture2D otherControlsTexture;
         Texture2D map1button;
         Texture2D map2button;
         Texture2D map3button;
@@ -36,6 +37,7 @@ namespace ToonDefense
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             controlsTexture = Game.Content.Load<Texture2D>("images\\controls");
+            otherControlsTexture = Game.Content.Load<Texture2D>("images\\othercontrols");
             map1button = Game.Content.Load<Texture2D>("maps\\map1button");
             map2button = Game.Content.Load<Texture2D>("maps\\map2button");
             map3button = Game.Content.Load<Texture2D>("maps\\map3button");
@@ -65,9 +67,9 @@ namespace ToonDefense
                 }
             }
 
-            map1buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2 - map1button.Width - 25, GraphicsDevice.PresentationParameters.BackBufferHeight / 2 - map1button.Height / 2.0f);
-            map2buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2, GraphicsDevice.PresentationParameters.BackBufferHeight / 2 - map1button.Height / 2.0f);
-            map3buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2 + map1button.Width + 25, GraphicsDevice.PresentationParameters.BackBufferHeight / 2 - map1button.Height / 2.0f);
+            map1buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2 - map1button.Width - 25, GraphicsDevice.PresentationParameters.BackBufferHeight / 2.5f - map1button.Height / 2.0f);
+            map2buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2, GraphicsDevice.PresentationParameters.BackBufferHeight / 2.5f - map1button.Height / 2.0f);
+            map3buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2 + map1button.Width + 25, GraphicsDevice.PresentationParameters.BackBufferHeight / 2.5f - map1button.Height / 2.0f);
 
             prevMouseState = currentMouseState;
             base.Update(gameTime);
@@ -82,7 +84,8 @@ namespace ToonDefense
             position -= font.MeasureString("Click on a map to start the game") / 2;
             position -= new Vector2(0, font.MeasureString("Click on a map to start the game").Y);
             spriteBatch.DrawString(font, "Click on a map to start the game", position, Color.White);
-            spriteBatch.Draw(controlsTexture, new Vector2(0, GraphicsDevice.PresentationParameters.BackBufferHeight - controlsTexture.Height), Color.White);
+            spriteBatch.Draw(controlsTexture, new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - controlsTexture.Width / 2, map1buttonPosition.Y + map1button.Height + 100), Color.White);
+            spriteBatch.Draw(otherControlsTexture, new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth - otherControlsTexture.Width, GraphicsDevice.PresentationParameters.BackBufferHeight - otherControlsTexture.Height), Color.White);
             drawMapButtons();
             spriteBatch.End();
             base.Draw(gameTime);
