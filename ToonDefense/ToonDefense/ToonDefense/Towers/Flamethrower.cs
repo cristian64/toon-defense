@@ -22,8 +22,8 @@ namespace ToonDefense.Towers
         {
             Name = "Flamethrower";
             Sight = 3;
-            Damage = 25;
-            Delay = 32;
+            Damage = 75;
+            Delay = 100;
             Price = 2000;
             UpgradePrice = 3000;
             Upgraded = false;
