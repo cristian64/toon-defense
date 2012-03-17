@@ -12,22 +12,22 @@ using Microsoft.Xna.Framework.Media;
 
 namespace ToonDefense.Spaceships
 {
-    public class BattleCruiser : Spaceship
+    public class EquipoME : Spaceship
     {
-        public BattleCruiser(Game game, Camera camera)
+        public EquipoME(Game game, Camera camera)
             : base(game, camera)
         {
-            Name = "Battle Cruiser";
-            Speed = 2.4f;
-            InitialHealth = 80000;
-            Reward = 120;
-            Position.Y = 1.2f;
+            Name = "Equipo ME";
+            Speed = 1.4f;
+            InitialHealth = 2000000;
+            Reward = 5000;
+            Position.Y = 1f;
         }
 
         protected override void LoadContent()
         {
-            model = Game.Content.Load<Model>("models\\battlecruiser");
-            texture = Game.Content.Load<Texture2D>("models\\battlecruisertexture");
+            model = Game.Content.Load<Model>("models\\equipome");
+            texture = Game.Content.Load<Texture2D>("models\\equipometexture");
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
 
