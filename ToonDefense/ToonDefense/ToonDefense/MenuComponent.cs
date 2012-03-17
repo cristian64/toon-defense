@@ -70,6 +70,9 @@ namespace ToonDefense
                     Game.Components.Add(new FadeOutComponent(Game, 0, 500, new GameplayComponent(Game, "map3"), new FadeInComponent(Game, 500, 500)));
                     created = true;
                 }
+
+                if (created)
+                    Game.Content.Load<SoundEffect>("sounds\\upgrade").Play();
             }
 
             map1buttonPosition = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - map1button.Width / 2 - map1button.Width - 25, GraphicsDevice.PresentationParameters.BackBufferHeight / 2.5f - map1button.Height / 2.0f);
