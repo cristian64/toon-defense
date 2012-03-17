@@ -74,9 +74,9 @@ namespace ToonDefense
             camera.World = world;
             GuiComponents.Add(new RoundManager(Game, camera, world));
             GuiComponents.Add(new LabelManager(Game, camera, world));
-            GuiComponents.Add(new BuildingPanel(Game, camera, world, player));
             GuiComponents.Add(new SpeedPanel(Game));
             GuiComponents.Add(new SelectingPanel(Game, camera, world));
+            GuiComponents.Add(new BuildingPanel(Game, camera, world, player));
             GuiComponents.Add(camera);
 
             fireParticleSystem = new FireParticleSystem(Game, Game.Content, camera);

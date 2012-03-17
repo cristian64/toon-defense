@@ -16,7 +16,8 @@ namespace ToonDefense
 {
     public class SelectingPanel : DrawableGameComponent
     {
-        Object selected;
+        public static SelectingPanel LastInstance = null;
+        public Object Selection;
         Camera camera;
         World world;
         SpriteBatch spriteBatch;
@@ -32,6 +33,7 @@ namespace ToonDefense
         public SelectingPanel(Game game, Camera camera, World world)
             : base(game)
         {
+            LastInstance = this;
             this.camera = camera;
             this.world = world;
         }
@@ -51,23 +53,24 @@ namespace ToonDefense
         {
             MouseState currentMouseState = Mouse.GetState();
 
-            Spaceship spaceship = selected as Spaceship;
+            Spaceship spaceship = Selection as Spaceship;
             if (spaceship != null && (spaceship.Health <= 0 || spaceship.Destinations.Count == 0))
-                selected = null;
+                Selection = null;
 
-            Tower tower = selected as Tower;
+            Tower tower = Selection as Tower;
             if (tower != null && tower.Sold)
-                selected = null;
+                Selection = null;
 
             int grabbingAmount = Math.Abs(currentMouseState.X - camera.GrabbingX) + Math.Abs(currentMouseState.Y - camera.GrabbingY);
 
             if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 5) &&
                 !IsOnSell(currentMouseState.X, currentMouseState.Y) && !IsOnUpgrade(currentMouseState.X, currentMouseState.Y) &&
-                !SpeedPanel.LastInstance.IsOnButtons(currentMouseState.X, currentMouseState.Y))
+                !SpeedPanel.LastInstance.IsOnButtons(currentMouseState.X, currentMouseState.Y) &&
+                BuildingPanel.LastInstance.Tower == null)
             {
-                if (selected != null)
-                    selected.Selected = false;
-                selected = null;
+                if (Selection != null)
+                    Selection.Selected = false;
+                Selection = null;
 
                 float distance = float.MaxValue;
                 Object candidate = null;
@@ -83,22 +86,22 @@ namespace ToonDefense
                     }
                 }
 
-                selected = candidate;
-                if (selected != null)
-                    selected.Selected = true;
+                Selection = candidate;
+                if (Selection != null)
+                    Selection.Selected = true;
             }
 
             if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 5) &&
                 IsOnSell(currentMouseState.X, currentMouseState.Y))
             {
-                (selected as Tower).Sold = true;
+                (Selection as Tower).Sold = true;
             }
 
             if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 5) &&
                 IsOnUpgrade(currentMouseState.X, currentMouseState.Y))
             {
-                if ((selected as Tower).UpgradePrice <= Player.LastInstance.Money)
-                    (selected as Tower).Upgrade();
+                if ((Selection as Tower).UpgradePrice <= Player.LastInstance.Money)
+                    (Selection as Tower).Upgrade();
             }
 
             prevMouseState = currentMouseState;
@@ -107,18 +110,18 @@ namespace ToonDefense
 
         public override void Draw(GameTime gameTime)
         {
-            if (selected != null)
+            if (Selection != null)
             {
-                string[] text = selected.ToText();
-                Vector2 position = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth - Math.Max(font2.MeasureString(selected.Name).X, font.MeasureString(text[0]).X + font.MeasureString(text[1]).X), 0);
+                string[] text = Selection.ToText();
+                Vector2 position = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth - Math.Max(font2.MeasureString(Selection.Name).X, font.MeasureString(text[0]).X + font.MeasureString(text[1]).X), 0);
                 position += new Vector2(-20, 10);
-                Vector2 position2 = position + new Vector2(0, font2.MeasureString(selected.Name).Y);
+                Vector2 position2 = position + new Vector2(0, font2.MeasureString(Selection.Name).Y);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-                spriteBatch.DrawString(font2, selected.Name, position + Vector2.UnitX, Color.Black);
-                spriteBatch.DrawString(font2, selected.Name, position - Vector2.UnitX, Color.Black);
-                spriteBatch.DrawString(font2, selected.Name, position + Vector2.UnitY, Color.Black);
-                spriteBatch.DrawString(font2, selected.Name, position - Vector2.UnitY, Color.Black);
-                spriteBatch.DrawString(font2, selected.Name, position, selected as Spaceship != null ? Color.Red : Color.Lime);
+                spriteBatch.DrawString(font2, Selection.Name, position + Vector2.UnitX, Color.Black);
+                spriteBatch.DrawString(font2, Selection.Name, position - Vector2.UnitX, Color.Black);
+                spriteBatch.DrawString(font2, Selection.Name, position + Vector2.UnitY, Color.Black);
+                spriteBatch.DrawString(font2, Selection.Name, position - Vector2.UnitY, Color.Black);
+                spriteBatch.DrawString(font2, Selection.Name, position, Selection as Spaceship != null ? Color.Red : Color.Lime);
                 spriteBatch.DrawString(font, text[0], position2 + Vector2.UnitX, Color.Black);
                 spriteBatch.DrawString(font, text[0], position2 - Vector2.UnitX, Color.Black);
                 spriteBatch.DrawString(font, text[0], position2 + Vector2.UnitY, Color.Black);
@@ -132,7 +135,7 @@ namespace ToonDefense
                 spriteBatch.DrawString(font, text[1], position3, Color.White);
                 
 
-                Tower tower = selected as Tower;
+                Tower tower = Selection as Tower;
                 if (tower != null)
                 {
                     redButtonPosition = position2 + new Vector2(0, font.MeasureString(text[0]).Y + 5);
@@ -176,7 +179,7 @@ namespace ToonDefense
 
         public bool IsOnSell(int x, int y)
         {
-            Tower tower = selected as Tower;
+            Tower tower = Selection as Tower;
             return tower != null && BuildingPanel.LastInstance.Tower == null &&
                 redButtonPosition.X <= x && x <= redButtonPosition.X + redButton.Width &&
                 redButtonPosition.Y <= y && y <= redButtonPosition.Y + redButton.Height;
@@ -184,7 +187,7 @@ namespace ToonDefense
 
         public bool IsOnUpgrade(int x, int y)
         {
-            Tower tower = selected as Tower;
+            Tower tower = Selection as Tower;
             return tower != null && BuildingPanel.LastInstance.Tower == null &&
                 greenButtonPosition.X <= x && x <= greenButtonPosition.X + greenButton.Width &&
                 greenButtonPosition.Y <= y && y <= greenButtonPosition.Y + greenButton.Height;
