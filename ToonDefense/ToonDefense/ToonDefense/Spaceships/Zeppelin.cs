@@ -18,10 +18,10 @@ namespace ToonDefense.Spaceships
             : base(game, camera)
         {
             Name = "Zeppelin";
-            Speed = 1.6f;
-            InitialHealth = 5000;
-            Reward = 30;
-            Position.Y = 1.7f;
+            Speed = 0.8f;
+            InitialHealth = 10000;
+            Reward = 40;
+            Position.Y = 4.5f;
         }
 
         protected override void LoadContent()

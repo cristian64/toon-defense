@@ -21,7 +21,7 @@ namespace ToonDefense.Spaceships
             Name = "Hoverboard";
             Speed = 2;
             InitialHealth = 300;
-            Reward = 5;
+            Reward = 7;
             Position.Y = 0.2f + (random.Next() % 30) / 100.0f;
         }
 

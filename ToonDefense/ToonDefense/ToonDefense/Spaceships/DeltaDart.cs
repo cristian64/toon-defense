@@ -21,7 +21,7 @@ namespace ToonDefense.Spaceships
             Name = "Delta Dart";
             Speed = 4;
             InitialHealth = 1500;
-            Reward = 15;
+            Reward = 18;
             Position.Y = 0.75f;
         }
 

@@ -22,7 +22,7 @@ namespace ToonDefense.Towers
         {
             Name = "Flamethrower";
             Sight = 3;
-            Damage = 15;
+            Damage = 25;
             Delay = 90;
             Price = 700;
             UpgradePrice = 900;
@@ -32,7 +32,7 @@ namespace ToonDefense.Towers
         public override void Upgrade()
         {
             Sight = 3.5f;
-            Damage = 20;
+            Damage = 35;
             base.Upgrade();
         }
 

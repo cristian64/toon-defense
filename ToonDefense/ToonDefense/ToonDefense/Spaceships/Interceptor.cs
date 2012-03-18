@@ -20,7 +20,7 @@ namespace ToonDefense.Spaceships
             Name = "Interceptor";
             Speed = 3.5f;
             InitialHealth = 1000;
-            Reward = 10;
+            Reward = 12;
             Position.Y = 0.55f;
         }
 
