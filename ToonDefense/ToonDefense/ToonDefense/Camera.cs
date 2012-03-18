@@ -119,6 +119,7 @@ namespace ToonDefense
             MouseState currentMouseState = Mouse.GetState();
             if (Game.IsActive && Enabled)
             {
+
                 if (Keyboard.GetState().IsKeyDown(Keys.F10) && prevKeyboardState.IsKeyUp(Keys.F10))
                     FreeCamera = !freeCamera;
 
@@ -215,14 +216,13 @@ namespace ToonDefense
 
                     projection = Matrix.CreatePerspectiveFieldOfView(0.2f, aspectRatio, nearPlaneDistance, farPlaneDistance);
                     view = Matrix.CreateLookAt(position, target, Vector3.Up);
-
-                    prevMouseState = Mouse.GetState();
                 }
-
-                prevKeyboardState = Keyboard.GetState();
-
-                base.Update(gameTime);
             }
+
+            prevMouseState = Mouse.GetState();
+            prevKeyboardState = Keyboard.GetState();
+
+            base.Update(gameTime);
         }
 
         public Vector3 Target
