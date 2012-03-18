@@ -19,7 +19,7 @@ namespace ToonDefense.Spaceships
         {
             Name = "Gunner";
             Speed = 1.3f;
-            InitialHealth = 3300;
+            InitialHealth = 4000;
             Reward = 20;
             Position.Y = 1.05f;
         }
