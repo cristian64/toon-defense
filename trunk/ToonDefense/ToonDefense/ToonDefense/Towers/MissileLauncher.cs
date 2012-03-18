@@ -32,8 +32,8 @@ namespace ToonDefense.Towers
         public override void Upgrade()
         {
             Sight = 8;
-            Damage = 50;
-            Delay = 350;
+            Damage = 200;
+            Delay = 1000;
             base.Upgrade();
         }
 

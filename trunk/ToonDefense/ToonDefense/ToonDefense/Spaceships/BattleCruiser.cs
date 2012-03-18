@@ -20,7 +20,7 @@ namespace ToonDefense.Spaceships
             Name = "Battle Cruiser";
             Speed = 2.4f;
             InitialHealth = 7000;
-            Reward = 40;
+            Reward = 50;
             Position.Y = 1.2f;
         }
 

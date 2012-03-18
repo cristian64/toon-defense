@@ -20,7 +20,7 @@ namespace ToonDefense.Spaceships
             Name = "Equipo ME";
             Speed = 1.4f;
             InitialHealth = 50000;
-            Reward = 60;
+            Reward = 80;
             Position.Y = 1f;
         }
 
