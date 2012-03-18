@@ -147,6 +147,7 @@ namespace ToonDefense
                             for (int j = 0; j < 30; j++)
                                 explosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
                             DrawableComponents.RemoveAt(i);
+                            spaceship.Dispose();
                             explosion.Play();
                             LabelManager.LastInstance.AddLabel("+" + spaceship.Reward, 2000, spaceship.Position, Color.Lime);
                         }
@@ -159,6 +160,7 @@ namespace ToonDefense
                                 plasmaExplosionParticleSystem.AddParticle(spaceship.Position, Vector3.Zero);
                             spaceship.Health = 0;
                             DrawableComponents.RemoveAt(i);
+                            spaceship.Dispose();
                             portal.Play();
                         }
                     }
@@ -173,6 +175,7 @@ namespace ToonDefense
                                 for (int j = 0; j < 30; j++)
                                     explosionSmokeParticleSystem.AddParticle(tower.Position, Vector3.Zero);
                                 DrawableComponents.RemoveAt(i);
+                                tower.Dispose();
                                 sold.Play();
                                 world.SetBuildable(new Vector3(tower.Position.X - tower.Width / 2.0f, 0, tower.Position.Z - tower.Depth / 2.0f), new Vector3(tower.Position.X + tower.Width / 2.0f, 0, tower.Position.Z + tower.Depth / 2.0f));
                                 LabelManager.LastInstance.AddLabel("+" + (tower.Price + (tower.Upgraded ? tower.UpgradePrice : 0)) / 2, 2000, tower.Position, Color.Lime);
@@ -182,7 +185,10 @@ namespace ToonDefense
                         {
                             Projectile projectile = DrawableComponents[i] as Projectile;
                             if (projectile != null && projectile.NoTarget)
+                            {
                                 DrawableComponents.RemoveAt(i);
+                                projectile.Dispose();
+                            }
                         }
                     }
                 }

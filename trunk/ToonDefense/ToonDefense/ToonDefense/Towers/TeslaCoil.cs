@@ -25,7 +25,7 @@ namespace ToonDefense.Towers
             Name = "Force Extractor";
             Sight = 3.5f;
             Damage = 30;
-            Delay = 600;
+            Delay = 500;
             Price = 50;
             UpgradePrice = 100;
             Upgraded = false;

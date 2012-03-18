@@ -33,7 +33,7 @@ namespace ToonDefense.Towers
         {
             Sight = 4.5f;
             Damage = 130;
-            Delay = 1000;
+            Delay = 800;
             base.Upgrade();
         }
 
