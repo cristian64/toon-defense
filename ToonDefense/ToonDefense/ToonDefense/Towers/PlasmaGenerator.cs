@@ -22,7 +22,7 @@ namespace ToonDefense.Towers
         {
             Name = "Plasma Generator";
             Sight = 4;
-            Damage = 70;
+            Damage = 80;
             Delay = 1000;
             Price = 150;
             UpgradePrice = 400;
@@ -32,7 +32,7 @@ namespace ToonDefense.Towers
         public override void Upgrade()
         {
             Sight = 4.5f;
-            Damage = 130;
+            Damage = 160;
             Delay = 800;
             base.Upgrade();
         }
