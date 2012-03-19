@@ -803,15 +803,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="particlesystem\electricity.png">
-      <Name>electricity</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="particlesystem\electricity2.png">
-      <Name>electricity2</Name>
+    <Compile Include="particlesystem\electricityball.png">
+      <Name>electricityball</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
