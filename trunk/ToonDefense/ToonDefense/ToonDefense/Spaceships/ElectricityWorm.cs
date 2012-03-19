@@ -21,8 +21,8 @@ namespace ToonDefense.Spaceships
         {
             Name = "Electricity Worm";
             Speed = 1.4f;
-            InitialHealth = 40000;
-            Reward = 110;
+            InitialHealth = 45000;
+            Reward = 150;
             Position.Y = 1f;
         }
 

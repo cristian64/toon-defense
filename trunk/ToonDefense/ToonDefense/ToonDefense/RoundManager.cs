@@ -1075,7 +1075,7 @@ namespace ToonDefense
 
         public void Round131()
         {
-            generationDelay = 200;
+            generationDelay = 100;
             int number = 30 + RoundNumber - roundCount;
             for (int i = 0; i < number; i++)
             {

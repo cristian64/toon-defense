@@ -18,8 +18,8 @@ namespace ToonDefense.Spaceships
             : base(game, camera)
         {
             Name = "Science Vessel";
-            Speed = 1;
-            InitialHealth = 30000;
+            Speed = 1.5f;
+            InitialHealth = 35000;
             Reward = 100;
         }
 

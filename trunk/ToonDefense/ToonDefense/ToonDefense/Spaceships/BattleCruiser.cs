@@ -18,8 +18,8 @@ namespace ToonDefense.Spaceships
             : base(game, camera)
         {
             Name = "Battle Cruiser";
-            Speed = 2.4f;
-            InitialHealth = 17000;
+            Speed = 2.7f;
+            InitialHealth = 20000;
             Reward = 80;
             Position.Y = 1.2f;
         }
