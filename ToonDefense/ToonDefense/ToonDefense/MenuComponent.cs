@@ -88,12 +88,7 @@ namespace ToonDefense
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             drawMapButtons();
-            SpriteFont font = Game.Content.Load<SpriteFont>("fonts\\title");
-            Vector2 position = new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2, map1buttonPosition.Y);
-            position -= font.MeasureString("Click on a map to start the game") / 2;
-            position -= new Vector2(0, font.MeasureString("Click on a map to start the game").Y);
-            spriteBatch.DrawString(font, "Click on a map to start the game", position, Color.White);
-            spriteBatch.Draw(controlsTexture, new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - controlsTexture.Width / 2, map1buttonPosition.Y + map1button.Height + 100), Color.White);
+            spriteBatch.Draw(controlsTexture, new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth / 2 - controlsTexture.Width / 2, map1buttonPosition.Y + map1button.Height + 50), Color.White);
             spriteBatch.Draw(otherControlsTexture, new Vector2(GraphicsDevice.PresentationParameters.BackBufferWidth - otherControlsTexture.Width, GraphicsDevice.PresentationParameters.BackBufferHeight - otherControlsTexture.Height), Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
