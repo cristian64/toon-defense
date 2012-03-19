@@ -57,7 +57,7 @@ namespace ToonDefense.Towers
 
         public override void Update(GameTime gameTime)
         {
-            if (Target != null)
+            if (Target != null && Target.Destinations.Count > 0)
             {
                 Vector3 targetDirection = Target.Destinations[0] - Target.Position;
                 targetDirection.Y = 0;
