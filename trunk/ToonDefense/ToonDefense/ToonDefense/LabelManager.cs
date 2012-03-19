@@ -39,12 +39,6 @@ namespace ToonDefense
             this.camera = camera;
             this.world = world;
             labels = new List<Label>();
-
-            Label hey = new Label();
-            hey.Text = "pollaca";
-            hey.Position = Vector3.Up;
-            hey.Color = Color.Indigo;
-            labels.Add(hey);
         }
 
         protected override void LoadContent()
@@ -57,16 +51,21 @@ namespace ToonDefense
         public override void Update(GameTime gameTime)
         {
             if (GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
+            {
+                float time = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (GameplayComponent.LastInstance.SpeedLevel == SpeedLevel.FAST)
+                    time /= 4;
                 for (int i = labels.Count - 1; i >= 0; i--)
                 {
                     Label label = labels[i];
-                    label.Duration -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    label.Duration -= time;
                     label.Color = label.Color * Math.Min(1.0f, (label.Duration / 1000.0f));
                     label.Position += new Vector3(0, 0.01f, 0);
 
                     if (label.Duration <= 0)
                         labels.RemoveAt(i);
                 }
+            }
             base.Update(gameTime);
         }
 

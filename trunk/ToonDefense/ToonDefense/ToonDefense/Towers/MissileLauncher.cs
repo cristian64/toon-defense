@@ -17,11 +17,12 @@ namespace ToonDefense.Towers
     public class MissileLauncher : Tower
     {
         SoundEffect sound;
+
         public MissileLauncher(Game game, Camera camera)
             : base(game, camera)
         {
             Name = "Missile Launcher";
-            Sight = 5;
+            Sight = 5.5f;
             Damage = 70;
             Delay = 700;
             Price = 500;

@@ -63,7 +63,7 @@ namespace ToonDefense
 
             int grabbingAmount = Math.Abs(currentMouseState.X - camera.GrabbingX) + Math.Abs(currentMouseState.Y - camera.GrabbingY);
 
-            if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 5) &&
+            if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 8) &&
                 !IsOnSell(currentMouseState.X, currentMouseState.Y) && !IsOnUpgrade(currentMouseState.X, currentMouseState.Y) &&
                 !SpeedPanel.LastInstance.IsOnButtons(currentMouseState.X, currentMouseState.Y) &&
                 BuildingPanel.LastInstance.Tower == null)
@@ -91,13 +91,13 @@ namespace ToonDefense
                     Selection.Selected = true;
             }
 
-            if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 5) &&
+            if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 8) &&
                 IsOnSell(currentMouseState.X, currentMouseState.Y) && GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
             {
                 (Selection as Tower).Sold = true;
             }
 
-            if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 5) &&
+            if (currentMouseState.LeftButton == ButtonState.Released && prevMouseState.LeftButton == ButtonState.Pressed && (!camera.Grabbing || grabbingAmount < 8) &&
                 IsOnUpgrade(currentMouseState.X, currentMouseState.Y) && GameplayComponent.LastInstance.SpeedLevel != SpeedLevel.PAUSED)
             {
                 if ((Selection as Tower).UpgradePrice <= Player.LastInstance.Money)

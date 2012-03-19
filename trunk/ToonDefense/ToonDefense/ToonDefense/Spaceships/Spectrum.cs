@@ -18,9 +18,9 @@ namespace ToonDefense.Spaceships
             : base(game, camera)
         {
             Name = "Spectrum";
-            Speed = 1;
-            InitialHealth = 10000;
-            Reward = 60;
+            Speed = 1.5f;
+            InitialHealth = 25000;
+            Reward = 90;
             Position.Y = 0.9f;
         }
 
