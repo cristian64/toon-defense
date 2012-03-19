@@ -81,7 +81,7 @@ namespace ToonDefense.Spaceships
                         else
                             difference -= MathHelper.TwoPi;
 
-                    Rotation.Y += 2 * (float)seconds * (float)difference;
+                    Rotation.Y += Speed * (float)seconds * (float)difference;
                     if (Rotation.Y > MathHelper.TwoPi)
                         Rotation.Y -= MathHelper.TwoPi;
                     else if (Rotation.Y < -MathHelper.TwoPi)
