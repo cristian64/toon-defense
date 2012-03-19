@@ -37,13 +37,16 @@ namespace ToonDefense.Spaceships
 
         public override void Update(GameTime gameTime)
         {
-            Vector3 direction = Destinations[0] - Position;
-            direction.Y = 0;
-            direction.Normalize();
-            Vector3 normal = new Vector3(-direction.Z, 0, direction.X);
-            
-            WhiteTrailParticleSystem.LastInstance.AddParticle(Position + normal * 0.12f - direction * (Width / 2), Vector3.Zero);
-            WhiteTrailParticleSystem.LastInstance.AddParticle(Position - normal * 0.12f - direction * (Width / 2), Vector3.Zero);
+            if (Destinations.Count > 0)
+            {
+                Vector3 direction = Destinations[0] - Position;
+                direction.Y = 0;
+                direction.Normalize();
+                Vector3 normal = new Vector3(-direction.Z, 0, direction.X);
+
+                WhiteTrailParticleSystem.LastInstance.AddParticle(Position + normal * 0.12f - direction * (Width / 2), Vector3.Zero);
+                WhiteTrailParticleSystem.LastInstance.AddParticle(Position - normal * 0.12f - direction * (Width / 2), Vector3.Zero);
+            }
             base.Update(gameTime);
         }
 
