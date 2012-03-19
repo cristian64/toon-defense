@@ -7,6 +7,7 @@ using ToonDefense.Spaceships;
 using ToonDefense.ParticleSystem;
 using System.Reflection;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace ToonDefense
 {
@@ -84,6 +85,7 @@ namespace ToonDefense
                             {
                                 methodInfo.Invoke(this, null);
                                 displayTimeCounter = displayTime;
+                                Game.Content.Load<SoundEffect>("sounds\\round").Play();
                             }
 
                             foreach (Spaceship i in pendentShips)
