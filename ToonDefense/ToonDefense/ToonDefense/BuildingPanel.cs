@@ -110,6 +110,10 @@ namespace ToonDefense
                     player.Money -= Tower.Price;
                     Game.Content.Load<SoundEffect>("sounds\\build").Play();
                     LabelManager.LastInstance.AddLabel("-" + Tower.Price, 2000, Tower.Position, Color.Red);
+                    if (SelectingPanel.LastInstance.Selection != null)
+                        SelectingPanel.LastInstance.Selection.Selected = false;
+                    SelectingPanel.LastInstance.Selection = Tower;
+                    Tower.Selected = true;
                 }
                 Tower = null;
             }

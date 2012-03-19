@@ -127,7 +127,9 @@
     <Compile Include="BuildingPanel.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="LabelManager.cs" />
+    <Compile Include="ParticleSystem\ElectricityBallParticleSystem.cs" />
     <Compile Include="SelectingPanel.cs" />
+    <Compile Include="Spaceships\ElectricityWorm.cs" />
     <Compile Include="Spaceships\EquipoME.cs" />
     <Compile Include="SpeedPanel.cs" />
     <Compile Include="FadeInComponent.cs" />

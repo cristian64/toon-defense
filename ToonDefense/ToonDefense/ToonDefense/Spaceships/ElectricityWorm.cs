@@ -9,18 +9,21 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using ToonDefense.ParticleSystem;
 
 namespace ToonDefense.Spaceships
 {
-    public class ScienceVessel : Spaceship
+    public class ElectricityWorm : Spaceship
     {
-        public ScienceVessel(Game game, Camera camera)
+        ParticleEmitter particleEmitter;
+        public ElectricityWorm(Game game, Camera camera)
             : base(game, camera)
         {
-            Name = "Science Vessel";
-            Speed = 1;
-            InitialHealth = 30000;
-            Reward = 100;
+            Name = "Electricity Worm";
+            Speed = 1.4f;
+            InitialHealth = 40000;
+            Reward = 110;
+            Position.Y = 1f;
         }
 
         protected override void LoadContent()
@@ -30,34 +33,21 @@ namespace ToonDefense.Spaceships
             effect = Game.Content.Load<Effect>("effects\\Toon").Clone();
             effect.Parameters["Texture"].SetValue(texture);
 
-            Position.Y = Height / 2.0f;
+            particleEmitter = new ParticleEmitter(ElectricityBallParticleSystem.LastInstance, 20, Vector3.Zero);
 
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            Rotation.Z -= MathHelper.Pi / 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //ElectricityBallParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
+            particleEmitter.Update(gameTime, Position);
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
             DrawShadow();
-            Matrix world = Matrix.CreateScale(Scale) * Matrix.CreateRotationZ(Rotation.Z) * Matrix.CreateRotationY(Rotation.Y) * Matrix.CreateTranslation(Position);
-            foreach (ModelMesh mesh in model.Meshes)
-            {
-                foreach (ModelMeshPart part in mesh.MeshParts)
-                {
-                    part.Effect = effect;
-                    effect.Parameters["World"].SetValue(world);
-                    effect.Parameters["View"].SetValue(Camera.View);
-                    effect.Parameters["Projection"].SetValue(Camera.Projection);
-                    effect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Transpose(Matrix.Invert(world)));
-                }
-                mesh.Draw();
-            }
-
             base.Draw(gameTime);
         }
     }

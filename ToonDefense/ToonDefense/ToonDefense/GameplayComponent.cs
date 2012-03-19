@@ -43,6 +43,7 @@ namespace ToonDefense
         LaserParticleSystem laserParticleSystem;
         ForceFieldParticleSystem forceFieldParticleSystem;
         PlasmaParticleSystem plasmaParticleSystem;
+        ElectricityBallParticleSystem electricityBallParticleSystem;
 
         SoundEffect explosion;
         SoundEffect sold;
@@ -89,6 +90,7 @@ namespace ToonDefense
             laserParticleSystem = new LaserParticleSystem(Game, Game.Content, camera);
             forceFieldParticleSystem = new ForceFieldParticleSystem(Game, Game.Content, camera);
             plasmaParticleSystem = new PlasmaParticleSystem(Game, Game.Content, camera);
+            electricityBallParticleSystem = new ElectricityBallParticleSystem(Game, Game.Content, camera);
 
             particleSystems.Add(explosionSmokeParticleSystem);
             particleSystems.Add(whiteTrailParticleSystem);
@@ -101,6 +103,7 @@ namespace ToonDefense
             particleSystems.Add(laserParticleSystem);
             particleSystems.Add(forceFieldParticleSystem);
             particleSystems.Add(plasmaParticleSystem);
+            particleSystems.Add(electricityBallParticleSystem);
 
             DrawableComponents.Add(new Axis(Game, camera));
 

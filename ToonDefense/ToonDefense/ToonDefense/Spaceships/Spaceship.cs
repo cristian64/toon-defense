@@ -81,7 +81,7 @@ namespace ToonDefense.Spaceships
                         else
                             difference -= MathHelper.TwoPi;
 
-                    Rotation.Y += 10 * (float)seconds * (float)difference;
+                    Rotation.Y += 2 * (float)seconds * (float)difference;
                     if (Rotation.Y > MathHelper.TwoPi)
                         Rotation.Y -= MathHelper.TwoPi;
                     else if (Rotation.Y < -MathHelper.TwoPi)
@@ -103,7 +103,7 @@ namespace ToonDefense.Spaceships
             Vector3 position = Camera.RayFromWorldToScreen(Position);
             if (position.Z < 1)
             {
-                position.Y -= 20;
+                position.Y -= 30;
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
                 spriteBatch.Draw(blackTexture, new Rectangle((int)position.X, (int)position.Y, 32, 4), Color.White);
                 spriteBatch.Draw(greenTexture, new Rectangle((int)position.X + 1, (int)position.Y + 1, (int)(30 * (Health / (float)InitialHealth)), 2), Color.White);
