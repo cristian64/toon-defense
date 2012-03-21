@@ -67,7 +67,8 @@ namespace ToonDefense.Projectiles
                         PlasmaExplosionParticleSystem.LastInstance.AddParticle(Position, Vector3.Zero);
                         Target.Health -= Damage;
                         NoTarget = true;
-                        sound.Play();
+                        if (ToonDefense.SoundsCount == SoundsCount.LOTS)
+                            sound.Play();
                     }
                 }
             }

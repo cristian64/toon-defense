@@ -58,7 +58,8 @@ namespace ToonDefense.Towers
             plasma.Damage = Damage;
             plasma.Position = Position + new Vector3(-0.45f, Height - 0.4f, 0);
             GameplayComponent.LastInstance.SpawnComponents.Add(plasma);
-            sound.Play();
+            if (ToonDefense.SoundsCount == SoundsCount.LOTS)
+                sound.Play();
             base.Shoot();
         }
 

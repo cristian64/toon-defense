@@ -61,7 +61,8 @@ namespace ToonDefense.Towers
             direction.Y = 0;
             missile.Position = Position + new Vector3(0, Height - 0.5f, 0) + 0.3f * direction;
             GameplayComponent.LastInstance.SpawnComponents.Add(missile);
-            sound.Play();
+            if (ToonDefense.SoundsCount == SoundsCount.LOTS)
+                sound.Play();
             base.Shoot();
         }
 
