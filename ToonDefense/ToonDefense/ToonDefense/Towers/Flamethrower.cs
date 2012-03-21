@@ -70,7 +70,7 @@ namespace ToonDefense.Towers
                 FireParticleSystem.LastInstance.AddParticle(Position + direction, 3 * direction2); 
             }
 
-            if (Target != null && sound.State != SoundState.Playing)
+            if (Target != null && sound.State != SoundState.Playing && ToonDefense.SoundsCount == SoundsCount.LOTS)
                 sound.Play();
             if (Target == null && sound.State == SoundState.Playing)
                 sound.Stop();

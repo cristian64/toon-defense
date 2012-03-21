@@ -69,7 +69,7 @@ namespace ToonDefense.Towers
         {
             laserEmitter.Update(gameTime, Position + Vector3.Up * 0.2f);
 
-            if (Target != null && sound.State != SoundState.Playing)
+            if (Target != null && sound.State != SoundState.Playing && ToonDefense.SoundsCount == SoundsCount.LOTS)
                 sound.Play();
             else if (Target == null && sound.State == SoundState.Playing)
                 sound.Stop();

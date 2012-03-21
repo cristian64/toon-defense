@@ -23,6 +23,7 @@ namespace ToonDefense
         Texture2D playButtonOn;
         Texture2D soundButton;
         Texture2D soundButtonOn;
+        Texture2D soundButtonMiddle;
         MouseState prevMouseState;
         KeyboardState prevKeyboardState;
         int size;
@@ -42,6 +43,7 @@ namespace ToonDefense
             playButtonOn = Game.Content.Load<Texture2D>("images\\playon");
             soundButton = Game.Content.Load<Texture2D>("images\\sound");
             soundButtonOn = Game.Content.Load<Texture2D>("images\\soundon");
+            soundButtonMiddle = Game.Content.Load<Texture2D>("images\\soundmiddle");
             size = 32;
             base.LoadContent();
         }
@@ -56,10 +58,20 @@ namespace ToonDefense
                 {
                     if (0 <= currentMouseState.X && currentMouseState.X <= size)
                     {
-                        if (SoundEffect.MasterVolume == 0)
-                            SoundEffect.MasterVolume = 1;
+                        if (ToonDefense.SoundsCount == SoundsCount.NONE)
+                            ToonDefense.SoundsCount = SoundsCount.LOTS;
+                        else if (ToonDefense.SoundsCount == SoundsCount.LOTS)
+                            ToonDefense.SoundsCount = SoundsCount.FEW;
                         else
+                            ToonDefense.SoundsCount = SoundsCount.NONE;
+
+                        ToonDefense.Ost.Volume = 1.0f;
+                        if (ToonDefense.SoundsCount == SoundsCount.NONE)
                             SoundEffect.MasterVolume = 0;
+                        else if (ToonDefense.SoundsCount == SoundsCount.FEW)
+                            ToonDefense.Ost.Volume = 0.2f;
+                        else
+                            SoundEffect.MasterVolume = 1f;
                     }
                     else if (size + 1 <= currentMouseState.X && currentMouseState.X <= size * 2)
                     {
@@ -130,9 +142,11 @@ namespace ToonDefense
                 spriteBatch.Draw(pauseButton, new Rectangle(size, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
                 spriteBatch.Draw(playButtonOn, new Rectangle(size * 2, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
             }
-            if (SoundEffect.MasterVolume == 0)
+            if (ToonDefense.SoundsCount == SoundsCount.NONE)
                 spriteBatch.Draw(soundButton, new Rectangle(0, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
-            else
+            else if (ToonDefense.SoundsCount == SoundsCount.FEW)
+                spriteBatch.Draw(soundButtonMiddle, new Rectangle(0, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
+            else if (ToonDefense.SoundsCount == SoundsCount.LOTS)
                 spriteBatch.Draw(soundButtonOn, new Rectangle(0, GraphicsDevice.Viewport.Height - size, size, size), Color.White);
             spriteBatch.End();
 

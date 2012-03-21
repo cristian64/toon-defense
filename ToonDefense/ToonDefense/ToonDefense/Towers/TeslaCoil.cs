@@ -58,7 +58,8 @@ namespace ToonDefense.Towers
         {
             ForceFieldParticleSystem.LastInstance.AddParticle(Target.Position, Position - Target.Position);
             Target.Health -= Damage;
-            soundEffect.Play();
+            if (ToonDefense.SoundsCount == SoundsCount.LOTS)
+                soundEffect.Play();
             base.Shoot();
         }
 

@@ -11,6 +11,8 @@ using Microsoft.Xna.Framework.Media;
 
 namespace ToonDefense
 {
+    public enum SoundsCount { NONE, FEW, LOTS }
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -22,6 +24,7 @@ namespace ToonDefense
         KeyboardState prevKeyboardState;
         public static SoundEffectInstance Ost;
         public static bool PlayOst;
+        public static SoundsCount SoundsCount = SoundsCount.LOTS;
 
         public ToonDefense()
         {
