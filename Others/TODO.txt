@@ -1,0 +1,12 @@
+(01:17:43) aebsubis: - Gráficos pobres
+- Posicionamiento de las torres de mierda (se necesita mucho pulso).
+- Mostrar características de las torres antes de comprarlas.
+- Mostrar cambios antes de upgradearlas.
+- Ajustar volumen en el menú.
+- Opción para bloquear cámara ( para no marear moviendo el mapa).
+- Añadir modelo al final de pantalla (para saber el objetivo de los enemigos).
+- Olas más cortas y más variadas
+(01:18:03) aebsubis: - Resistencias y debilidades.
+- Accesos rápidos mediante teclado.
+(01:18:46) aebsubis: Se lo ha pasado en dificultad dificil.
+(01:19:04) aebsubis: le ha fundido mucho lo de que no haya cuadrícula
