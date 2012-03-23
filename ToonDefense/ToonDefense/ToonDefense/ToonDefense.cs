@@ -96,7 +96,7 @@ namespace ToonDefense
             KeyboardState currentKeyboardState = Keyboard.GetState();
 
             // Allows the game to exit
-            if (currentKeyboardState.IsKeyDown(Keys.Escape) && prevKeyboardState.IsKeyUp(Keys.Escape))
+            if (currentKeyboardState.IsKeyDown(Keys.Escape) && prevKeyboardState.IsKeyUp(Keys.Escape) && this.IsActive)
             {
                 if (Components[0] as MenuComponent != null && Components.Count == 1)
                 {
