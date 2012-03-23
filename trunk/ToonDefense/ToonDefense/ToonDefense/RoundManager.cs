@@ -1077,55 +1077,35 @@ namespace ToonDefense
 
         public void Round131()
         {
-            generationDelay = 100;
+            generationDelay = 500;
             int number = 30 + RoundNumber - roundCount;
             for (int i = 0; i < number; i++)
             {
-                switch(random.Next(14))
+                switch(random.Next(7))
                 {
                     case 0:
-                        pendentShips.Add(new PaperAirplane(Game, camera));
-                        break;
-                    case 1:
-                        pendentShips.Add(new HoverBoard(Game, camera));
-                        break;
-                    case 2:
-                        pendentShips.Add(new Explorer(Game, camera));
-                        break;
-                    case 3:
-                        pendentShips.Add(new Interceptor(Game, camera));
-                        break;
-                    case 4:
-                        pendentShips.Add(new Helicopter(Game, camera));
-                        break;
-                    case 5:
-                        pendentShips.Add(new DeltaDart(Game, camera));
-                        break;
-                    case 6:
-                        pendentShips.Add(new Gunner(Game, camera));
-                        break;
-                    case 7:
                         pendentShips.Add(new Unidentified(Game, camera));
                         break;
-                    case 8:
+                    case 1:
                         pendentShips.Add(new Zeppelin(Game, camera));
                         break;
-                    case 9:
+                    case 2:
                         pendentShips.Add(new BattleCruiser(Game, camera));
                         break;
-                    case 10:
+                    case 3:
                         pendentShips.Add(new Spectrum(Game, camera));
                         break;
-                    case 11:
+                    case 4:
                         pendentShips.Add(new ScienceVessel(Game, camera));
                         break;
-                    case 12:
+                    case 5:
                         pendentShips.Add(new ElectricityWorm(Game, camera));
                         break;
-                    case 13:
+                    case 6:
                         pendentShips.Add(new EquipoME(Game, camera));
                         break;
                 }
+                pendentShips[pendentShips.Count - 1].Speed = 3.5f;
             }
         }
 
